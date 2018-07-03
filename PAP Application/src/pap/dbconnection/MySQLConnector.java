@@ -16,12 +16,13 @@ import java.sql.SQLException;
 
 public class MySQLConnector {
     //JDBC driver name and database URL
-    private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/pap";
+    private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/pap?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Manila";
     
     //Database credentials
     private static final String USER = "root";
-    private static final String PASS = "";
+    private static final String PASS = "tDuwXMyyNwhLD7Jw";
+    //tDuwXMyyNwhLD7Jw
     private static Connection conn = null;
 
     
@@ -52,5 +53,10 @@ public class MySQLConnector {
     
     public static Connection getConnection(){
         return conn;
+    }
+    
+    public static void main(String[] args){
+        openConnection();
+        closeConnection();
     }
 }
