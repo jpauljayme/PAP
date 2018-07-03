@@ -21,7 +21,7 @@ public class MySQLConnector {
     
     //Database credentials
     private static final String USER = "root";
-    private static final String PASS = "tDuwXMyyNwhLD7Jw";
+    private static final String PASS = "password";
     //tDuwXMyyNwhLD7Jw
     private static Connection conn = null;
 
