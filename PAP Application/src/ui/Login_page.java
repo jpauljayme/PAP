@@ -38,6 +38,9 @@ public class Login_page extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(410, 290));
+        setPreferredSize(new java.awt.Dimension(410, 290));
+        setResizable(false);
         getContentPane().setLayout(null);
 
         jPanel1.setLayout(null);
@@ -63,12 +66,12 @@ public class Login_page extends javax.swing.JFrame {
         loginButton.setFont(new java.awt.Font("Meiryo", 0, 12)); // NOI18N
         loginButton.setText("Login");
         jPanel1.add(loginButton);
-        loginButton.setBounds(160, 190, 90, 23);
+        loginButton.setBounds(160, 170, 90, 23);
 
         exitButton.setFont(new java.awt.Font("Meiryo", 0, 12)); // NOI18N
         exitButton.setText("Cancel");
         jPanel1.add(exitButton);
-        exitButton.setBounds(160, 220, 90, 23);
+        exitButton.setBounds(160, 200, 90, 23);
 
         jLabel3.setFont(new java.awt.Font("Meiryo", 0, 12)); // NOI18N
         jLabel3.setText("Username");
@@ -78,12 +81,13 @@ public class Login_page extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Meiryo", 0, 12)); // NOI18N
         jLabel4.setText("Password");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(100, 130, 55, 15);
+        jLabel4.setBounds(100, 130, 60, 15);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 410, 290);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     /**

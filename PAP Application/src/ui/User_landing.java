@@ -27,20 +27,145 @@ public class User_landing extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        sortButtonGroup = new javax.swing.ButtonGroup();
+        jPanel1 = new javax.swing.JPanel();
+        helloTextField = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        inventoryTable = new javax.swing.JTable();
+        logoutButton = new javax.swing.JButton();
+        salesReportButton = new javax.swing.JButton();
+        idRadioButton = new javax.swing.JRadioButton();
+        receiveDateRadioButton = new javax.swing.JRadioButton();
+        dateAddedRadioButton = new javax.swing.JRadioButton();
+        receiveRadioButton = new javax.swing.JRadioButton();
+        jSeparator1 = new javax.swing.JSeparator();
+        jLabel2 = new javax.swing.JLabel();
+        totalAmountRadioButton = new javax.swing.JRadioButton();
+        ownerNameRadioButton = new javax.swing.JRadioButton();
+        addInvoiceButton = new javax.swing.JButton();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(630, 550));
+        setPreferredSize(new java.awt.Dimension(630, 550));
+        setResizable(false);
+        getContentPane().setLayout(null);
+
+        jPanel1.setPreferredSize(new java.awt.Dimension(630, 550));
+        jPanel1.setLayout(null);
+
+        helloTextField.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
+        helloTextField.setText("Hello, <username>");
+        jPanel1.add(helloTextField);
+        helloTextField.setBounds(10, 10, 160, 18);
+
+        inventoryTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "ID", "Owner Name", "Contact Number", "Address ", "Date Added", "Receive Date", "Received?", "Total Amount"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.Float.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(inventoryTable);
+
+        jPanel1.add(jScrollPane1);
+        jScrollPane1.setBounds(10, 50, 600, 290);
+
+        logoutButton.setFont(new java.awt.Font("Meiryo UI", 0, 12)); // NOI18N
+        logoutButton.setText("Logout");
+        jPanel1.add(logoutButton);
+        logoutButton.setBounds(530, 500, 73, 25);
+
+        salesReportButton.setFont(new java.awt.Font("Meiryo UI", 0, 12)); // NOI18N
+        salesReportButton.setText("Sales Report");
+        jPanel1.add(salesReportButton);
+        salesReportButton.setBounds(230, 470, 150, 25);
+
+        sortButtonGroup.add(idRadioButton);
+        idRadioButton.setFont(new java.awt.Font("Meiryo UI", 0, 11)); // NOI18N
+        idRadioButton.setText("ID");
+        jPanel1.add(idRadioButton);
+        idRadioButton.setBounds(40, 400, 50, 23);
+
+        sortButtonGroup.add(receiveDateRadioButton);
+        receiveDateRadioButton.setFont(new java.awt.Font("Meiryo UI", 0, 11)); // NOI18N
+        receiveDateRadioButton.setText("Receive Date");
+        jPanel1.add(receiveDateRadioButton);
+        receiveDateRadioButton.setBounds(300, 400, 95, 23);
+
+        sortButtonGroup.add(dateAddedRadioButton);
+        dateAddedRadioButton.setFont(new java.awt.Font("Meiryo UI", 0, 11)); // NOI18N
+        dateAddedRadioButton.setText("Date Added");
+        jPanel1.add(dateAddedRadioButton);
+        dateAddedRadioButton.setBounds(200, 400, 87, 23);
+
+        sortButtonGroup.add(receiveRadioButton);
+        receiveRadioButton.setFont(new java.awt.Font("Meiryo UI", 0, 11)); // NOI18N
+        receiveRadioButton.setText("Received");
+        jPanel1.add(receiveRadioButton);
+        receiveRadioButton.setBounds(410, 400, 80, 23);
+        jPanel1.add(jSeparator1);
+        jSeparator1.setBounds(10, 362, 600, 10);
+
+        jLabel2.setFont(new java.awt.Font("Meiryo UI", 0, 12)); // NOI18N
+        jLabel2.setText("Sort by");
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(20, 380, 50, 16);
+
+        sortButtonGroup.add(totalAmountRadioButton);
+        totalAmountRadioButton.setFont(new java.awt.Font("Meiryo UI", 0, 11)); // NOI18N
+        totalAmountRadioButton.setText("Total Amount");
+        jPanel1.add(totalAmountRadioButton);
+        totalAmountRadioButton.setBounds(500, 400, 110, 23);
+
+        sortButtonGroup.add(ownerNameRadioButton);
+        ownerNameRadioButton.setFont(new java.awt.Font("Meiryo UI", 0, 11)); // NOI18N
+        ownerNameRadioButton.setText("Owner Name");
+        jPanel1.add(ownerNameRadioButton);
+        ownerNameRadioButton.setBounds(90, 400, 95, 23);
+
+        addInvoiceButton.setFont(new java.awt.Font("Meiryo UI", 0, 12)); // NOI18N
+        addInvoiceButton.setText("Add Invoice");
+        jPanel1.add(addInvoiceButton);
+        addInvoiceButton.setBounds(230, 440, 150, 25);
+
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(0, 0, 630, 550);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     /**
@@ -79,5 +204,21 @@ public class User_landing extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addInvoiceButton;
+    private javax.swing.JRadioButton dateAddedRadioButton;
+    private javax.swing.JLabel helloTextField;
+    private javax.swing.JRadioButton idRadioButton;
+    private javax.swing.JTable inventoryTable;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JButton logoutButton;
+    private javax.swing.JRadioButton ownerNameRadioButton;
+    private javax.swing.JRadioButton receiveDateRadioButton;
+    private javax.swing.JRadioButton receiveRadioButton;
+    private javax.swing.JButton salesReportButton;
+    private javax.swing.ButtonGroup sortButtonGroup;
+    private javax.swing.JRadioButton totalAmountRadioButton;
     // End of variables declaration//GEN-END:variables
 }
