@@ -34,7 +34,7 @@ public class Admin_landing extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         employeeTable = new javax.swing.JTable();
         logoutButton = new javax.swing.JButton();
-        salesReportButton = new javax.swing.JButton();
+        viewInvoicesButton = new javax.swing.JButton();
         idRadioButton = new javax.swing.JRadioButton();
         typeRadioButton = new javax.swing.JRadioButton();
         dateAddedRadioButton = new javax.swing.JRadioButton();
@@ -47,6 +47,7 @@ public class Admin_landing extends javax.swing.JFrame {
         removeEmployeeButton = new javax.swing.JButton();
         descendingRadioButton = new javax.swing.JRadioButton();
         ascendingRadioButton = new javax.swing.JRadioButton();
+        salesReportButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -108,10 +109,15 @@ public class Admin_landing extends javax.swing.JFrame {
         jPanel1.add(logoutButton);
         logoutButton.setBounds(530, 550, 73, 25);
 
-        salesReportButton.setFont(new java.awt.Font("Meiryo UI", 0, 12)); // NOI18N
-        salesReportButton.setText("Sales Report");
-        jPanel1.add(salesReportButton);
-        salesReportButton.setBounds(240, 510, 150, 25);
+        viewInvoicesButton.setFont(new java.awt.Font("Meiryo UI", 0, 12)); // NOI18N
+        viewInvoicesButton.setText("View Invoices");
+        viewInvoicesButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewInvoicesButtonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(viewInvoicesButton);
+        viewInvoicesButton.setBounds(330, 510, 150, 25);
 
         sortButtonGroup.add(idRadioButton);
         idRadioButton.setFont(new java.awt.Font("Meiryo UI", 0, 11)); // NOI18N
@@ -177,6 +183,16 @@ public class Admin_landing extends javax.swing.JFrame {
         jPanel1.add(ascendingRadioButton);
         ascendingRadioButton.setBounds(200, 430, 87, 23);
 
+        salesReportButton1.setFont(new java.awt.Font("Meiryo UI", 0, 12)); // NOI18N
+        salesReportButton1.setText("Sales Report");
+        salesReportButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salesReportButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(salesReportButton1);
+        salesReportButton1.setBounds(170, 510, 150, 25);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -194,6 +210,14 @@ public class Admin_landing extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void viewInvoicesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewInvoicesButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_viewInvoicesButtonActionPerformed
+
+    private void salesReportButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salesReportButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_salesReportButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -247,9 +271,10 @@ public class Admin_landing extends javax.swing.JFrame {
     private javax.swing.JButton logoutButton;
     private javax.swing.ButtonGroup orientationButtonGroup;
     private javax.swing.JButton removeEmployeeButton;
-    private javax.swing.JButton salesReportButton;
+    private javax.swing.JButton salesReportButton1;
     private javax.swing.ButtonGroup sortButtonGroup;
     private javax.swing.JRadioButton typeRadioButton;
     private javax.swing.JButton updateEmployeeButton;
+    private javax.swing.JButton viewInvoicesButton;
     // End of variables declaration//GEN-END:variables
 }
