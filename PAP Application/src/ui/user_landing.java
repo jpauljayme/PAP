@@ -27,18 +27,61 @@ public class user_landing extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        usernameField = new javax.swing.JTextField();
+        passwordField = new javax.swing.JPasswordField();
+        loginButton = new javax.swing.JButton();
+        exitButton = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(null);
+
+        jPanel1.setLayout(null);
+
+        jLabel1.setFont(new java.awt.Font("Montserrat", 0, 18)); // NOI18N
+        jLabel1.setText("MMM Laundry");
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(130, 30, 133, 23);
+
+        jLabel2.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
+        jLabel2.setText("POS System");
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(150, 50, 110, 23);
+
+        usernameField.setFont(new java.awt.Font("Meiryo", 0, 12)); // NOI18N
+        jPanel1.add(usernameField);
+        usernameField.setBounds(170, 100, 130, 21);
+
+        passwordField.setFont(new java.awt.Font("Meiryo", 0, 12)); // NOI18N
+        jPanel1.add(passwordField);
+        passwordField.setBounds(170, 130, 130, 21);
+
+        loginButton.setFont(new java.awt.Font("Meiryo", 0, 12)); // NOI18N
+        loginButton.setText("Login");
+        jPanel1.add(loginButton);
+        loginButton.setBounds(160, 190, 90, 23);
+
+        exitButton.setFont(new java.awt.Font("Meiryo", 0, 12)); // NOI18N
+        exitButton.setText("Cancel");
+        jPanel1.add(exitButton);
+        exitButton.setBounds(160, 220, 90, 23);
+
+        jLabel3.setFont(new java.awt.Font("Meiryo", 0, 12)); // NOI18N
+        jLabel3.setText("Username");
+        jPanel1.add(jLabel3);
+        jLabel3.setBounds(100, 100, 60, 20);
+
+        jLabel4.setFont(new java.awt.Font("Meiryo", 0, 12)); // NOI18N
+        jLabel4.setText("Password");
+        jPanel1.add(jLabel4);
+        jLabel4.setBounds(100, 130, 55, 15);
+
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(0, 0, 410, 290);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -79,5 +122,14 @@ public class user_landing extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton exitButton;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton loginButton;
+    private javax.swing.JPasswordField passwordField;
+    private javax.swing.JTextField usernameField;
     // End of variables declaration//GEN-END:variables
 }
