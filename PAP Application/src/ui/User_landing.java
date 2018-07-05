@@ -28,6 +28,7 @@ public class User_landing extends javax.swing.JFrame {
     private void initComponents() {
 
         sortButtonGroup = new javax.swing.ButtonGroup();
+        orientationButtonGroup = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         helloTextField = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -43,6 +44,8 @@ public class User_landing extends javax.swing.JFrame {
         totalAmountRadioButton = new javax.swing.JRadioButton();
         ownerNameRadioButton = new javax.swing.JRadioButton();
         addInvoiceButton = new javax.swing.JButton();
+        dateAddedRadioButton1 = new javax.swing.JRadioButton();
+        dateAddedRadioButton2 = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(630, 550));
@@ -60,34 +63,34 @@ public class User_landing extends javax.swing.JFrame {
 
         inventoryTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Owner Name", "Contact Number", "Address ", "Date Added", "Receive Date", "Received?", "Total Amount"
+                "ID", "Owner Name", "Contact Number", "Address ", "Date Added", "Receive Date", "Received?", "Transaction Type", "Total Amount"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.Float.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Float.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -106,12 +109,12 @@ public class User_landing extends javax.swing.JFrame {
         logoutButton.setFont(new java.awt.Font("Meiryo UI", 0, 12)); // NOI18N
         logoutButton.setText("Logout");
         jPanel1.add(logoutButton);
-        logoutButton.setBounds(530, 500, 73, 25);
+        logoutButton.setBounds(530, 540, 73, 25);
 
         salesReportButton.setFont(new java.awt.Font("Meiryo UI", 0, 12)); // NOI18N
         salesReportButton.setText("Sales Report");
         jPanel1.add(salesReportButton);
-        salesReportButton.setBounds(230, 470, 150, 25);
+        salesReportButton.setBounds(230, 510, 150, 25);
 
         sortButtonGroup.add(idRadioButton);
         idRadioButton.setFont(new java.awt.Font("Meiryo UI", 0, 11)); // NOI18N
@@ -125,11 +128,11 @@ public class User_landing extends javax.swing.JFrame {
         jPanel1.add(receiveDateRadioButton);
         receiveDateRadioButton.setBounds(300, 400, 95, 23);
 
-        sortButtonGroup.add(dateAddedRadioButton);
+        orientationButtonGroup.add(dateAddedRadioButton);
         dateAddedRadioButton.setFont(new java.awt.Font("Meiryo UI", 0, 11)); // NOI18N
-        dateAddedRadioButton.setText("Date Added");
+        dateAddedRadioButton.setText("Descending");
         jPanel1.add(dateAddedRadioButton);
-        dateAddedRadioButton.setBounds(200, 400, 87, 23);
+        dateAddedRadioButton.setBounds(310, 440, 87, 23);
 
         sortButtonGroup.add(receiveRadioButton);
         receiveRadioButton.setFont(new java.awt.Font("Meiryo UI", 0, 11)); // NOI18N
@@ -159,10 +162,22 @@ public class User_landing extends javax.swing.JFrame {
         addInvoiceButton.setFont(new java.awt.Font("Meiryo UI", 0, 12)); // NOI18N
         addInvoiceButton.setText("Add Invoice");
         jPanel1.add(addInvoiceButton);
-        addInvoiceButton.setBounds(230, 440, 150, 25);
+        addInvoiceButton.setBounds(230, 480, 150, 25);
+
+        sortButtonGroup.add(dateAddedRadioButton1);
+        dateAddedRadioButton1.setFont(new java.awt.Font("Meiryo UI", 0, 11)); // NOI18N
+        dateAddedRadioButton1.setText("Date Added");
+        jPanel1.add(dateAddedRadioButton1);
+        dateAddedRadioButton1.setBounds(200, 400, 87, 23);
+
+        orientationButtonGroup.add(dateAddedRadioButton2);
+        dateAddedRadioButton2.setFont(new java.awt.Font("Meiryo UI", 0, 11)); // NOI18N
+        dateAddedRadioButton2.setText("Ascending");
+        jPanel1.add(dateAddedRadioButton2);
+        dateAddedRadioButton2.setBounds(200, 440, 87, 23);
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 630, 550);
+        jPanel1.setBounds(0, 0, 630, 580);
 
         pack();
         setLocationRelativeTo(null);
@@ -206,6 +221,8 @@ public class User_landing extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addInvoiceButton;
     private javax.swing.JRadioButton dateAddedRadioButton;
+    private javax.swing.JRadioButton dateAddedRadioButton1;
+    private javax.swing.JRadioButton dateAddedRadioButton2;
     private javax.swing.JLabel helloTextField;
     private javax.swing.JRadioButton idRadioButton;
     private javax.swing.JTable inventoryTable;
@@ -214,6 +231,7 @@ public class User_landing extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JButton logoutButton;
+    private javax.swing.ButtonGroup orientationButtonGroup;
     private javax.swing.JRadioButton ownerNameRadioButton;
     private javax.swing.JRadioButton receiveDateRadioButton;
     private javax.swing.JRadioButton receiveRadioButton;

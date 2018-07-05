@@ -27,6 +27,8 @@ public class Admin_landing extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        orientationButtonGroup = new javax.swing.ButtonGroup();
+        sortButtonGroup = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         helloTextField = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -43,6 +45,8 @@ public class Admin_landing extends javax.swing.JFrame {
         updateEmployeeButton = new javax.swing.JButton();
         addEmployeeButton = new javax.swing.JButton();
         removeEmployeeButton = new javax.swing.JButton();
+        descendingRadioButton = new javax.swing.JRadioButton();
+        ascendingRadioButton = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -102,28 +106,32 @@ public class Admin_landing extends javax.swing.JFrame {
         logoutButton.setFont(new java.awt.Font("Meiryo UI", 0, 12)); // NOI18N
         logoutButton.setText("Logout");
         jPanel1.add(logoutButton);
-        logoutButton.setBounds(530, 520, 73, 25);
+        logoutButton.setBounds(530, 550, 73, 25);
 
         salesReportButton.setFont(new java.awt.Font("Meiryo UI", 0, 12)); // NOI18N
         salesReportButton.setText("Sales Report");
         jPanel1.add(salesReportButton);
-        salesReportButton.setBounds(240, 480, 150, 25);
+        salesReportButton.setBounds(240, 510, 150, 25);
 
+        sortButtonGroup.add(idRadioButton);
         idRadioButton.setFont(new java.awt.Font("Meiryo UI", 0, 11)); // NOI18N
         idRadioButton.setText("ID");
         jPanel1.add(idRadioButton);
         idRadioButton.setBounds(60, 400, 50, 23);
 
+        sortButtonGroup.add(typeRadioButton);
         typeRadioButton.setFont(new java.awt.Font("Meiryo UI", 0, 11)); // NOI18N
         typeRadioButton.setText("Type");
         jPanel1.add(typeRadioButton);
         typeRadioButton.setBounds(520, 400, 51, 23);
 
+        sortButtonGroup.add(dateAddedRadioButton);
         dateAddedRadioButton.setFont(new java.awt.Font("Meiryo UI", 0, 11)); // NOI18N
         dateAddedRadioButton.setText("Date Added");
         jPanel1.add(dateAddedRadioButton);
         dateAddedRadioButton.setBounds(400, 400, 87, 23);
 
+        sortButtonGroup.add(firstNameRadioButton);
         firstNameRadioButton.setFont(new java.awt.Font("Meiryo UI", 0, 11)); // NOI18N
         firstNameRadioButton.setText("First Name");
         jPanel1.add(firstNameRadioButton);
@@ -136,6 +144,7 @@ public class Admin_landing extends javax.swing.JFrame {
         jPanel1.add(jLabel2);
         jLabel2.setBounds(20, 380, 50, 16);
 
+        sortButtonGroup.add(lastNameRadioButton);
         lastNameRadioButton.setFont(new java.awt.Font("Meiryo UI", 0, 11)); // NOI18N
         lastNameRadioButton.setText("Last Name");
         jPanel1.add(lastNameRadioButton);
@@ -144,17 +153,29 @@ public class Admin_landing extends javax.swing.JFrame {
         updateEmployeeButton.setFont(new java.awt.Font("Meiryo UI", 0, 12)); // NOI18N
         updateEmployeeButton.setText("Update Employee");
         jPanel1.add(updateEmployeeButton);
-        updateEmployeeButton.setBounds(400, 440, 150, 25);
+        updateEmployeeButton.setBounds(400, 470, 150, 25);
 
         addEmployeeButton.setFont(new java.awt.Font("Meiryo UI", 0, 12)); // NOI18N
         addEmployeeButton.setText("Add Employee");
         jPanel1.add(addEmployeeButton);
-        addEmployeeButton.setBounds(80, 440, 150, 25);
+        addEmployeeButton.setBounds(80, 470, 150, 25);
 
         removeEmployeeButton.setFont(new java.awt.Font("Meiryo UI", 0, 12)); // NOI18N
         removeEmployeeButton.setText("Remove Employee");
         jPanel1.add(removeEmployeeButton);
-        removeEmployeeButton.setBounds(240, 440, 150, 25);
+        removeEmployeeButton.setBounds(240, 470, 150, 25);
+
+        orientationButtonGroup.add(descendingRadioButton);
+        descendingRadioButton.setFont(new java.awt.Font("Meiryo UI", 0, 11)); // NOI18N
+        descendingRadioButton.setText("Descending");
+        jPanel1.add(descendingRadioButton);
+        descendingRadioButton.setBounds(310, 430, 87, 23);
+
+        orientationButtonGroup.add(ascendingRadioButton);
+        ascendingRadioButton.setFont(new java.awt.Font("Meiryo UI", 0, 11)); // NOI18N
+        ascendingRadioButton.setText("Ascending");
+        jPanel1.add(ascendingRadioButton);
+        ascendingRadioButton.setBounds(200, 430, 87, 23);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -162,18 +183,13 @@ public class Admin_landing extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 650, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 650, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 566, Short.MAX_VALUE)
+            .addGap(0, 592, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addGap(0, 11, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 555, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 592, Short.MAX_VALUE))
         );
 
         pack();
@@ -216,7 +232,9 @@ public class Admin_landing extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addEmployeeButton;
+    private javax.swing.JRadioButton ascendingRadioButton;
     private javax.swing.JRadioButton dateAddedRadioButton;
+    private javax.swing.JRadioButton descendingRadioButton;
     private javax.swing.JTable employeeTable;
     private javax.swing.JRadioButton firstNameRadioButton;
     private javax.swing.JLabel helloTextField;
@@ -227,8 +245,10 @@ public class Admin_landing extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JRadioButton lastNameRadioButton;
     private javax.swing.JButton logoutButton;
+    private javax.swing.ButtonGroup orientationButtonGroup;
     private javax.swing.JButton removeEmployeeButton;
     private javax.swing.JButton salesReportButton;
+    private javax.swing.ButtonGroup sortButtonGroup;
     private javax.swing.JRadioButton typeRadioButton;
     private javax.swing.JButton updateEmployeeButton;
     // End of variables declaration//GEN-END:variables
