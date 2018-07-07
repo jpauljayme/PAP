@@ -29,4 +29,53 @@ public class ItemList {
         this.itemListID = itemListID;
         this.transactionID = transactionID;
     }
+    
+    /*
+     * GETTERS
+     */
+
+    /**
+     * Returns the ItemList ID
+     * @return the itemListID
+     */
+    public int getItemListID() {
+        return itemListID;
+    }
+
+    /**
+     * Returns the Transaction ID of the ItemList
+     * @return the transactionID
+     */
+    public int getTransactionID() {
+        return transactionID;
+    }
+
+    /**
+     * Returns the Item ID of the ItemList
+     * @return the itemID
+     */
+    public int getItemID() {
+        return itemID;
+    }
+    
+    
+    /*
+     * SETTERS
+     */
+
+    /**
+     * Sets the Transaction ID of the ItemList
+     * @param transactionID the transactionID to set
+     */
+    public void setTransactionID(int transactionID) {
+        this.transactionID = transactionID;
+    }
+
+    /**
+     * Sets the Item ID of the ItemList
+     * @param itemID the itemID to set
+     */
+    public void setItemID(int itemID) {
+        this.itemID = itemID;
+    }
 }

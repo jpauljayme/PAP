@@ -29,4 +29,53 @@ public class Credential {
         this.username = username;
         this.password = password;
     }
+    
+    /*
+     * GETTERS
+     */
+
+    /**
+     * Returns the Credential ID
+     * @return the credentialID
+     */
+    public int getCredentialID() {
+        return credentialID;
+    }
+
+    /**
+     * Returns the username
+     * @return the username
+     */
+    public String getUsername() {
+        return username;
+    }
+
+    /**
+     * Returns a hashed password
+     * @return the password
+     */
+    public String getPassword() {
+        return password;
+    }
+    
+    
+    /*
+     * SETTERS
+     */
+
+    /**
+     * Sets the username field
+     * @param username the username to set
+     */
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    /**
+     * Sets the password field
+     * @param password the password to set
+     */
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }
