@@ -4,13 +4,12 @@
  * and open the template in the editor.
  */
 package pap.functionality;
+import pap.hash.MD5;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.math.BigInteger;
 import pap.dbconnection.MySQLConnector;
 /**
  *
