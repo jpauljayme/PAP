@@ -9,7 +9,9 @@ import java.util.Date;
 
 /**
  *Date and time of the server side.
- * @author jaymezing
+ * First, compile (f9) the client code, then the server code, on different consoles.
+ * Second, run (shift f6) the server code, then the client code. 
+ * @author John Paul Jayme <jpaul.jayme.com>
  */
 public class DateServer {
         public static void main(String args[]) throws Exception
