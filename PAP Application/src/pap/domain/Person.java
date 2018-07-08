@@ -1,4 +1,3 @@
-
 package pap.domain;
 
 import java.io.Serializable;
@@ -7,46 +6,51 @@ import javax.persistence.Entity;
 
 /**
  * Class for Person entity.
- * @author      John Paul Jayme <jpaul.jayme.com>
- * 
  *
- * 
+ * @author John Paul Jayme <jpaul.jayme.com>
+ *
+ *
+ *
  */
 import java.util.Date;
 import javax.persistence.Id;
 
 @Entity
 public class Person implements Serializable {
+
     @Id
-    @Column(name="PersonID")
+    @Column(name = "PersonID")
     private int personID;
-    @Column(name="PersonTypeID")
+    @Column(name = "PersonTypeID")
     private int personTypeID;
-    @Column(name="AddressID")
+    @Column(name = "AddressID")
     private int addressID;
-    @Column(name="LastName")
+    @Column(name = "LastName")
     private String lastName;
-    @Column(name="FirstName")
+    @Column(name = "FirstName")
     private String firstName;
-    @Column(name="MiddleName")
+    @Column(name = "MiddleName")
     private String middleName;
-    @Column(name="BirthDate")
+    @Column(name = "BirthDate")
     private Date birthDate;
-    @Column(name="Email")
+    @Column(name = "Sex")
+    private char sex;
+    @Column(name = "Email")
     private String email;
-    @Column(name="ContactNumber")
+    @Column(name = "ContactNumber")
     private String contactNumber;
-    @Column(name="AddedDate")
+    @Column(name = "AddedDate")
     private Date addedDate;
-    @Column(name="AddedBy")
+    @Column(name = "AddedBy")
     private int addedBy;
-    @Column(name="UpdatedDate")
+    @Column(name = "UpdatedDate")
     private Date updatedDate;
-    @Column(name="UpdatedBy")
+    @Column(name = "UpdatedBy")
     private int updatedBy;
-    
+
     /**
-     *Constructor with parameters.
+     * Constructor with parameters.
+     *
      * @param personID
      * @param personTypeID
      * @param addressID
@@ -54,15 +58,16 @@ public class Person implements Serializable {
      * @param firstName
      * @param middleName
      * @param birthDate
+     * @param sex
      * @param email
      * @param contactNumber
      * @param addedBy
      * @param updatedBy
      */
-    public Person(int personID, int personTypeID, int addressID, 
-                  String lastName, String firstName, String middleName, Date birthDate,
-                  String email, String contactNumber, Date addedDate, int addedBy,
-                  Date updatedDate, int updatedBy){
+    public Person(int personID, int personTypeID, int addressID,
+            String lastName, String firstName, String middleName, Date birthDate,
+            char sex, String email, String contactNumber, Date addedDate, int addedBy,
+            Date updatedDate, int updatedBy) {
         this.personID = personID;
         this.personTypeID = personTypeID;
         this.addressID = addressID;
@@ -70,17 +75,18 @@ public class Person implements Serializable {
         this.middleName = middleName;
         this.firstName = firstName;
         this.birthDate = birthDate;
+        this.sex = sex;
         this.email = email;
         this.contactNumber = contactNumber;
         this.addedBy = addedBy;
         this.updatedBy = updatedBy;
-        
+
     }
-    
+
     /**
-     *Default constructor.
+     * Default constructor.
      */
-    public Person(){
+    public Person() {
         this.personID = 0;
         this.personTypeID = 0;
         this.addressID = 0;
@@ -88,18 +94,19 @@ public class Person implements Serializable {
         this.middleName = "";
         this.firstName = "";
         this.birthDate = new Date();
+        this.sex = 'x';
         this.email = "";
         this.contactNumber = "";
         this.addedBy = 0;
         this.updatedBy = 0;
     }
-    
+
     /*
      * GETTERS
      */
-
     /**
      * Returns the Person's ID
+     *
      * @return the personID
      */
     public int getPersonID() {
@@ -108,6 +115,7 @@ public class Person implements Serializable {
 
     /**
      * Returns the Person's PersonType ID
+     *
      * @return the personTypeID
      */
     public int getPersonTypeID() {
@@ -116,6 +124,7 @@ public class Person implements Serializable {
 
     /**
      * Returns the Person's Address ID
+     *
      * @return the addressID
      */
     public int getAddressID() {
@@ -124,6 +133,7 @@ public class Person implements Serializable {
 
     /**
      * Returns the Person's last name
+     *
      * @return the lastName
      */
     public String getLastName() {
@@ -132,6 +142,7 @@ public class Person implements Serializable {
 
     /**
      * Returns the Person's first name
+     *
      * @return the firstName
      */
     public String getFirstName() {
@@ -140,6 +151,7 @@ public class Person implements Serializable {
 
     /**
      * Returns the Person's middle name
+     *
      * @return the middleName
      */
     public String getMiddleName() {
@@ -148,6 +160,7 @@ public class Person implements Serializable {
 
     /**
      * Returns the Person's date of birth
+     *
      * @return the birthDate
      */
     public Date getBirthDate() {
@@ -155,7 +168,17 @@ public class Person implements Serializable {
     }
 
     /**
+     * Returns the Person's date of birth
+     *
+     * @return the person's sex
+     */
+    public char getSex() {
+        return sex;
+    }
+
+    /**
      * Returns the Person's email address
+     *
      * @return the email
      */
     public String getEmail() {
@@ -164,6 +187,7 @@ public class Person implements Serializable {
 
     /**
      * Returns the Person's contact number
+     *
      * @return the contactNumber
      */
     public String getContactNumber() {
@@ -172,6 +196,7 @@ public class Person implements Serializable {
 
     /**
      * Returns the date when the Person was added
+     *
      * @return the addedDate
      */
     public Date getAddedDate() {
@@ -180,6 +205,7 @@ public class Person implements Serializable {
 
     /**
      * Returns the ID of the entity who added the Person
+     *
      * @return the addedBy
      */
     public int getAddedBy() {
@@ -188,6 +214,7 @@ public class Person implements Serializable {
 
     /**
      * Returns the date when the Person was updated
+     *
      * @return the updatedDate
      */
     public Date getUpdatedDate() {
@@ -196,19 +223,19 @@ public class Person implements Serializable {
 
     /**
      * Returns the ID of the entity who updated the Person
+     *
      * @return the updatedBy
      */
     public int getUpdatedBy() {
         return updatedBy;
     }
-    
-    
+
     /*
      * SETTERS
      */
-
     /**
      * Sets the Person's PersonType ID
+     *
      * @param personTypeID the personTypeID to set
      */
     public void setPersonTypeID(int personTypeID) {
@@ -217,6 +244,7 @@ public class Person implements Serializable {
 
     /**
      * Sets the Person's Address ID
+     *
      * @param addressID the addressID to set
      */
     public void setAddressID(int addressID) {
@@ -225,6 +253,7 @@ public class Person implements Serializable {
 
     /**
      * Sets the Person's last name
+     *
      * @param lastName the lastName to set
      */
     public void setLastName(String lastName) {
@@ -233,6 +262,7 @@ public class Person implements Serializable {
 
     /**
      * Sets the Person's first name
+     *
      * @param firstName the firstName to set
      */
     public void setFirstName(String firstName) {
@@ -241,6 +271,7 @@ public class Person implements Serializable {
 
     /**
      * Sets the Person's middle name
+     *
      * @param middleName the middleName to set
      */
     public void setMiddleName(String middleName) {
@@ -249,6 +280,7 @@ public class Person implements Serializable {
 
     /**
      * Sets the Person's date of birth
+     *
      * @param birthDate the birthDate to set
      */
     public void setBirthDate(Date birthDate) {
@@ -257,6 +289,7 @@ public class Person implements Serializable {
 
     /**
      * Sets the Person's email address
+     *
      * @param email the email to set
      */
     public void setEmail(String email) {
@@ -265,6 +298,7 @@ public class Person implements Serializable {
 
     /**
      * Sets the Person's contact number
+     *
      * @param contactNumber the contactNumber to set
      */
     public void setContactNumber(String contactNumber) {
@@ -273,6 +307,7 @@ public class Person implements Serializable {
 
     /**
      * Sets the ID of the entity who added the Person
+     *
      * @param addedBy the addedBy to set
      */
     public void setAddedBy(int addedBy) {
@@ -281,9 +316,27 @@ public class Person implements Serializable {
 
     /**
      * Sets the ID of the entity who updated the Person
+     *
      * @param updatedBy the updatedBy to set
      */
     public void setUpdatedBy(int updatedBy) {
         this.updatedBy = updatedBy;
+    }
+
+    /**
+     * Sets the person's sex
+     *
+     * @param sex the sex to set
+     */
+    public void setSex(char sex) {
+        this.sex = sex;
+    }
+
+    @Override
+    public String toString() {
+        return "id: " + personID + "\n"
+                + "name: " + firstName + middleName + lastName + "\n"
+                + "address: " + birthDate + "\n"
+                + "sex: " + sex + "\n\n";
     }
 }
