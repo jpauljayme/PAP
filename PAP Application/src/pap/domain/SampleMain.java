@@ -18,18 +18,18 @@ public class SampleMain {
     public static void main(String... args) {
 
         try {
-            ResultSetMapper<SamplePojo> resultSetMapper = new ResultSetMapper<>();
+            ResultSetMapper<Person> resultSetMapper = new ResultSetMapper<>();
             ResultSet resultSet = null;
             // simple JDBC code to run SQL query and populate resultSet - START
             MySQLConnector.openConnection();
             try (Connection connection = MySQLConnector.getConnection()) {
-                PreparedStatement statement = connection.prepareStatement("SELECT * FROM SamplePojo");
+                PreparedStatement statement = connection.prepareStatement("SELECT * FROM person");
                 resultSet = statement.executeQuery();
                 // simple JDBC code to run SQL query and populate resultSet - END
-                List<SamplePojo> pojoList = resultSetMapper.mapRersultSetToObject(resultSet, SamplePojo.class);
+                List<Person> pojoList = resultSetMapper.mapRersultSetToObject(resultSet, Person.class);
                 // print out the list retrieved from database
                 if (pojoList != null) {
-                    for (SamplePojo p : pojoList) {
+                    for (Person p : pojoList) {
                         System.out.println(p);
                     }
                 } else {
