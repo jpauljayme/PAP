@@ -38,5 +38,9 @@ nb-configuration.xml
 #Ignore META-INF 
 */META-INF/*
 
+
+*.properties
+project.properties
+
 # End of https://www.gitignore.io/api/java
 /PAP Application/nbproject/private/
