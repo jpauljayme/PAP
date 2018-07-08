@@ -14,12 +14,11 @@ public class Item {
     private int addedBy;
     private Date updatedDate;
     private int updatedBy;
-    private int itemCounter = 1;
     /**
      *Default constructor.
      */
     public Item(){
-        itemID = itemCounter++;
+        itemID = 0;
         this.itemTypeID = 0;
         this.itemCount = 0;
         this.addedDate = new Date();

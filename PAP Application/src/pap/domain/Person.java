@@ -23,7 +23,6 @@ public class Person {
     private int addedBy;
     private Date updatedDate;
     private int updatedBy;
-    static int personCount = 1;
     
     /**
      *Constructor with parameters.
@@ -45,7 +44,7 @@ public class Person {
             String lastName, String firstName, String middleName, Date birthDate,
             String email, String contactNumber, Date addedDate, int addedBy,
             Date updatedDate, int updatedBy){
-        this.personID = personCount++;
+        this.personID = personID;
         this.personTypeID = personTypeID;
         this.addressID = addressID;
         this.lastName = lastName;
@@ -65,7 +64,7 @@ public class Person {
      *Default constructor.
      */
     public Person(){
-        this.personID = personCount++;
+        this.personID = 0;
         this.personTypeID = 0;
         this.addressID = 0;
         this.lastName = "";

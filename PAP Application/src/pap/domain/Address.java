@@ -16,13 +16,12 @@ public class Address {
     private Date addedDate;
     private int updatedBy;
     private Date updatedDate;
-    private static int addressCount = 1;
     
     /**
      *Default constructor.
      */
     public Address(){
-        this.addressID = addressCount++;
+        this.addressID = 0;
         this.floor = "";
         this.roomNumber = 0;
         this.buildingName = "";
@@ -43,10 +42,10 @@ public class Address {
      * @param updatedDate
      * @param updatedBy
      */
-    public Address(String floor, int roomNumber, 
+    public Address(int addressID, String floor, int roomNumber, 
             String buildingName, Date addedDate,
             int addedBy, Date updatedDate, int updatedBy){
-        addressID = addressCount++;
+        addressID = addressID;
         this.floor = floor;
         this.roomNumber = roomNumber;
         this.buildingName = buildingName;

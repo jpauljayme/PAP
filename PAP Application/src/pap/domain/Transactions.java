@@ -6,7 +6,7 @@ import java.util.Date;
  *Class that defines the transaction with the customer.
  * @author @author      John Paul Jayme <jpaul.jayme.com>
  */
-public class Transaction {
+public class Transactions {
     private int transactionID;
     private int personID;
     private Date addedDate;
@@ -16,12 +16,11 @@ public class Transaction {
     private float beddingsWeight;
     private Double totalAmount;
     private String transactionType;
-    private static int transactionCounter = 1;
     /**
      *Default constructor.
      */
-    public Transaction(){
-        transactionID = transactionCounter++;
+    public Transactions(){
+        this.transactionID = 0;
         this.personID = 0;
         this.addedDate = new Date();
         this.addedBy = 0;
@@ -44,7 +43,7 @@ public class Transaction {
      * @param totalAmount
      * @param transactionType
      */
-    public Transaction(int transactionID, int personID, Date addedDate,
+    public Transactions(int transactionID, int personID, Date addedDate,
             int addedBy, Date receivedDate, 
             float clothingWeight, float beddingsWeight, double totalAmount,
             String transactionType){
@@ -64,7 +63,7 @@ public class Transaction {
      */
 
     /**
-     * Returns the Transaction ID
+     * Returns the Transactions ID
      * @return the transactionID
      */
     public int getTransactionID() {
@@ -80,7 +79,7 @@ public class Transaction {
     }
 
     /**
-     * Returns the date when the Transaction was added
+     * Returns the date when the Transactions was added
      * @return the addedDate
      */
     public Date getAddedDate() {
@@ -88,7 +87,7 @@ public class Transaction {
     }
 
     /**
-     * Returns the ID of the entity who added the Transaction
+     * Returns the ID of the entity who added the Transactions
      * @return the addedBy
      */
     public int getAddedBy() {
@@ -128,7 +127,7 @@ public class Transaction {
     }
 
     /**
-     * Returns the type of Transaction
+     * Returns the type of Transactions
      * @return the transactionType
      */
     public String getTransactionType() {
@@ -149,7 +148,7 @@ public class Transaction {
     }
 
     /**
-     * Sets the date when the Transaction was added
+     * Sets the date when the Transactions was added
      * @param addedDate the addedDate to set
      */
     public void setAddedDate(Date addedDate) {
@@ -157,7 +156,7 @@ public class Transaction {
     }
 
     /**
-     * Sets the ID of the entity who added the Transaction
+     * Sets the ID of the entity who added the Transactions
      * @param addedBy the addedBy to set
      */
     public void setAddedBy(int addedBy) {
@@ -197,7 +196,7 @@ public class Transaction {
     }
 
     /**
-     * Sets the type of Transaction
+     * Sets the type of Transactions
      * @param transactionType the transactionType to set
      */
     public void setTransactionType(String transactionType) {

@@ -17,7 +17,9 @@ import java.sql.SQLException;
 public class MySQLConnector {
     //JDBC driver name and database URL
     private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/pap?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Manila";
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/pap?"
+            + "useUnicode=true&useJDBCCompliantTimezoneShift=true"
+            + "&useLegacyDatetimeCode=false&serverTimezone=Asia/Manila";
     
     //Database credentials
     private static final String USER = "root";
