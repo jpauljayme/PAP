@@ -1,18 +1,31 @@
 package pap.domain;
 
+import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 /**
  *Class that defines an item.
  * @author @author      John Paul Jayme <jpaul.jayme.com>
  */
-public class Item {
+@Entity
+public class Item implements Serializable {
+    @Id
+    @Column(name="ItemID")
     private int itemID;
+    @Column(name="ItemTypeID")
     private int itemTypeID;
+    @Column(name="ItemCount")
     private int itemCount;
+    @Column(name="AddedDate")
     private Date addedDate;
+    @Column(name="AddedBy")
     private int addedBy;
+    @Column(name="UpdatedDate")
     private Date updatedDate;
+    @Column(name="UpdatedBy")
     private int updatedBy;
     /**
      *Default constructor.
@@ -21,10 +34,8 @@ public class Item {
         itemID = 0;
         this.itemTypeID = 0;
         this.itemCount = 0;
-        this.addedDate = new Date();
         this.addedBy = 0;
         this.updatedBy = 0;
-        this.updatedDate = new Date();
     }
     
     /**
@@ -32,21 +43,17 @@ public class Item {
      * @param itemID
      * @param itemTypeID
      * @param itemCount
-     * @param addedDate
+     * @param updatedBy
      * @param addedBy
-     * @param updatedDate
-     * @param updateBy
      */
-    public Item(int itemID, int itemTypeID, int itemCount, Date addedDate,
-            int addedBy, Date updatedDate, int updateBy){
+    public Item(int itemID, int itemTypeID, int itemCount,
+                int addedBy, int updatedBy){
         
         this.itemID = itemID;
         this.itemTypeID = itemTypeID;
         this.itemCount = itemCount;
-        this.addedDate = addedDate;
         this.addedBy = addedBy;
         this.updatedBy = updatedBy;
-        this.updatedDate = updatedDate;
     }
     
     /*
@@ -131,27 +138,11 @@ public class Item {
     }
 
     /**
-     * Sets the date the Item was created
-     * @param addedDate
-     */
-    public void setAddedDate(Date addedDate) {
-        this.addedDate = addedDate;
-    }
-
-    /**
      * Sets the ID of the entity who added the Item
      * @param addedBy the addedBy to set
      */
     public void setAddedBy(int addedBy) {
         this.addedBy = addedBy;
-    }
-
-    /**
-     * Sets the date when the Item was updated
-     * @param updatedDate
-     */
-    public void setUpdatedDate(Date updatedDate) {
-        this.updatedDate = updatedDate;
     }
 
     /**

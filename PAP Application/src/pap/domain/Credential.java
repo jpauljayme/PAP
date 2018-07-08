@@ -1,33 +1,61 @@
 package pap.domain;
 
+import java.io.Serializable;
+import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 /**
  *Class forcCredential of a user in the system,
  * @author @author      John Paul Jayme <jpaul.jayme.com>
  */
-public class Credential {
-    private int credentialID;
+@Entity
+public class Credential implements Serializable {
+    @Id
+    @Column(name="CredentialsID")
+    private int credentialsID;
+    @Column(name="PersonID")
+    private int personID;
+    @Column(name="Username")
     private String username;
-    private String password;
+    @Column(name="UserPassword")
+    private String userPassword;
+    @Column(name="AddedBy")
+    private int addedBy;
+    @Column(name="AddedDate")
+    private Date addedDate;
+    @Column(name="UpdatedBy")
+    private int updatedBy;
+    @Column(name="UpdatedDate")
+    private Date updatedDate;
     
     /**
      *Default constructor.
      */
     public Credential(){
-        this.credentialID = 0;
+        this.credentialsID = 0;
         this.username = "";
-        this.password = "";
+        this.userPassword = "";
+        this.addedBy = 0;
+        this.updatedBy = 0;
     }
     
     /**
      *Constructor that accepts parameters.
-     * @param credentialID
+     * @param credentialsID
      * @param username
      * @param password
+     * @param addedBy
+     * @param updatedBy
      */
-    public Credential(int credentialID, String username, String password){
-        this.credentialID = credentialID;
+    public Credential(int credentialsID, String username, String password,
+                      int addedBy, int updatedBy){
+        this.credentialsID = credentialsID;
         this.username = username;
-        this.password = password;
+        this.userPassword = password;
+        this.addedBy = addedBy;
+        this.updatedBy = updatedBy;
     }
     
     /*
@@ -38,8 +66,8 @@ public class Credential {
      * Returns the Credential ID
      * @return the credentialID
      */
-    public int getCredentialID() {
-        return credentialID;
+    public int getCredentialsID() {
+        return credentialsID;
     }
 
     /**
@@ -54,15 +82,57 @@ public class Credential {
      * Returns a hashed password
      * @return the password
      */
-    public String getPassword() {
-        return password;
+    public String getUserPassword() {
+        return userPassword;
+    }
+
+    /**
+     * @return the personID
+     */
+    public int getPersonID() {
+        return personID;
+    }
+
+    /**
+     * @return the addedBy
+     */
+    public int getAddedBy() {
+        return addedBy;
+    }
+
+    /**
+     * @return the addedDate
+     */
+    public Date getAddedDate() {
+        return addedDate;
+    }
+
+    /**
+     * @return the updatedBy
+     */
+    public int getUpdatedBy() {
+        return updatedBy;
+    }
+
+    /**
+     * @return the updatedDate
+     */
+    public Date getUpdatedDate() {
+        return updatedDate;
     }
     
-    
+        
     /*
      * SETTERS
      */
 
+    /**
+     * @param personID the personID to set
+     */
+    public void setPersonID(int personID) {
+        this.personID = personID;
+    }
+    
     /**
      * Sets the username field
      * @param username the username to set
@@ -72,10 +142,23 @@ public class Credential {
     }
 
     /**
-     * Sets the password field
-     * @param password the password to set
+     * @param userPassword the userPassword to set
      */
-    public void setPassword(String password) {
-        this.password = password;
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword;
+    }
+
+    /**
+     * @param addedBy the addedBy to set
+     */
+    public void setAddedBy(int addedBy) {
+        this.addedBy = addedBy;
+    }
+
+    /**
+     * @param updatedBy the updatedBy to set
+     */
+    public void setUpdatedBy(int updatedBy) {
+        this.updatedBy = updatedBy;
     }
 }

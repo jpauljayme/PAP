@@ -1,20 +1,36 @@
 package pap.domain;
 
+import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 /**
  *Class that defines the transaction with the customer.
  * @author @author      John Paul Jayme <jpaul.jayme.com>
  */
-public class Transactions {
+
+@Entity
+public class Transactions implements Serializable {
+    @Id
+    @Column(name="TransactionID")
     private int transactionID;
+    @Column(name="PersonID")
     private int personID;
+    @Column(name="AddedDate")
     private Date addedDate;
+    @Column(name="AddedBy")
     private int addedBy;
+    @Column(name="ReceivedDate")
     private Date receivedDate;
+    @Column(name="ClothingWeight")
     private float clothingWeight;
+    @Column(name="BeddingsWeight")
     private float beddingsWeight;
+    @Column(name="TotalAmount")
     private Double totalAmount;
+    @Column(name="TransactionType")
     private String transactionType;
     /**
      *Default constructor.
@@ -22,9 +38,7 @@ public class Transactions {
     public Transactions(){
         this.transactionID = 0;
         this.personID = 0;
-        this.addedDate = new Date();
         this.addedBy = 0;
-        this.receivedDate = new Date();
         this.clothingWeight = 0;
         this.beddingsWeight = 0;
         this.totalAmount = 0.0;
@@ -35,7 +49,6 @@ public class Transactions {
      *Constructor that accepts parameters.
      * @param transactionID
      * @param personID
-     * @param addedDate
      * @param addedBy
      * @param receivedDate
      * @param clothingWeight
@@ -43,13 +56,12 @@ public class Transactions {
      * @param totalAmount
      * @param transactionType
      */
-    public Transactions(int transactionID, int personID, Date addedDate,
-            int addedBy, Date receivedDate, 
-            float clothingWeight, float beddingsWeight, double totalAmount,
-            String transactionType){
+    
+    public Transactions(int transactionID, int personID,
+            int addedBy, Date receivedDate, float clothingWeight,
+            float beddingsWeight, double totalAmount, String transactionType){
         this.transactionID = transactionID;
         this.personID = personID;
-        this.addedDate = addedDate;
         this.addedBy = addedBy;
         this.receivedDate = receivedDate;
         this.clothingWeight = clothingWeight;
@@ -148,6 +160,7 @@ public class Transactions {
     }
 
     /**
+<<<<<<< Updated upstream:PAP Application/src/pap/domain/Transactions.java
      * Sets the date when the Transactions was added
      * @param addedDate the addedDate to set
      */
@@ -157,6 +170,9 @@ public class Transactions {
 
     /**
      * Sets the ID of the entity who added the Transactions
+=======
+     * Sets the ID of the entity who added the Transaction
+>>>>>>> Stashed changes:PAP Application/src/pap/domain/Transactions.java
      * @param addedBy the addedBy to set
      */
     public void setAddedBy(int addedBy) {

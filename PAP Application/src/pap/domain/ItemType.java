@@ -1,18 +1,31 @@
 package pap.domain;
 
+import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 /**
  *Class that describes the item type.
  * @author @author      John Paul Jayme <jpaul.jayme.com>
  */
-public class ItemType {
+@Entity
+public class ItemType implements Serializable {
+    @Id
+    @Column(name="ItemTypeID")
     private int itemTypeID;
+    @Column(name="ItemTypeName")
     private String itemTypeName;
+    @Column(name="ItemTypePrice")
     private float itemTypePrice;
+    @Column(name="AddedDate")
     private Date addedDate;
+    @Column(name="AddedBy")
     private int addedBy;
+    @Column(name="UpdatedDate")
     private Date updatedDate;
+    @Column(name="UpdatedBy")
     private int updatedBy;
     
     /**
@@ -22,10 +35,8 @@ public class ItemType {
         this.itemTypeID = 0;
         this.itemTypeName = "";
         this.itemTypePrice = 0;
-        this.addedDate = new Date();
         this.addedBy = 0;
         this.updatedBy = 0;
-        this.updatedDate = new Date();
     }
     
     /**
@@ -33,21 +44,17 @@ public class ItemType {
      * @param itemTypeID
      * @param itemTypeName
      * @param itemTypePrice
-     * @param addedDate
      * @param addedBy
-     * @param updatedDate
-     * @param updateBy
+     * @param updatedBy
      */
-    public ItemType(int itemTypeID, String itemTypeName, float itemTypePrice, Date addedDate,
-                    int addedBy, Date updatedDate, int updateBy){
+    public ItemType(int itemTypeID, String itemTypeName, float itemTypePrice,
+                    int addedBy, int updatedBy){
         
         this.itemTypeID = itemTypeID;
         this.itemTypeName = itemTypeName;
         this.itemTypePrice = itemTypePrice;
-        this.addedDate = new Date();
-        this.addedBy = 0;
-        this.updatedBy = 0;
-        this.updatedDate = new Date();
+        this.addedBy = addedBy;
+        this.updatedBy = updatedBy;
     }
 
     /*
@@ -132,27 +139,11 @@ public class ItemType {
     }
 
     /**
-     * Sets the date when the ItemType was added
-     * @param addedDate
-     */
-    public void setAddedDate(Date addedDate) {
-        this.addedDate = addedDate;
-    }
-
-    /**
      * Sets the ID of the entity who added the ItemType
      * @param addedBy the addedBy to set
      */
     public void setAddedBy(int addedBy) {
         this.addedBy = addedBy;
-    }
-
-    /**
-     * Sets the date when the ItemType was updated
-     * @param updatedDate
-     */
-    public void setUpdatedDate(Date updatedDate) {
-        this.updatedDate = updatedDate;
     }
 
     /**

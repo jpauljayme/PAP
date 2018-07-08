@@ -1,5 +1,10 @@
 
 package pap.domain;
+
+import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+
 /**
  * Class for Person entity.
  * @author      John Paul Jayme <jpaul.jayme.com>
@@ -8,20 +13,36 @@ package pap.domain;
  * 
  */
 import java.util.Date;
+import javax.persistence.Id;
 
-public class Person {
+@Entity
+public class Person implements Serializable {
+    @Id
+    @Column(name="PersonID")
     private int personID;
+    @Column(name="PersonTypeID")
     private int personTypeID;
+    @Column(name="AddressID")
     private int addressID;
+    @Column(name="LastName")
     private String lastName;
+    @Column(name="FirstName")
     private String firstName;
+    @Column(name="MiddleName")
     private String middleName;
+    @Column(name="BirthDate")
     private Date birthDate;
+    @Column(name="Email")
     private String email;
+    @Column(name="ContactNumber")
     private String contactNumber;
+    @Column(name="AddedDate")
     private Date addedDate;
+    @Column(name="AddedBy")
     private int addedBy;
+    @Column(name="UpdatedDate")
     private Date updatedDate;
+    @Column(name="UpdatedBy")
     private int updatedBy;
     
     /**
@@ -35,15 +56,13 @@ public class Person {
      * @param birthDate
      * @param email
      * @param contactNumber
-     * @param addedDate
      * @param addedBy
-     * @param updatedDate
      * @param updatedBy
      */
     public Person(int personID, int personTypeID, int addressID, 
-            String lastName, String firstName, String middleName, Date birthDate,
-            String email, String contactNumber, Date addedDate, int addedBy,
-            Date updatedDate, int updatedBy){
+                  String lastName, String firstName, String middleName, Date birthDate,
+                  String email, String contactNumber, Date addedDate, int addedBy,
+                  Date updatedDate, int updatedBy){
         this.personID = personID;
         this.personTypeID = personTypeID;
         this.addressID = addressID;
@@ -53,9 +72,7 @@ public class Person {
         this.birthDate = birthDate;
         this.email = email;
         this.contactNumber = contactNumber;
-        this.addedDate = addedDate;
         this.addedBy = addedBy;
-        this.updatedDate = updatedDate;
         this.updatedBy = updatedBy;
         
     }
@@ -73,9 +90,7 @@ public class Person {
         this.birthDate = new Date();
         this.email = "";
         this.contactNumber = "";
-        this.addedDate = new Date();
         this.addedBy = 0;
-        this.updatedDate = new Date();
         this.updatedBy = 0;
     }
     
@@ -257,27 +272,11 @@ public class Person {
     }
 
     /**
-     * Sets the date when the Person was added
-     * @param addedDate the addedDate to set
-     */
-    public void setAddedDate(Date addedDate) {
-        this.addedDate = addedDate;
-    }
-
-    /**
      * Sets the ID of the entity who added the Person
      * @param addedBy the addedBy to set
      */
     public void setAddedBy(int addedBy) {
         this.addedBy = addedBy;
-    }
-
-    /**
-     * Sets the date when the Person was updated
-     * @param updatedDate the updatedDate to set
-     */
-    public void setUpdatedDate(Date updatedDate) {
-        this.updatedDate = updatedDate;
     }
 
     /**

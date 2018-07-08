@@ -20,19 +20,27 @@ public class login {
     public static String checkCredentials(String username, String password) throws SQLException, NoSuchAlgorithmException{
         MySQLConnector.openConnection();
         Connection conn = MySQLConnector.getConnection();
+
         Statement st = conn.createStatement();
         String query = "SELECT * FROM credentials WHERE Username='"+ username +"'";
         ResultSet rs = st.executeQuery(query);
         
         if(!rs.isBeforeFirst()){
+            MySQLConnector.closeConnection();
             return ("InvalidUsername");
         }
         
         rs.next();
         if(rs.getString("UserPassword").equals(MD5.hash(password))){
+            MySQLConnector.closeConnection();
             return ("True");
         }else{
+            MySQLConnector.closeConnection();
             return ("InvalidPassword");
         }
+    }
+    
+    public static void main(String args[]) throws SQLException, NoSuchAlgorithmException{
+        System.out.println(checkCredentials("dante", "password"));
     }
 }
