@@ -35,5 +35,8 @@ nbdist/
 nbactions.xml
 nb-configuration.xml
 
+#Ignore META-INF 
+*/META-INF/*
+
 # End of https://www.gitignore.io/api/java
 /PAP Application/nbproject/private/
