@@ -1,12 +1,22 @@
 package pap.domain;
 
+import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 /**
  *Class that stores the id's of related transaction and item.
  * @author @author      John Paul Jayme <jpaul.jayme.com>
  */
-public class ItemList {
+@Entity
+public class ItemList implements Serializable {
+    @Id
+    @Column(name="ItemListID")
     private int itemListID;
+    @Column(name="TransactionID")
     private int transactionID;
+    @Column(name="ItemID")
     private int itemID;
     
     /**

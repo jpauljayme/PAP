@@ -1,20 +1,33 @@
 package pap.domain;
 
+import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 /**
  *Class that defines address of the customer.
  * @author @author      John Paul Jayme <jpaul.jayme.com>
  */
-public class Address {
-
+@Entity
+public class Address implements Serializable {
+    @Id
+    @Column(name="AddressID")
     private int addressID;
+    @Column(name="Floor")
     private String floor;
+    @Column(name="RoomNumber")
     private int roomNumber;
+    @Column(name="BuildingName")
     private String buildingName;
+    @Column(name="AddedBy")
     private int addedBy;
+    @Column(name="AddedDate")
     private Date addedDate;
+    @Column(name="UpdatedBy")
     private int updatedBy;
+    @Column(name="UpdatedDate")
     private Date updatedDate;
     
     /**
@@ -25,10 +38,8 @@ public class Address {
         this.floor = "";
         this.roomNumber = 0;
         this.buildingName = "";
-        this.addedDate = new Date();
         this.addedBy = 0;
         this.updatedBy = 0;
-        this.updatedDate = new Date();
     }
     
     /**
@@ -37,22 +48,19 @@ public class Address {
      * @param floor
      * @param roomNumber
      * @param buildingName
-     * @param addedDate
      * @param addedBy
-     * @param updatedDate
      * @param updatedBy
      */
+
     public Address(int addressID, String floor, int roomNumber, 
-            String buildingName, Date addedDate,
-            int addedBy, Date updatedDate, int updatedBy){
-        addressID = addressID;
+                   String buildingName, Date addedDate,
+                   int addedBy, Date updatedDate, int updatedBy){
+        this.addressID = addressID;
         this.floor = floor;
         this.roomNumber = roomNumber;
         this.buildingName = buildingName;
-        this.addedDate = addedDate;
         this.addedBy = addedBy;
         this.updatedBy = updatedBy;
-        this.updatedDate = updatedDate;
     }
     
     /*
@@ -161,28 +169,15 @@ public class Address {
     }
 
     /**
-     * Sets the date when the Address was added
-     * @param addedDate
-     */
-    public void setAddedDate(Date addedDate) {
-        this.addedDate = addedDate;
-    }
-
-    /**
      * Sets the field to the ID of the entity who updated the Address
      * @param updatedBy the updatedBy to set
      */
     public void setUpdatedBy(int updatedBy) {
         this.updatedBy = updatedBy;
-    }
-
-    /**
-     * Sets the date to when the Address was updated
-     * @param updatedDate
-     */
-    public void setUpdatedDate(Date updatedDate) {
-        this.updatedDate = updatedDate;
-    }
+    } 
     
+    public static void main(String[] args){
+    
+    }
     
 }

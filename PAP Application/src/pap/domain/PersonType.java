@@ -1,35 +1,43 @@
 package pap.domain;
 
+import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 /**
  *Class that specifies the privilege/type of a user.
  * @author @author      John Paul Jayme <jpaul.jayme.com>
  */
-public class PersonType {
+@Entity
+public class PersonType implements Serializable {
+    @Id
+    @Column(name="PersonTypeID")
     private int personTypeID;
+    @Column(name="PersonType")
     private String personType;
+    @Column(name="AddedDate")
     private Date addedDate;
+    @Column(name="AddedBy")
     private int addedBy;
+    @Column(name="UpdatedDate")
     private Date updatedDate;
+    @Column(name="UpdatedBy")
     private int updatedBy;
     
     /**
      *Constructor with parameters.
      * @param personTypeID
      * @param personType
-     * @param addedDate
      * @param addedBy
-     * @param updatedDate
      * @param updatedBy
      */
-    public PersonType(int personTypeID, String personType, Date addedDate, int addedBy,
-            Date updatedDate, int updatedBy){
+    public PersonType(int personTypeID, String personType, 
+                      int addedBy, int updatedBy){
         this.personTypeID = personTypeID;
         this.personType = personType;
-        this.addedDate = addedDate;
         this.addedBy = addedBy;
-        this.updatedDate = updatedDate;
         this.updatedBy = updatedBy;
         
     }
@@ -40,9 +48,7 @@ public class PersonType {
     public PersonType(){
         this.personTypeID = 0;
         this.personType = "Person";
-        this.addedDate = new Date();
         this.addedBy = 0;
-        this.updatedDate = new Date();
         this.updatedBy = 0;
     }
     
@@ -112,27 +118,11 @@ public class PersonType {
     }
 
     /**
-     * Sets the date when the PersonType was added
-     * @param addedDate the addedDate to set
-     */
-    public void setAddedDate(Date addedDate) {
-        this.addedDate = addedDate;
-    }
-
-    /**
      * Sets the ID of the entity who added the PersonType
      * @param addedBy the addedBy to set
      */
     public void setAddedBy(int addedBy) {
         this.addedBy = addedBy;
-    }
-
-    /**
-     * Sets the date when the PersonType was updated
-     * @param updatedDate the updatedDate to set
-     */
-    public void setUpdatedDate(Date updatedDate) {
-        this.updatedDate = updatedDate;
     }
 
     /**
