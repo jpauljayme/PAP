@@ -14,6 +14,7 @@ import javax.persistence.Entity;
  */
 import java.util.Date;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
 
 @Entity
 public class Person implements Serializable {
@@ -32,7 +33,7 @@ public class Person implements Serializable {
     @Column(name = "MiddleName")
     private String middleName;
     @Column(name = "BirthDate")
-    private Date birthDate;
+    private String birthDate;
     @Column(name = "Sex")
     private char sex;
     @Column(name = "Email")
@@ -40,10 +41,12 @@ public class Person implements Serializable {
     @Column(name = "ContactNumber")
     private String contactNumber;
     @Column(name = "AddedDate")
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date addedDate;
     @Column(name = "AddedBy")
     private int addedBy;
     @Column(name = "UpdatedDate")
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date updatedDate;
     @Column(name = "UpdatedBy")
     private int updatedBy;
@@ -63,11 +66,11 @@ public class Person implements Serializable {
      * @param contactNumber
      * @param addedBy
      * @param updatedBy
+     * 
      */
     public Person(int personID, int personTypeID, int addressID,
-            String lastName, String firstName, String middleName, Date birthDate,
-            char sex, String email, String contactNumber, Date addedDate, int addedBy,
-            Date updatedDate, int updatedBy) {
+            String lastName, String firstName, String middleName, String birthDate,
+            char sex, String email, String contactNumber, int addedBy, int updatedBy) {
         this.personID = personID;
         this.personTypeID = personTypeID;
         this.addressID = addressID;
@@ -80,6 +83,8 @@ public class Person implements Serializable {
         this.contactNumber = contactNumber;
         this.addedBy = addedBy;
         this.updatedBy = updatedBy;
+        this.addedDate = addedDate;
+        this.updatedDate = updatedDate;
 
     }
 
@@ -93,12 +98,13 @@ public class Person implements Serializable {
         this.lastName = "";
         this.middleName = "";
         this.firstName = "";
-        this.birthDate = new Date();
+        this.birthDate = "";
         this.sex = 'x';
         this.email = "";
         this.contactNumber = "";
         this.addedBy = 0;
         this.updatedBy = 0;
+      
     }
 
     /*
@@ -163,7 +169,7 @@ public class Person implements Serializable {
      *
      * @return the birthDate
      */
-    public Date getBirthDate() {
+    public String getBirthDate() {
         return birthDate;
     }
 
@@ -233,6 +239,16 @@ public class Person implements Serializable {
     /*
      * SETTERS
      */
+
+    /**
+     * Sets the Person's PersonType ID
+     *
+     * @param personID the personID to set
+     */
+    public void setPersonID(int personID) {
+        this.personID = personID;
+    }
+    
     /**
      * Sets the Person's PersonType ID
      *
@@ -283,7 +299,7 @@ public class Person implements Serializable {
      *
      * @param birthDate the birthDate to set
      */
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(String birthDate) {
         this.birthDate = birthDate;
     }
 
@@ -331,12 +347,32 @@ public class Person implements Serializable {
     public void setSex(char sex) {
         this.sex = sex;
     }
+    
+     /**
+     * Sets the added date
+     *
+     * @param addedDate the date to set
+     */
+    public void setAddedDate(Date addedDate) {
+        this.addedDate = addedDate;
+    }
+    
+     /**
+     * Sets the updated date
+     *
+     * @param updatedDate the date to set
+     */
+    public void setUpdatedDate(Date updatedDate) {
+        this.updatedDate = updatedDate;
+    }
 
     @Override
     public String toString() {
         return "id: " + personID + "\n"
-                + "name: " + firstName + middleName + lastName + "\n"
-                + "address: " + birthDate + "\n"
-                + "sex: " + sex + "\n\n";
+                + "name: " + firstName + " " +middleName + " "+ lastName + "\n"
+                + "birthdate: " + birthDate + "\n"
+                + "sex: " + sex + "\n\n"
+                + "addedDate: " + addedDate + "\n"
+                + "updatedDate: " + updatedDate;
     }
 }
