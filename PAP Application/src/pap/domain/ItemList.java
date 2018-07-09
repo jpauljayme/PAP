@@ -72,6 +72,14 @@ public class ItemList implements Serializable {
     /*
      * SETTERS
      */
+    
+    /**
+     * Sets the ItemList ID of the ItemList
+     * @param itemListID the itemID to set
+     */
+    public void setItemListID(int itemListID) {
+        this.itemListID = itemListID;
+    }
 
     /**
      * Sets the Transaction ID of the ItemList

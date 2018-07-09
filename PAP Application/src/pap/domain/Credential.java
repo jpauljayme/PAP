@@ -125,6 +125,13 @@ public class Credential implements Serializable {
     /*
      * SETTERS
      */
+    
+    /**
+     * @param credentialsID
+     */
+    public void setCredentialsID(int credentialsID) {
+        this.credentialsID = credentialsID;
+    }
 
     /**
      * @param personID the personID to set
@@ -154,11 +161,27 @@ public class Credential implements Serializable {
     public void setAddedBy(int addedBy) {
         this.addedBy = addedBy;
     }
+    
+    /**
+     * Sets the Date when the Credential was added
+     * @param addedDate
+     */
+    public void setAddedDate(Date addedDate) {
+        this.addedDate = addedDate;
+    }
 
     /**
      * @param updatedBy the updatedBy to set
      */
     public void setUpdatedBy(int updatedBy) {
         this.updatedBy = updatedBy;
+    }
+    
+    /**
+     * Sets the Date when the Credential was updated
+     * @param updatedDate
+     */
+    public void setUpdatedDate(Date updatedDate) {
+        this.updatedDate = updatedDate;
     }
 }

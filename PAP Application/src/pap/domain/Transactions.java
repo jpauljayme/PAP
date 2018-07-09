@@ -25,9 +25,9 @@ public class Transactions implements Serializable {
     @Column(name="ReceivedDate")
     private Date receivedDate;
     @Column(name="ClothingWeight")
-    private float clothingWeight;
+    private double clothingWeight;
     @Column(name="BeddingsWeight")
-    private float beddingsWeight;
+    private double beddingsWeight;
     @Column(name="TotalAmount")
     private Double totalAmount;
     @Column(name="TransactionType")
@@ -75,7 +75,7 @@ public class Transactions implements Serializable {
      */
 
     /**
-     * Returns the Transactions ID
+     * Returns the Transaction ID
      * @return the transactionID
      */
     public int getTransactionID() {
@@ -91,7 +91,7 @@ public class Transactions implements Serializable {
     }
 
     /**
-     * Returns the date when the Transactions was added
+     * Returns the date when the Transaction was added
      * @return the addedDate
      */
     public Date getAddedDate() {
@@ -99,7 +99,7 @@ public class Transactions implements Serializable {
     }
 
     /**
-     * Returns the ID of the entity who added the Transactions
+     * Returns the ID of the entity who added the Transaction
      * @return the addedBy
      */
     public int getAddedBy() {
@@ -118,7 +118,7 @@ public class Transactions implements Serializable {
      * Returns the weight of clothes 
      * @return the clothingWeight
      */
-    public float getClothingWeight() {
+    public double getClothingWeight() {
         return clothingWeight;
     }
 
@@ -126,7 +126,7 @@ public class Transactions implements Serializable {
      * Returns the weight of bedding 
      * @return the beddingsWeight
      */
-    public float getBeddingsWeight() {
+    public double getBeddingsWeight() {
         return beddingsWeight;
     }
 
@@ -139,7 +139,7 @@ public class Transactions implements Serializable {
     }
 
     /**
-     * Returns the type of Transactions
+     * Returns the type of Transaction
      * @return the transactionType
      */
     public String getTransactionType() {
@@ -150,6 +150,14 @@ public class Transactions implements Serializable {
     /*
      * SETTERS
      */
+    
+    /**
+     * Sets the Transaction's ID
+     * @param transactionID the transactionID to set
+     */
+    public void setTransactionID(int transactionID) {
+        this.transactionID = transactionID;
+    }
 
     /**
      * Sets the customer's PersonID
@@ -160,8 +168,7 @@ public class Transactions implements Serializable {
     }
 
     /**
-<<<<<<< Updated upstream:PAP Application/src/pap/domain/Transactions.java
-     * Sets the date when the Transactions was added
+     * Sets the date when the Transaction was added
      * @param addedDate the addedDate to set
      */
     public void setAddedDate(Date addedDate) {
@@ -169,10 +176,7 @@ public class Transactions implements Serializable {
     }
 
     /**
-     * Sets the ID of the entity who added the Transactions
-=======
      * Sets the ID of the entity who added the Transaction
->>>>>>> Stashed changes:PAP Application/src/pap/domain/Transactions.java
      * @param addedBy the addedBy to set
      */
     public void setAddedBy(int addedBy) {
@@ -191,7 +195,7 @@ public class Transactions implements Serializable {
      * Sets the weight of clothes 
      * @param clothingWeight the clothingWeight to set
      */
-    public void setClothingWeight(float clothingWeight) {
+    public void setClothingWeight(double clothingWeight) {
         this.clothingWeight = clothingWeight;
     }
 
@@ -199,7 +203,7 @@ public class Transactions implements Serializable {
      * Sets the weight of bedding 
      * @param beddingsWeight the beddingsWeight to set
      */
-    public void setBeddingsWeight(float beddingsWeight) {
+    public void setBeddingsWeight(double beddingsWeight) {
         this.beddingsWeight = beddingsWeight;
     }
 
@@ -212,7 +216,7 @@ public class Transactions implements Serializable {
     }
 
     /**
-     * Sets the type of Transactions
+     * Sets the type of Transaction
      * @param transactionType the transactionType to set
      */
     public void setTransactionType(String transactionType) {

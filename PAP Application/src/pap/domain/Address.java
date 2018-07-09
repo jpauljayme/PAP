@@ -52,10 +52,9 @@ public class Address implements Serializable {
      * @param updatedBy
      */
 
-    public Address(int addressID, String floor, int roomNumber, 
-                   String buildingName, Date addedDate,
-                   int addedBy, Date updatedDate, int updatedBy){
-        this.addressID = addressID;
+    public Address(String floor, int roomNumber, 
+                   String buildingName,
+                   int addedBy, int updatedBy){
         this.floor = floor;
         this.roomNumber = roomNumber;
         this.buildingName = buildingName;
@@ -135,6 +134,14 @@ public class Address implements Serializable {
     /*
      * SETTERS
      */
+    
+    /**
+     * Sets the addressID of the Address
+     * @param addressID
+     */
+    public void setAddressID(int addressID) {
+        this.addressID = addressID;
+    }
 
     /**
      * Sets the floor of the Address
@@ -167,6 +174,14 @@ public class Address implements Serializable {
     public void setAddedBy(int addedBy) {
         this.addedBy = addedBy;
     }
+    
+    /**
+     * Sets the Date when the Address was added
+     * @param addedDate
+     */
+    public void setAddedDate(Date addedDate) {
+        this.addedDate = addedDate;
+    }
 
     /**
      * Sets the field to the ID of the entity who updated the Address
@@ -175,6 +190,14 @@ public class Address implements Serializable {
     public void setUpdatedBy(int updatedBy) {
         this.updatedBy = updatedBy;
     } 
+    
+    /**
+     * Sets the Date when the Address was updated
+     * @param updatedDate
+     */
+    public void setUpdatedDate(Date updatedDate) {
+        this.updatedDate = updatedDate;
+    }
     
     public static void main(String[] args){
     

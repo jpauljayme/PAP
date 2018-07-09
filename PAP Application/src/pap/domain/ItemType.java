@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
 
 /**
  *Class that describes the item type.
@@ -20,10 +21,12 @@ public class ItemType implements Serializable {
     @Column(name="ItemTypePrice")
     private float itemTypePrice;
     @Column(name="AddedDate")
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date addedDate;
     @Column(name="AddedBy")
     private int addedBy;
     @Column(name="UpdatedDate")
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date updatedDate;
     @Column(name="UpdatedBy")
     private int updatedBy;
@@ -121,6 +124,14 @@ public class ItemType implements Serializable {
     /*
      * SETTERS
      */
+    
+    /**
+     * Sets the ID of the ItemType
+     * @param itemTypeID the itemTypeID to set
+     */
+    public void setItemTypeID(int itemTypeID) {
+        this.itemTypeID = itemTypeID;
+    }
 
     /**
      * Sets the name of the ItemType
@@ -145,6 +156,14 @@ public class ItemType implements Serializable {
     public void setAddedBy(int addedBy) {
         this.addedBy = addedBy;
     }
+    
+    /**
+     * Sets the Date when the ItemType was added
+     * @param addedDate
+     */
+    public void setAddedDate(Date addedDate) {
+        this.addedDate = addedDate;
+    }
 
     /**
      * Sets the ID of the entity who updated the ItemType
@@ -152,5 +171,13 @@ public class ItemType implements Serializable {
      */
     public void setUpdatedBy(int updatedBy) {
         this.updatedBy = updatedBy;
+    }
+    
+    /**
+     * Sets the Date when the ItemType was updated
+     * @param updatedDate
+     */
+    public void setUpdatedDate(Date updatedDate) {
+        this.updatedDate = updatedDate;
     }
 }

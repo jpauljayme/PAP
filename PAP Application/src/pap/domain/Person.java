@@ -233,6 +233,16 @@ public class Person implements Serializable {
     /*
      * SETTERS
      */
+    
+    /**
+     * Sets the Person's ID
+     *
+     * @param personID the personID to set
+     */
+    public void setPersonID(int personID) {
+        this.personID = personID;
+    }
+    
     /**
      * Sets the Person's PersonType ID
      *
@@ -313,6 +323,14 @@ public class Person implements Serializable {
     public void setAddedBy(int addedBy) {
         this.addedBy = addedBy;
     }
+    
+    /**
+     * Sets the Date when the Person was added
+     * @param addedDate
+     */
+    public void setAddedDate(Date addedDate) {
+        this.addedDate = addedDate;
+    }
 
     /**
      * Sets the ID of the entity who updated the Person
@@ -321,6 +339,14 @@ public class Person implements Serializable {
      */
     public void setUpdatedBy(int updatedBy) {
         this.updatedBy = updatedBy;
+    }
+    
+    /**
+     * Sets the Date when the Person was updated
+     * @param updatedDate
+     */
+    public void setUpdatedDate(Date updatedDate) {
+        this.updatedDate = updatedDate;
     }
 
     /**

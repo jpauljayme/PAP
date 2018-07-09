@@ -1,6 +1,8 @@
 package pap.domain;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -120,6 +122,14 @@ public class Item implements Serializable {
     /*
      * SETTERS
      */
+    
+    /**
+     * Sets the ID of the Item
+     * @param itemID
+     */
+    public void setItemID(int itemID) {
+        this.itemID = itemID;
+    }
 
     /**
      * Sets the type ID of the Item
@@ -144,6 +154,14 @@ public class Item implements Serializable {
     public void setAddedBy(int addedBy) {
         this.addedBy = addedBy;
     }
+    
+    /**
+     * Sets the Date when the Item was added
+     * @param addedDate
+     */
+    public void setAddedDate(Date addedDate) {
+        this.addedDate = addedDate;
+    }
 
     /**
      * Sets the ID of the entity who updated the Item
@@ -151,5 +169,13 @@ public class Item implements Serializable {
      */
     public void setUpdatedBy(int updatedBy) {
         this.updatedBy = updatedBy;
+    }
+    
+    /**
+     * Sets the Date when the Item was updated
+     * @param updatedDate
+     */
+    public void setUpdatedDate(Date updatedDate) {
+        this.updatedDate = updatedDate;
     }
 }

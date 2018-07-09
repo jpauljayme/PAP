@@ -1,0 +1,160 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package pap.controllers;
+
+import java.security.NoSuchAlgorithmException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+import pap.dbconnection.MySQLConnector;
+import pap.domain.Credential;
+import pap.domain.ResultSetMapper;
+import static pap.functionality.getLastID.getLastInsertID;
+import pap.hash.MD5;
+
+/**
+ *
+ * @author Allena Denise
+ */
+public class credentialsController {
+    
+    public static String checkCredentials(String username, String password) throws NoSuchAlgorithmException{
+        try {
+            ResultSetMapper<Credential> resultSetMapper = new ResultSetMapper<>();
+            ResultSet resultSet;
+            MySQLConnector.openConnection();
+            
+            try (Connection connection = MySQLConnector.getConnection()) {
+                PreparedStatement statement = connection.prepareStatement("SELECT * FROM credentials WHERE Username=?");
+                statement.setString(1, username);
+                
+                resultSet = statement.executeQuery();
+                List<Credential> c = resultSetMapper.mapRersultSetToObject(resultSet, Credential.class);
+                
+                MySQLConnector.closeConnection();
+                
+                if (c != null) {
+                    Credential user = c.get(0);
+                    if(user.getUserPassword().equals(MD5.hash(password))){
+                        return ("Valid");
+                    }else{
+                        return ("InvalidPassword");
+                    }
+                }
+            }
+        } catch (SQLException e) {
+        }
+        return ("InvalidUsername");
+    }
+    
+    public static int insertCredentials(int personID, String username, String password, int addedBy, int updatedBy) throws NoSuchAlgorithmException{
+        try{
+            MySQLConnector.openConnection();
+
+            try(Connection connection = MySQLConnector.getConnection()) {
+                
+                String query = "INSERT INTO credentials (PersonID, Username, UserPassword, AddedBy, UpdatedBy) VALUES (?,?,?,?,?)";
+                PreparedStatement statement = connection.prepareStatement(query);
+                statement.setInt(1, personID);
+                statement.setString(2, username);
+                statement.setString(3, MD5.hash(password));
+                statement.setInt(4, addedBy);
+                statement.setInt(5, updatedBy);
+                statement.execute();
+                
+                int id = getLastInsertID(connection);
+
+                MySQLConnector.closeConnection();
+                return id;
+            }
+        }catch (SQLException e){
+        }
+        return 0;
+    }
+    
+    public static void updateCredentials(String oldUsername, String username, String password, int updatedBy) throws NoSuchAlgorithmException{
+        try{
+            MySQLConnector.openConnection();
+
+            try(Connection connection = MySQLConnector.getConnection()) {
+                String query = "UPDATE credentials SET Username=?, UserPassword=?, UpdatedBy=? WHERE Username=?";
+                
+                PreparedStatement statement = connection.prepareStatement(query);
+                statement.setString(1, username);
+                statement.setString(2, MD5.hash(password));
+                statement.setInt(3, updatedBy);
+                statement.setString(4, oldUsername);
+                
+                statement.execute();
+
+                MySQLConnector.closeConnection();
+            }
+        }catch (SQLException e){
+        }
+    }
+    
+    public static void deleteCredentials(int credentialsID){
+        try{
+            MySQLConnector.openConnection();
+
+            try(Connection connection = MySQLConnector.getConnection()) {
+                String query = "DELETE FROM credentials WHERE CredentialsID=?";
+                
+                PreparedStatement statement = connection.prepareStatement(query);
+                statement.setInt(1, credentialsID);
+                
+                statement.execute();
+
+                MySQLConnector.closeConnection();
+            }
+        }catch (SQLException e){
+        }
+    }
+    
+    public static String validCredentialInsert(String username, String password) throws NoSuchAlgorithmException{
+        
+        if(username.equals("")){
+            return ("UsernameEmpty");
+        }
+        if(password.equals("")){
+            return ("PasswordEmpty");
+        }
+        if(username.length() > 20){
+            return ("UsernameOverflow");
+        }       
+        try {
+            ResultSetMapper<Credential> resultSetMapper = new ResultSetMapper<>();
+            ResultSet resultSet;
+            MySQLConnector.openConnection();
+            
+            try (Connection connection = MySQLConnector.getConnection()) {
+                PreparedStatement statement = connection.prepareStatement("SELECT * FROM credentials WHERE Username=?");
+                statement.setString(1, username);
+                
+                resultSet = statement.executeQuery();
+                List<Credential> c = resultSetMapper.mapRersultSetToObject(resultSet, Credential.class);
+                
+                MySQLConnector.closeConnection();
+                
+                if (c != null) {
+                    return ("UsernameTaken");
+                }
+            }
+        } catch (SQLException e) {
+        }
+        return ("Valid");
+    }
+    
+    public static void main(String[] args) throws SQLException, NoSuchAlgorithmException{
+//        System.out.println(checkCredentials("dante", "password"));
+//        updateCredentials("dante1","dante2", "password", 2);
+//        deleteCredentials(3);
+//        System.out.println(validCredentialInsert("dant2", "password"));
+//        System.out.println(insertCredentials(2, "username", "password", 2, 2));
+    }
+}
