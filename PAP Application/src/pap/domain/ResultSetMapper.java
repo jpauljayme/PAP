@@ -54,6 +54,7 @@ public class ResultSetMapper<T> {
                                             && columnValue != null) {
                                         BeanUtils.setProperty(bean, field
                                                 .getName(), columnValue);
+                                        //System.out.println(field.getName()+ " "+columnValue);
                                         break;
                                     }
                                 }
@@ -71,13 +72,7 @@ public class ResultSetMapper<T> {
             } else {
                 return null;
             }
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
+        } catch (IllegalAccessException | SQLException | InstantiationException | InvocationTargetException e) {
             e.printStackTrace();
         }
         return outputList;
