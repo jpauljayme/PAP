@@ -7,11 +7,17 @@ package pap.controllers;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import static pap.controllers.itemTypeController.getItemType;
 import pap.dbconnection.MySQLConnector;
 import pap.domain.ItemType;
+import pap.domain.Person;
+import pap.domain.ResultSetMapper;
 import pap.domain.Transactions;
+import static pap.functionality.dataExist.getRow;
 import static pap.functionality.getLastID.getLastInsertID;
 
 /**
@@ -19,6 +25,76 @@ import static pap.functionality.getLastID.getLastInsertID;
  * @author Allena Denise
  */
 public class transactionController {
+    
+    public static List<Transactions> getTransaction(){
+        List<Transactions> result = new ArrayList<>();
+        
+        try{
+            ResultSetMapper<Transactions> resultSetMapper = new ResultSetMapper<>();
+            ResultSet resultSet;
+            MySQLConnector.openConnection();
+            
+            try(Connection connection = MySQLConnector.getConnection()){
+                
+                String query = "SELECT * FROM transactions INNER JOIN Person ON transactions.PersonID = person.PersonID ORDER BY TransactionID DESC";
+                PreparedStatement statement = connection.prepareStatement(query);
+                resultSet = statement.executeQuery();
+                
+                result = resultSetMapper.mapResultSetToObject(resultSet, Transactions.class);
+                
+            }
+        }catch(SQLException e){
+        }
+        return result;
+    } 
+    
+    public static Transactions getTransaction(int transactionID){
+        Transactions temp = new Transactions();
+        
+        try{
+            ResultSetMapper<Transactions> resultSetMapper = new ResultSetMapper<>();
+            ResultSet resultSet;
+            MySQLConnector.openConnection();
+            
+            try(Connection connection = MySQLConnector.getConnection()){
+                
+                String query = "SELECT * FROM transactions WHERE TransactionID=?";
+                PreparedStatement statement = connection.prepareStatement(query);
+                statement.setInt(1, transactionID);
+                resultSet = statement.executeQuery();
+                List<Transactions> transaction = resultSetMapper.mapResultSetToObject(resultSet, Transactions.class);
+                
+                if(transaction != null){
+                    return transaction.get(0);
+                }
+            }
+        }catch(SQLException e){
+        }
+        return temp;
+    }
+    
+    public static List<Transactions> getTransaction(String sortBy, String orderBy){
+        List<Transactions> result = new ArrayList<>();
+        
+        try{
+            ResultSetMapper<Transactions> resultSetMapper = new ResultSetMapper<>();
+            ResultSet resultSet;
+            MySQLConnector.openConnection();
+            
+            try(Connection connection = MySQLConnector.getConnection()){
+                
+                String query = "SELECT CONCAT(person.FirstName, person.MiddleName, person.LastName) AS FullName, transactions.* FROM transactions INNER JOIN person ON transactions.PersonID = person.PersonID ORDER BY %s %s";
+                query = String.format(query, sortBy, orderBy);
+                PreparedStatement statement = connection.prepareStatement(query);
+                resultSet = statement.executeQuery();
+                
+                result = resultSetMapper.mapResultSetToObject(resultSet, Transactions.class);
+                
+            }
+        }catch(SQLException e){
+        }
+        return result;
+    }
     
     public static int insertTransaction(Transactions transactions){
         
@@ -36,7 +112,7 @@ public class transactionController {
                 
                 String query = "INSERT INTO transactions (PersonID, AddedBy, ClothingWeight, BeddingsWeight, TotalAmount, TransactionType, ReceivedDate) VALUES (?,?,?,?,?,?, (DATE_ADD(CURRENT_TIMESTAMP , INTERVAL ? DAY)))";
                 PreparedStatement statement = connection.prepareStatement(query);
-                statement.setInt(1, transactions.getPersonID());
+                statement.setInt(1, transactions.getPersonID().getPersonID());
                 statement.setInt(2, transactions.getAddedBy());
                 statement.setDouble(3, transactions.getClothingWeight());
                 statement.setDouble(4, transactions.getBeddingsWeight());
@@ -55,8 +131,32 @@ public class transactionController {
         return 0;
     }
     
-    public static void main(String[] args){
+    public static String validTransactionInput(int personID, String transactionType ,int addedBy, double clothingWeight, double beddingsWeight) throws SQLException{
+        
+        MySQLConnector.openConnection();
+        Connection connection = MySQLConnector.getConnection();
+        
+        if(getRow(connection, "person", "PersonID", personID) == false){
+            return ("PersonIDDoesNotExist");
+        }else if(getRow(connection, "transactions", "TransactionType", transactionType) == false){
+            return ("TransactionTypeDoesNotExist");
+        }else if(getRow(connection, "person", "PersonID", addedBy) == false){
+            return ("AddedByDoesNotExist");
+        }else if(clothingWeight < 0){
+            return ("InvalidClothingWeight");
+        }else if(beddingsWeight < 0){
+            return ("InvalidBeddingsWeight");
+        }else{
+            return ("Valid");
+        }
+    }
+    
+    public static void main(String[] args) throws SQLException{
 //        System.out.println(insertTransaction(2, 2, 4.4, 0, "Rushed"));
 //        System.out.println(insertTransaction(2, 2, 4.4, 0, "Regular"));
+//        System.out.println(getTransaction("FullName", "ASC"));
+
+//        System.out.println(getTransaction("FullName", "DESC").get(0).getTransactionID());
+//        System.out.println(validTransactionInput(3, "Regular", 2, 0, 0));
     }
 }

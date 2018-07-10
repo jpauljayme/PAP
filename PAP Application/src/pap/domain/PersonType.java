@@ -50,7 +50,7 @@ public class PersonType implements Serializable {
      */
     public PersonType(){
         this.personTypeID = 0;
-        this.personType = "Person";
+        this.personType = null;
         this.addedBy = 0;
         this.updatedBy = 0;
     }

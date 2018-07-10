@@ -8,6 +8,7 @@ import java.util.List;
 import pap.dbconnection.MySQLConnector;
 import pap.domain.ItemType;
 import pap.domain.ResultSetMapper;
+import static pap.functionality.dataExist.getRow;
 import static pap.functionality.getLastID.getLastInsertID;
 
 /*
@@ -98,15 +99,34 @@ public class itemTypeController {
         return 0;
     }
     
+    public static String validItemTypeInsert(String itemTypeName, float itemTypePrice, int addedBy) throws SQLException{
+        
+        MySQLConnector.openConnection();
+        Connection connection = MySQLConnector.getConnection();
+        
+        if(itemTypeName.length() > 50){
+            return ("ItemTypeNameOverflow");
+        }else if(getRow(connection, "itemtype", "ItemTypeName", itemTypeName) == true){
+            return ("ItemTypeNameExists");
+        }else if(itemTypePrice <= 0){
+            return ("InvalidItemTypePrice");
+        }else if(getRow(connection, "person", "PersonID", addedBy) == false){
+            return ("AddedByDoesNotExist");
+        }else{
+            return ("Valid");
+        }
+    }
+    
     public static void main(String[] args) throws SQLException{
 //        System.out.println(insertItemType("Bedding", 40, 2, 2));
 
-        System.out.println("ItemTypeID: " + getItemType("Clothes").getItemTypeID());
-        System.out.println("ItemTypeName: " + getItemType("Clothes").getItemTypeName());
-        System.out.println("ItemTypePrice: " + getItemType("Clothes").getItemTypePrice());
-        System.out.println("AddedDate: " + getItemType("Clothes").getAddedDate());
-        System.out.println("AddedBy: " + getItemType("Clothes").getAddedBy());
-        System.out.println("UpdatedDate: " + getItemType("Clothes").getUpdatedDate());
-        System.out.println("UpdatedBy: " + getItemType("Clothes").getUpdatedBy());
+//        System.out.println("ItemTypeID: " + getItemType("Clothes").getItemTypeID());
+//        System.out.println("ItemTypeName: " + getItemType("Clothes").getItemTypeName());
+//        System.out.println("ItemTypePrice: " + getItemType("Clothes").getItemTypePrice());
+//        System.out.println("AddedDate: " + getItemType("Clothes").getAddedDate());
+//        System.out.println("AddedBy: " + getItemType("Clothes").getAddedBy());
+//        System.out.println("UpdatedDate: " + getItemType("Clothes").getUpdatedDate());
+//        System.out.println("UpdatedBy: " + getItemType("Clothes").getUpdatedBy());
+//        System.out.println(validItemTypeInsert("Clothess", 1, 2));
     }
 }

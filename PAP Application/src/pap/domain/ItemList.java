@@ -23,6 +23,7 @@ public class ItemList implements Serializable {
      *Default constructor.
      */
     public ItemList(){
+        this.itemListID = 0;
         this.itemID = 0;
         this.transactionID = 0;
     }
