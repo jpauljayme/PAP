@@ -34,7 +34,7 @@ public class addressController {
                 PreparedStatement statement = connection.prepareStatement(query);
                 statement.setInt(1, addressID);
                 resultSet = statement.executeQuery();
-                List<Address> a = resultSetMapper.mapRersultSetToObject(resultSet, Address.class);
+                List<Address> a = resultSetMapper.mapResultSetToObject(resultSet, Address.class);
                 
                 if(a != null){
                     System.out.println("test6");

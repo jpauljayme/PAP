@@ -26,7 +26,7 @@ public class SampleMain {
                 PreparedStatement statement = connection.prepareStatement("SELECT * FROM person");
                 resultSet = statement.executeQuery();
                 // simple JDBC code to run SQL query and populate resultSet - END
-                List<Person> pojoList = resultSetMapper.mapRersultSetToObject(resultSet, Person.class);
+                List<Person> pojoList = resultSetMapper.mapResultSetToObject(resultSet, Person.class);
                 // print out the list retrieved from database
                 if (pojoList != null) {
                     for (Person p : pojoList) {

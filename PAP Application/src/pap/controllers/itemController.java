@@ -34,7 +34,7 @@ public class itemController {
                 PreparedStatement statement = connection.prepareStatement(query);
                 statement.setInt(1, itemID);
                 resultSet = statement.executeQuery();
-                List<Item> item = resultSetMapper.mapRersultSetToObject(resultSet, Item.class);
+                List<Item> item = resultSetMapper.mapResultSetToObject(resultSet, Item.class);
                 
                 if(item != null){
                     return item.get(0);

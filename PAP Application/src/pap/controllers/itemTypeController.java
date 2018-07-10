@@ -37,7 +37,7 @@ public class itemTypeController {
                 PreparedStatement statement = connection.prepareStatement(query);
                 statement.setInt(1, itemTypeID);
                 resultSet = statement.executeQuery();
-                List<ItemType> item = resultSetMapper.mapRersultSetToObject(resultSet, ItemType.class);
+                List<ItemType> item = resultSetMapper.mapResultSetToObject(resultSet, ItemType.class);
                 
                 if(item != null){
                     System.out.println("test6");
@@ -63,7 +63,7 @@ public class itemTypeController {
                 PreparedStatement statement = connection.prepareStatement(query);
                 statement.setString(1, itemTypeName);
                 resultSet = statement.executeQuery();
-                List<ItemType> item = resultSetMapper.mapRersultSetToObject(resultSet, ItemType.class);
+                List<ItemType> item = resultSetMapper.mapResultSetToObject(resultSet, ItemType.class);
                 
                 if(item != null){
                     System.out.println("test6");

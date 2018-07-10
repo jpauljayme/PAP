@@ -34,7 +34,7 @@ public class credentialsController {
                 statement.setString(1, username);
                 
                 resultSet = statement.executeQuery();
-                List<Credential> c = resultSetMapper.mapRersultSetToObject(resultSet, Credential.class);
+                List<Credential> c = resultSetMapper.mapResultSetToObject(resultSet, Credential.class);
                 
                 MySQLConnector.closeConnection();
                 
@@ -137,7 +137,7 @@ public class credentialsController {
                 statement.setString(1, username);
                 
                 resultSet = statement.executeQuery();
-                List<Credential> c = resultSetMapper.mapRersultSetToObject(resultSet, Credential.class);
+                List<Credential> c = resultSetMapper.mapResultSetToObject(resultSet, Credential.class);
                 
                 MySQLConnector.closeConnection();
                 
