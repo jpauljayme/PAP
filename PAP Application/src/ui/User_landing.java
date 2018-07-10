@@ -35,35 +35,37 @@ public class User_landing extends javax.swing.JFrame {
         inventoryTable = new javax.swing.JTable();
         logoutButton = new javax.swing.JButton();
         salesReportButton = new javax.swing.JButton();
-        idRadioButton = new javax.swing.JRadioButton();
-        receiveDateRadioButton = new javax.swing.JRadioButton();
-        dateAddedRadioButton = new javax.swing.JRadioButton();
-        receiveRadioButton = new javax.swing.JRadioButton();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
-        totalAmountRadioButton = new javax.swing.JRadioButton();
-        ownerNameRadioButton = new javax.swing.JRadioButton();
         addInvoiceButton = new javax.swing.JButton();
-        dateAddedRadioButton1 = new javax.swing.JRadioButton();
-        dateAddedRadioButton2 = new javax.swing.JRadioButton();
+        jLabel3 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(630, 550));
-        setPreferredSize(new java.awt.Dimension(630, 550));
+        setMinimumSize(new java.awt.Dimension(980, 600));
+        setPreferredSize(new java.awt.Dimension(980, 600));
         setResizable(false);
         getContentPane().setLayout(null);
 
-        jPanel1.setPreferredSize(new java.awt.Dimension(630, 550));
+        jPanel1.setBackground(new java.awt.Color(23, 111, 153));
+        jPanel1.setPreferredSize(new java.awt.Dimension(980, 580));
         jPanel1.setLayout(null);
 
-        helloTextField.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
+        helloTextField.setFont(new java.awt.Font("Montserrat", 0, 18)); // NOI18N
+        helloTextField.setForeground(new java.awt.Color(255, 255, 255));
         helloTextField.setText("Hello, <username>");
         jPanel1.add(helloTextField);
-        helloTextField.setBounds(10, 10, 160, 18);
+        helloTextField.setBounds(20, 60, 200, 23);
 
+        inventoryTable.setFont(new java.awt.Font("Meiryo UI", 0, 13)); // NOI18N
         inventoryTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
+                { new Integer(0), "Chaeyoung Son", "09955382518", "La Aldea Buena Mactan", "09/08/18", "05/08/18", "Yes", "Rushed",  new Float(808.5)},
                 {null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null},
@@ -101,83 +103,93 @@ public class User_landing extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        inventoryTable.setFillsViewportHeight(true);
+        inventoryTable.setRowHeight(30);
+        inventoryTable.setShowVerticalLines(false);
         jScrollPane1.setViewportView(inventoryTable);
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(10, 50, 600, 290);
+        jScrollPane1.setBounds(20, 170, 940, 300);
 
-        logoutButton.setFont(new java.awt.Font("Meiryo UI", 0, 12)); // NOI18N
+        logoutButton.setBackground(new java.awt.Color(206, 53, 53));
+        logoutButton.setFont(new java.awt.Font("Meiryo UI", 0, 14)); // NOI18N
+        logoutButton.setForeground(new java.awt.Color(255, 255, 255));
         logoutButton.setText("Logout");
+        logoutButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        logoutButton.setBorderPainted(false);
+        logoutButton.setFocusable(false);
         jPanel1.add(logoutButton);
-        logoutButton.setBounds(530, 540, 73, 25);
+        logoutButton.setBounds(870, 90, 90, 30);
 
-        salesReportButton.setFont(new java.awt.Font("Meiryo UI", 0, 12)); // NOI18N
+        salesReportButton.setBackground(new java.awt.Color(23, 111, 153));
+        salesReportButton.setFont(new java.awt.Font("Meiryo UI", 0, 14)); // NOI18N
+        salesReportButton.setForeground(new java.awt.Color(255, 255, 255));
         salesReportButton.setText("Sales Report");
+        salesReportButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        salesReportButton.setBorderPainted(false);
         jPanel1.add(salesReportButton);
-        salesReportButton.setBounds(230, 510, 150, 25);
-
-        sortButtonGroup.add(idRadioButton);
-        idRadioButton.setFont(new java.awt.Font("Meiryo UI", 0, 11)); // NOI18N
-        idRadioButton.setText("ID");
-        jPanel1.add(idRadioButton);
-        idRadioButton.setBounds(40, 400, 50, 23);
-
-        sortButtonGroup.add(receiveDateRadioButton);
-        receiveDateRadioButton.setFont(new java.awt.Font("Meiryo UI", 0, 11)); // NOI18N
-        receiveDateRadioButton.setText("Receive Date");
-        jPanel1.add(receiveDateRadioButton);
-        receiveDateRadioButton.setBounds(300, 400, 95, 23);
-
-        orientationButtonGroup.add(dateAddedRadioButton);
-        dateAddedRadioButton.setFont(new java.awt.Font("Meiryo UI", 0, 11)); // NOI18N
-        dateAddedRadioButton.setText("Descending");
-        jPanel1.add(dateAddedRadioButton);
-        dateAddedRadioButton.setBounds(310, 440, 87, 23);
-
-        sortButtonGroup.add(receiveRadioButton);
-        receiveRadioButton.setFont(new java.awt.Font("Meiryo UI", 0, 11)); // NOI18N
-        receiveRadioButton.setText("Received");
-        jPanel1.add(receiveRadioButton);
-        receiveRadioButton.setBounds(410, 400, 80, 23);
+        salesReportButton.setBounds(300, 520, 180, 30);
         jPanel1.add(jSeparator1);
-        jSeparator1.setBounds(10, 362, 600, 10);
+        jSeparator1.setBounds(20, 490, 940, 10);
 
-        jLabel2.setFont(new java.awt.Font("Meiryo UI", 0, 12)); // NOI18N
-        jLabel2.setText("Sort by");
+        jLabel2.setFont(new java.awt.Font("Meiryo UI", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Search Customer");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(20, 380, 50, 16);
+        jLabel2.setBounds(20, 110, 120, 18);
 
-        sortButtonGroup.add(totalAmountRadioButton);
-        totalAmountRadioButton.setFont(new java.awt.Font("Meiryo UI", 0, 11)); // NOI18N
-        totalAmountRadioButton.setText("Total Amount");
-        jPanel1.add(totalAmountRadioButton);
-        totalAmountRadioButton.setBounds(500, 400, 110, 23);
-
-        sortButtonGroup.add(ownerNameRadioButton);
-        ownerNameRadioButton.setFont(new java.awt.Font("Meiryo UI", 0, 11)); // NOI18N
-        ownerNameRadioButton.setText("Owner Name");
-        jPanel1.add(ownerNameRadioButton);
-        ownerNameRadioButton.setBounds(90, 400, 95, 23);
-
-        addInvoiceButton.setFont(new java.awt.Font("Meiryo UI", 0, 12)); // NOI18N
+        addInvoiceButton.setBackground(new java.awt.Color(23, 111, 153));
+        addInvoiceButton.setFont(new java.awt.Font("Meiryo UI", 0, 14)); // NOI18N
+        addInvoiceButton.setForeground(new java.awt.Color(255, 255, 255));
         addInvoiceButton.setText("Add Invoice");
+        addInvoiceButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        addInvoiceButton.setBorderPainted(false);
         jPanel1.add(addInvoiceButton);
-        addInvoiceButton.setBounds(230, 480, 150, 25);
+        addInvoiceButton.setBounds(490, 520, 180, 30);
 
-        sortButtonGroup.add(dateAddedRadioButton1);
-        dateAddedRadioButton1.setFont(new java.awt.Font("Meiryo UI", 0, 11)); // NOI18N
-        dateAddedRadioButton1.setText("Date Added");
-        jPanel1.add(dateAddedRadioButton1);
-        dateAddedRadioButton1.setBounds(200, 400, 87, 23);
+        jLabel3.setFont(new java.awt.Font("Meiryo UI", 0, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Sort by");
+        jPanel1.add(jLabel3);
+        jLabel3.setBounds(20, 130, 50, 18);
 
-        orientationButtonGroup.add(dateAddedRadioButton2);
-        dateAddedRadioButton2.setFont(new java.awt.Font("Meiryo UI", 0, 11)); // NOI18N
-        dateAddedRadioButton2.setText("Ascending");
-        jPanel1.add(dateAddedRadioButton2);
-        dateAddedRadioButton2.setBounds(200, 440, 87, 23);
+        jTextField1.setFont(new java.awt.Font("Meiryo UI", 0, 12)); // NOI18N
+        jPanel1.add(jTextField1);
+        jTextField1.setBounds(150, 100, 250, 30);
+
+        jComboBox1.setFont(new java.awt.Font("Meiryo UI", 0, 12)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID", "Name", "Date Added", "Date Received", "Transaction Type", "Total Amount" }));
+        jComboBox1.setSelectedIndex(2);
+        jPanel1.add(jComboBox1);
+        jComboBox1.setBounds(150, 130, 140, 30);
+
+        jComboBox2.setFont(new java.awt.Font("Meiryo UI", 0, 12)); // NOI18N
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ascending", "Descending" }));
+        jComboBox2.setSelectedIndex(1);
+        jPanel1.add(jComboBox2);
+        jComboBox2.setBounds(290, 130, 110, 30);
+
+        jPanel2.setBackground(new java.awt.Color(3, 91, 133));
+        jPanel2.setLayout(null);
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("idk what to name view");
+        jPanel2.add(jLabel1);
+        jLabel1.setBounds(0, 20, 980, 14);
+
+        jPanel1.add(jPanel2);
+        jPanel2.setBounds(0, 0, 980, 50);
+
+        jLabel4.setFont(new java.awt.Font("Montserrat", 0, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("<insert today's date>");
+        jPanel1.add(jLabel4);
+        jLabel4.setBounds(770, 60, 200, 23);
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 630, 580);
+        jPanel1.setBounds(0, 0, 980, 580);
 
         pack();
         setLocationRelativeTo(null);
@@ -220,23 +232,22 @@ public class User_landing extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addInvoiceButton;
-    private javax.swing.JRadioButton dateAddedRadioButton;
-    private javax.swing.JRadioButton dateAddedRadioButton1;
-    private javax.swing.JRadioButton dateAddedRadioButton2;
     private javax.swing.JLabel helloTextField;
-    private javax.swing.JRadioButton idRadioButton;
     private javax.swing.JTable inventoryTable;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JButton logoutButton;
     private javax.swing.ButtonGroup orientationButtonGroup;
-    private javax.swing.JRadioButton ownerNameRadioButton;
-    private javax.swing.JRadioButton receiveDateRadioButton;
-    private javax.swing.JRadioButton receiveRadioButton;
     private javax.swing.JButton salesReportButton;
     private javax.swing.ButtonGroup sortButtonGroup;
-    private javax.swing.JRadioButton totalAmountRadioButton;
     // End of variables declaration//GEN-END:variables
 }

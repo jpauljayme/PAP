@@ -102,14 +102,14 @@ public class Admin_landing extends javax.swing.JFrame {
         jScrollPane1.setViewportView(employeeTable);
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(10, 50, 600, 290);
+        jScrollPane1.setBounds(10, 50, 730, 290);
 
-        logoutButton.setFont(new java.awt.Font("Meiryo UI", 0, 12)); // NOI18N
+        logoutButton.setFont(new java.awt.Font("Meiryo UI", 0, 14)); // NOI18N
         logoutButton.setText("Logout");
         jPanel1.add(logoutButton);
-        logoutButton.setBounds(530, 550, 73, 25);
+        logoutButton.setBounds(640, 570, 80, 27);
 
-        viewInvoicesButton.setFont(new java.awt.Font("Meiryo UI", 0, 12)); // NOI18N
+        viewInvoicesButton.setFont(new java.awt.Font("Meiryo UI", 0, 14)); // NOI18N
         viewInvoicesButton.setText("View Invoices");
         viewInvoicesButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -117,33 +117,33 @@ public class Admin_landing extends javax.swing.JFrame {
             }
         });
         jPanel1.add(viewInvoicesButton);
-        viewInvoicesButton.setBounds(330, 510, 150, 25);
+        viewInvoicesButton.setBounds(400, 530, 160, 27);
 
         sortButtonGroup.add(idRadioButton);
-        idRadioButton.setFont(new java.awt.Font("Meiryo UI", 0, 11)); // NOI18N
+        idRadioButton.setFont(new java.awt.Font("Meiryo UI", 0, 14)); // NOI18N
         idRadioButton.setText("ID");
         jPanel1.add(idRadioButton);
-        idRadioButton.setBounds(60, 400, 50, 23);
+        idRadioButton.setBounds(60, 400, 50, 27);
 
         sortButtonGroup.add(typeRadioButton);
-        typeRadioButton.setFont(new java.awt.Font("Meiryo UI", 0, 11)); // NOI18N
+        typeRadioButton.setFont(new java.awt.Font("Meiryo UI", 0, 14)); // NOI18N
         typeRadioButton.setText("Type");
         jPanel1.add(typeRadioButton);
-        typeRadioButton.setBounds(520, 400, 51, 23);
+        typeRadioButton.setBounds(660, 400, 59, 27);
 
         sortButtonGroup.add(dateAddedRadioButton);
-        dateAddedRadioButton.setFont(new java.awt.Font("Meiryo UI", 0, 11)); // NOI18N
+        dateAddedRadioButton.setFont(new java.awt.Font("Meiryo UI", 0, 14)); // NOI18N
         dateAddedRadioButton.setText("Date Added");
         jPanel1.add(dateAddedRadioButton);
-        dateAddedRadioButton.setBounds(400, 400, 87, 23);
+        dateAddedRadioButton.setBounds(500, 400, 105, 27);
 
         sortButtonGroup.add(firstNameRadioButton);
-        firstNameRadioButton.setFont(new java.awt.Font("Meiryo UI", 0, 11)); // NOI18N
+        firstNameRadioButton.setFont(new java.awt.Font("Meiryo UI", 0, 14)); // NOI18N
         firstNameRadioButton.setText("First Name");
         jPanel1.add(firstNameRadioButton);
-        firstNameRadioButton.setBounds(270, 400, 90, 23);
+        firstNameRadioButton.setBounds(340, 400, 100, 27);
         jPanel1.add(jSeparator1);
-        jSeparator1.setBounds(10, 362, 600, 10);
+        jSeparator1.setBounds(10, 362, 730, 10);
 
         jLabel2.setFont(new java.awt.Font("Meiryo UI", 0, 12)); // NOI18N
         jLabel2.setText("Sort by");
@@ -151,39 +151,39 @@ public class Admin_landing extends javax.swing.JFrame {
         jLabel2.setBounds(20, 380, 50, 16);
 
         sortButtonGroup.add(lastNameRadioButton);
-        lastNameRadioButton.setFont(new java.awt.Font("Meiryo UI", 0, 11)); // NOI18N
+        lastNameRadioButton.setFont(new java.awt.Font("Meiryo UI", 0, 14)); // NOI18N
         lastNameRadioButton.setText("Last Name");
         jPanel1.add(lastNameRadioButton);
-        lastNameRadioButton.setBounds(140, 400, 81, 23);
+        lastNameRadioButton.setBounds(180, 400, 97, 27);
 
-        updateEmployeeButton.setFont(new java.awt.Font("Meiryo UI", 0, 12)); // NOI18N
+        updateEmployeeButton.setFont(new java.awt.Font("Meiryo UI", 0, 14)); // NOI18N
         updateEmployeeButton.setText("Update Employee");
         jPanel1.add(updateEmployeeButton);
-        updateEmployeeButton.setBounds(400, 470, 150, 25);
+        updateEmployeeButton.setBounds(480, 490, 160, 27);
 
-        addEmployeeButton.setFont(new java.awt.Font("Meiryo UI", 0, 12)); // NOI18N
+        addEmployeeButton.setFont(new java.awt.Font("Meiryo UI", 0, 14)); // NOI18N
         addEmployeeButton.setText("Add Employee");
         jPanel1.add(addEmployeeButton);
-        addEmployeeButton.setBounds(80, 470, 150, 25);
+        addEmployeeButton.setBounds(110, 490, 160, 27);
 
-        removeEmployeeButton.setFont(new java.awt.Font("Meiryo UI", 0, 12)); // NOI18N
+        removeEmployeeButton.setFont(new java.awt.Font("Meiryo UI", 0, 14)); // NOI18N
         removeEmployeeButton.setText("Remove Employee");
         jPanel1.add(removeEmployeeButton);
-        removeEmployeeButton.setBounds(240, 470, 150, 25);
+        removeEmployeeButton.setBounds(300, 490, 160, 27);
 
         orientationButtonGroup.add(descendingRadioButton);
-        descendingRadioButton.setFont(new java.awt.Font("Meiryo UI", 0, 11)); // NOI18N
+        descendingRadioButton.setFont(new java.awt.Font("Meiryo UI", 0, 14)); // NOI18N
         descendingRadioButton.setText("Descending");
         jPanel1.add(descendingRadioButton);
-        descendingRadioButton.setBounds(310, 430, 87, 23);
+        descendingRadioButton.setBounds(410, 430, 105, 27);
 
         orientationButtonGroup.add(ascendingRadioButton);
-        ascendingRadioButton.setFont(new java.awt.Font("Meiryo UI", 0, 11)); // NOI18N
+        ascendingRadioButton.setFont(new java.awt.Font("Meiryo UI", 0, 14)); // NOI18N
         ascendingRadioButton.setText("Ascending");
         jPanel1.add(ascendingRadioButton);
-        ascendingRadioButton.setBounds(200, 430, 87, 23);
+        ascendingRadioButton.setBounds(270, 430, 100, 27);
 
-        salesReportButton1.setFont(new java.awt.Font("Meiryo UI", 0, 12)); // NOI18N
+        salesReportButton1.setFont(new java.awt.Font("Meiryo UI", 0, 14)); // NOI18N
         salesReportButton1.setText("Sales Report");
         salesReportButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -191,21 +191,25 @@ public class Admin_landing extends javax.swing.JFrame {
             }
         });
         jPanel1.add(salesReportButton1);
-        salesReportButton1.setBounds(170, 510, 150, 25);
+        salesReportButton1.setBounds(220, 530, 160, 27);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 650, Short.MAX_VALUE)
+            .addGap(0, 753, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 650, Short.MAX_VALUE))
+                .addGroup(layout.createSequentialGroup()
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 753, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 592, Short.MAX_VALUE)
+            .addGap(0, 617, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 592, Short.MAX_VALUE))
+                .addGroup(layout.createSequentialGroup()
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 617, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         pack();
