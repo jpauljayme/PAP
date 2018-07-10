@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import pap.dbconnection.MySQLConnector;
+import pap.domain.ItemList;
 import static pap.functionality.getLastID.getLastInsertID;
 
 /**
@@ -17,7 +18,7 @@ import static pap.functionality.getLastID.getLastInsertID;
  */
 public class itemListController {
     
-    public static int insertItemList(int transactionID, int itemID){
+    public static int insertItemList(ItemList itemList){
         try{
             MySQLConnector.openConnection();
             
@@ -25,8 +26,8 @@ public class itemListController {
                 
                 String query = "INSERT INTO itemList (TransactionID, ItemID) VALUES (?,?)";
                 PreparedStatement statement = connection.prepareStatement(query);
-                statement.setInt(1, transactionID);
-                statement.setInt(2, itemID);
+                statement.setInt(1, itemList.getTransactionID());
+                statement.setInt(2, itemList.getItemID());
                 statement.executeQuery();
                 
                 int id = getLastInsertID(connection);

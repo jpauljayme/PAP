@@ -35,8 +35,7 @@ public class ItemType implements Serializable {
      *Default constructor.
      */
     public ItemType(){
-        this.itemTypeID = 0;
-        this.itemTypeName = "";
+        this.itemTypeName = null;
         this.itemTypePrice = 0;
         this.addedBy = 0;
         this.updatedBy = 0;
@@ -44,16 +43,12 @@ public class ItemType implements Serializable {
     
     /**
      *Constructor with parameters.
-     * @param itemTypeID
      * @param itemTypeName
      * @param itemTypePrice
      * @param addedBy
      * @param updatedBy
      */
-    public ItemType(int itemTypeID, String itemTypeName, float itemTypePrice,
-                    int addedBy, int updatedBy){
-        
-        this.itemTypeID = itemTypeID;
+    public ItemType(String itemTypeName, float itemTypePrice, int addedBy, int updatedBy){
         this.itemTypeName = itemTypeName;
         this.itemTypePrice = itemTypePrice;
         this.addedBy = addedBy;

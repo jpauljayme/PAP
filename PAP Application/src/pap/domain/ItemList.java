@@ -24,19 +24,16 @@ public class ItemList implements Serializable {
      */
     public ItemList(){
         this.itemID = 0;
-        this.itemListID = 0;
         this.transactionID = 0;
     }
     
     /**
      *Constructor with parameters.
      * @param itemID
-     * @param itemListID
      * @param transactionID
      */
-    public ItemList(int itemID, int itemListID, int transactionID){
+    public ItemList(int itemID, int transactionID){
         this.itemID = itemID;
-        this.itemListID = itemListID;
         this.transactionID = transactionID;
     }
     

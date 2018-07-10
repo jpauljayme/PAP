@@ -37,24 +37,24 @@ public class Credential implements Serializable {
      *Default constructor.
      */
     public Credential(){
-        this.credentialsID = 0;
-        this.username = "";
-        this.userPassword = "";
+        this.personID = 0;
+        this.username = null;
+        this.userPassword = null;
         this.addedBy = 0;
         this.updatedBy = 0;
     }
     
     /**
      *Constructor that accepts parameters.
-     * @param credentialsID
+     * @param personID
      * @param username
      * @param password
      * @param addedBy
      * @param updatedBy
      */
-    public Credential(int credentialsID, String username, String password,
+    public Credential(int personID, String username, String password,
                       int addedBy, int updatedBy){
-        this.credentialsID = credentialsID;
+        this.personID = personID;
         this.username = username;
         this.userPassword = password;
         this.addedBy = addedBy;

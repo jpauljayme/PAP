@@ -45,28 +45,24 @@ public class Transactions implements Serializable {
         this.clothingWeight = 0;
         this.beddingsWeight = 0;
         this.totalAmount = 0.0;
-        this.transactionType = "";
+        this.transactionType = null;
     }
     
     /**
      *Constructor that accepts parameters.
-     * @param transactionID
      * @param personID
      * @param addedBy
-     * @param receivedDate
      * @param clothingWeight
      * @param beddingsWeight
      * @param totalAmount
      * @param transactionType
      */
     
-    public Transactions(int transactionID, int personID,
-            int addedBy, Date receivedDate, float clothingWeight,
-            float beddingsWeight, double totalAmount, String transactionType){
-        this.transactionID = transactionID;
+    public Transactions(int personID, int addedBy, float clothingWeight,
+                        float beddingsWeight, double totalAmount,
+                        String transactionType){
         this.personID = personID;
         this.addedBy = addedBy;
-        this.receivedDate = receivedDate;
         this.clothingWeight = clothingWeight;
         this.beddingsWeight = beddingsWeight;
         this.totalAmount = totalAmount;

@@ -34,7 +34,6 @@ public class Item implements Serializable {
      *Default constructor.
      */
     public Item(){
-        itemID = 0;
         this.itemTypeID = 0;
         this.itemCount = 0;
         this.addedBy = 0;
@@ -43,16 +42,12 @@ public class Item implements Serializable {
     
     /**
      *Constructor that accepts parameters.
-     * @param itemID
      * @param itemTypeID
      * @param itemCount
      * @param updatedBy
      * @param addedBy
      */
-    public Item(int itemID, int itemTypeID, int itemCount,
-                int addedBy, int updatedBy){
-        
-        this.itemID = itemID;
+    public Item(int itemTypeID, int itemCount, int addedBy, int updatedBy){
         this.itemTypeID = itemTypeID;
         this.itemCount = itemCount;
         this.addedBy = addedBy;

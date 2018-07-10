@@ -1,6 +1,5 @@
 package pap.controllers;
 
-import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -75,7 +74,7 @@ public class itemTypeController {
         return temp;
     }
     
-    public static int insertItemType(String itemTypeName, float itemTypePrice, int addedBy, int updatedBy){
+    public static int insertItemType(ItemType itemType){
         try{
             MySQLConnector.openConnection();
 
@@ -83,10 +82,10 @@ public class itemTypeController {
                 
                 String query = "INSERT INTO itemtype (ItemTypeName, ItemTypePrice, AddedBy, UpdatedBy) VALUES (?,?,?,?)";
                 PreparedStatement statement = connection.prepareStatement(query);
-                statement.setString(1, itemTypeName);
-                statement.setFloat(2, itemTypePrice);
-                statement.setInt(3, addedBy);
-                statement.setInt(4, updatedBy);
+                statement.setString(1, itemType.getItemTypeName());
+                statement.setFloat(2, itemType.getItemTypePrice());
+                statement.setInt(3, itemType.getAddedBy());
+                statement.setInt(4, itemType.getUpdatedBy());
                 statement.execute();
                 
                 int id = getLastInsertID(connection);

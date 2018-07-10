@@ -45,7 +45,7 @@ public class itemController {
         return temp;
     }
     
-    public static int insertItem(int itemTypeID, int itemCount, int addedBy, int updatedBy){
+    public static int insertItem(Item item){
         try{
             MySQLConnector.openConnection();
 
@@ -53,10 +53,10 @@ public class itemController {
                 
                 String query = "INSERT INTO item (ItemTypeID, ItemCount, AddedBy, UpdatedBy) VALUES (?,?,?,?)";
                 PreparedStatement statement = connection.prepareStatement(query);
-                statement.setInt(1, itemTypeID);
-                statement.setInt(2, itemCount);
-                statement.setInt(3, addedBy);
-                statement.setInt(4, updatedBy);
+                statement.setInt(1, item.getItemTypeID());
+                statement.setInt(2, item.getItemCount());
+                statement.setInt(3, item.getAddedBy());
+                statement.setInt(4, item.getUpdatedBy());
                 statement.execute();
                 
                 int id = getLastInsertID(connection);

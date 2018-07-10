@@ -52,7 +52,7 @@ public class credentialsController {
         return ("InvalidUsername");
     }
     
-    public static int insertCredentials(int personID, String username, String password, int addedBy, int updatedBy) throws NoSuchAlgorithmException{
+    public static int insertCredentials(Credential credential) throws NoSuchAlgorithmException{
         try{
             MySQLConnector.openConnection();
 
@@ -60,11 +60,11 @@ public class credentialsController {
                 
                 String query = "INSERT INTO credentials (PersonID, Username, UserPassword, AddedBy, UpdatedBy) VALUES (?,?,?,?,?)";
                 PreparedStatement statement = connection.prepareStatement(query);
-                statement.setInt(1, personID);
-                statement.setString(2, username);
-                statement.setString(3, MD5.hash(password));
-                statement.setInt(4, addedBy);
-                statement.setInt(5, updatedBy);
+                statement.setInt(1, credential.getPersonID());
+                statement.setString(2, credential.getUsername());
+                statement.setString(3, MD5.hash(credential.getUserPassword()));
+                statement.setInt(4, credential.getAddedBy());
+                statement.setInt(5, credential.getUpdatedBy());
                 statement.execute();
                 
                 int id = getLastInsertID(connection);
@@ -77,7 +77,7 @@ public class credentialsController {
         return 0;
     }
     
-    public static void updateCredentials(String oldUsername, String username, String password, int updatedBy) throws NoSuchAlgorithmException{
+    public static void updateCredentials(String oldUsername, Credential credential) throws NoSuchAlgorithmException{
         try{
             MySQLConnector.openConnection();
 
@@ -85,9 +85,9 @@ public class credentialsController {
                 String query = "UPDATE credentials SET Username=?, UserPassword=?, UpdatedBy=? WHERE Username=?";
                 
                 PreparedStatement statement = connection.prepareStatement(query);
-                statement.setString(1, username);
-                statement.setString(2, MD5.hash(password));
-                statement.setInt(3, updatedBy);
+                statement.setString(1, credential.getUsername());
+                statement.setString(2, MD5.hash(credential.getUserPassword()));
+                statement.setInt(3, credential.getUpdatedBy());
                 statement.setString(4, oldUsername);
                 
                 statement.execute();

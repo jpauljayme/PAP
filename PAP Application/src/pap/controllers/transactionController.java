@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import static pap.controllers.itemTypeController.getItemType;
 import pap.dbconnection.MySQLConnector;
 import pap.domain.ItemType;
+import pap.domain.Transactions;
 import static pap.functionality.getLastID.getLastInsertID;
 
 /**
@@ -19,13 +20,14 @@ import static pap.functionality.getLastID.getLastInsertID;
  */
 public class transactionController {
     
-    public static int insertTransaction(int personID, int addedBy, double clothingWeight, double beddingsWeight, String transactionType){
+    public static int insertTransaction(Transactions transactions){
         
         ItemType clothes = getItemType("Clothes");
         ItemType beddings = getItemType("Bedding");
-        int interval = (transactionType.equals("Regular")? 2:1);
+        int interval = (transactions.getTransactionType().equals("Regular")? 2:1);
         
-        double totalAmount = (clothingWeight * clothes.getItemTypePrice()) + (beddingsWeight * beddings.getItemTypePrice());
+        double totalAmount = (transactions.getClothingWeight() * clothes.getItemTypePrice()) +
+                             (transactions.getBeddingsWeight() * beddings.getItemTypePrice());
         
         try{
             MySQLConnector.openConnection();
@@ -34,12 +36,12 @@ public class transactionController {
                 
                 String query = "INSERT INTO transactions (PersonID, AddedBy, ClothingWeight, BeddingsWeight, TotalAmount, TransactionType, ReceivedDate) VALUES (?,?,?,?,?,?, (DATE_ADD(CURRENT_TIMESTAMP , INTERVAL ? DAY)))";
                 PreparedStatement statement = connection.prepareStatement(query);
-                statement.setInt(1, personID);
-                statement.setInt(2, addedBy);
-                statement.setDouble(3, clothingWeight);
-                statement.setDouble(4, beddingsWeight);
+                statement.setInt(1, transactions.getPersonID());
+                statement.setInt(2, transactions.getAddedBy());
+                statement.setDouble(3, transactions.getClothingWeight());
+                statement.setDouble(4, transactions.getBeddingsWeight());
                 statement.setDouble(5, totalAmount);
-                statement.setString(6, transactionType);
+                statement.setString(6, transactions.getTransactionType());
                 statement.setInt(7, interval);
                 statement.execute();
                 
@@ -54,7 +56,7 @@ public class transactionController {
     }
     
     public static void main(String[] args){
-        System.out.println(insertTransaction(2, 2, 4.4, 0, "Rushed"));
-        System.out.println(insertTransaction(2, 2, 4.4, 0, "Regular"));
+//        System.out.println(insertTransaction(2, 2, 4.4, 0, "Rushed"));
+//        System.out.println(insertTransaction(2, 2, 4.4, 0, "Regular"));
     }
 }
