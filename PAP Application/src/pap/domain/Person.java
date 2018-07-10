@@ -66,14 +66,12 @@ public class Person implements Serializable {
      * @param contactNumber
      * @param addedBy
      * @param updatedBy
-     * 
+     *
      */
-    public Person(int personID, int personTypeID, int addressID,
+    public Person(int personTypeID,
             String lastName, String firstName, String middleName, String birthDate,
             char sex, String email, String contactNumber, int addedBy, int updatedBy) {
-        this.personID = personID;
         this.personTypeID = personTypeID;
-        this.addressID = addressID;
         this.lastName = lastName;
         this.middleName = middleName;
         this.firstName = firstName;
@@ -83,8 +81,6 @@ public class Person implements Serializable {
         this.contactNumber = contactNumber;
         this.addedBy = addedBy;
         this.updatedBy = updatedBy;
-        this.addedDate = addedDate;
-        this.updatedDate = updatedDate;
 
     }
 
@@ -98,13 +94,13 @@ public class Person implements Serializable {
         this.lastName = "";
         this.middleName = "";
         this.firstName = "";
-        this.birthDate = "";
+        this.birthDate = null;
         this.sex = 'x';
         this.email = "";
         this.contactNumber = "";
         this.addedBy = 0;
         this.updatedBy = 0;
-      
+
     }
 
     /*
@@ -239,18 +235,15 @@ public class Person implements Serializable {
     /*
      * SETTERS
      */
-
-    
     /**
-     * Sets the Person's ID
-    /**
-     * Sets the Person's PersonType ID
+     * Sets the Person's ID /** Sets the Person's PersonType ID
+     *
      * @param personID the personID to set
      */
     public void setPersonID(int personID) {
         this.personID = personID;
     }
-    
+
     /**
      * Sets the Person's PersonType ID
      *
@@ -331,9 +324,10 @@ public class Person implements Serializable {
     public void setAddedBy(int addedBy) {
         this.addedBy = addedBy;
     }
-    
+
     /**
      * Sets the Date when the Person was added
+     *
      * @param addedDate
      */
     public void setAddedDate(Date addedDate) {
@@ -348,9 +342,10 @@ public class Person implements Serializable {
     public void setUpdatedBy(int updatedBy) {
         this.updatedBy = updatedBy;
     }
-    
+
     /**
      * Sets the Date when the Person was updated
+     *
      * @param updatedDate
      */
     public void setUpdatedDate(Date updatedDate) {
@@ -369,7 +364,7 @@ public class Person implements Serializable {
     @Override
     public String toString() {
         return "id: " + personID + "\n"
-                + "name: " + firstName + " " +middleName + " "+ lastName + "\n"
+                + "name: " + firstName + " " + middleName + " " + lastName + "\n"
                 + "birthdate: " + birthDate + "\n"
                 + "sex: " + sex + "\n\n"
                 + "addedDate: " + addedDate + "\n"
