@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
 
 /**
  *Class that defines address of the customer.
@@ -21,13 +22,23 @@ public class Address implements Serializable {
     private int roomNumber;
     @Column(name="BuildingName")
     private String buildingName;
+    @Column(name="HouseNumber")
+    private String houseNumber;
+    @Column(name="Street")
+    private String street;
+    @Column(name="Barangay")
+    private String barangay;
+    @Column(name="City")
+    private String city;
     @Column(name="AddedBy")
     private int addedBy;
     @Column(name="AddedDate")
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date addedDate;
     @Column(name="UpdatedBy")
     private int updatedBy;
     @Column(name="UpdatedDate")
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date updatedDate;
     
     /**
@@ -91,11 +102,43 @@ public class Address implements Serializable {
     }
 
     /**
-     * Returns the  building name
+     * Returns the building name
      * @return the buildingName
      */
     public String getBuildingName() {
         return buildingName;
+    }
+    
+    /**
+     * Returns the house number
+     * @return the houseNumber
+     */
+    public String getHouseNumber() {
+        return houseNumber;
+    }
+    
+    /**
+     * Returns the street
+     * @return the street
+     */
+    public String getStreet() {
+        return street;
+    }
+    
+    /**
+     * Returns the barangay
+     * @return the barangay
+     */
+    public String getBarangay() {
+        return barangay;
+    }
+    
+    /**
+     * Returns the city
+     * @return the city
+     */
+    public String getCity() {
+        return city;
     }
 
     /**
@@ -165,6 +208,38 @@ public class Address implements Serializable {
      */
     public void setBuildingName(String buildingName) {
         this.buildingName = buildingName;
+    }
+    
+    /**
+     * Sets the house number of the Address
+     * @param houseNumber
+     */
+    public void setHouseNumber(String houseNumber) {
+        this.houseNumber = houseNumber;
+    }
+    
+    /**
+     * Sets the street of the Address
+     * @param street
+     */
+    public void setStreet(String street) {
+        this.street = street;
+    }
+    
+    /**
+     * Sets the barangay of the Address
+     * @param barangay
+     */
+    public void setBarangay(String barangay) {
+        this.barangay = barangay;
+    }
+    
+    /**
+     * Sets the city of the Address
+     * @param city
+     */
+    public void setCity(String city) {
+        this.city = city;
     }
 
     /**

@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
 
 /**
  *Class that defines the transaction with the customer.
@@ -19,10 +20,12 @@ public class Transactions implements Serializable {
     @Column(name="PersonID")
     private int personID;
     @Column(name="AddedDate")
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date addedDate;
     @Column(name="AddedBy")
     private int addedBy;
     @Column(name="ReceivedDate")
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date receivedDate;
     @Column(name="ClothingWeight")
     private double clothingWeight;

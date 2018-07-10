@@ -46,20 +46,24 @@ public class addressController {
         return temp;
     }
     
-    public static int insertAddress(String floor, int roomNumber, String buildingName, int addedBy, int updatedBy) throws SQLException{
+    public static int insertAddress(String floor, int roomNumber, String buildingName, String houseNumber, String street, String barangay, String city, int addedBy, int updatedBy) throws SQLException{
         try{
             
             MySQLConnector.openConnection();
 
             try(Connection connection = MySQLConnector.getConnection()) {
                 
-                String query = "INSERT INTO address (Floor, RoomNumber, BuildingName, AddedBy, UpdatedBy) VALUES (?,?,?,?,?)";
+                String query = "INSERT INTO address (Floor, RoomNumber, BuildingName, HouseNumber, Street, Barangay, City, AddedBy, UpdatedBy) VALUES (?,?,?,?,?,?,?,?,?)";
                 PreparedStatement statement = connection.prepareStatement(query);
                 statement.setString(1, floor);
                 statement.setInt(2, roomNumber);
                 statement.setString(3, buildingName);
-                statement.setInt(4, addedBy);
-                statement.setInt(5, updatedBy);
+                statement.setString(4, houseNumber);
+                statement.setString(5, street);
+                statement.setString(6, barangay);
+                statement.setString(7, city);
+                statement.setInt(8, addedBy);
+                statement.setInt(9, updatedBy);
                 statement.execute();
                 
                 int id = getLastInsertID(connection);
@@ -86,6 +90,6 @@ public class addressController {
 //        System.out.println("AddedDate: " + getAddress(4).getAddedDate());
 //        System.out.println("UpdatedDate: " + getAddress(4).getUpdatedDate());
         
-//        System.out.println(insertAddress("2", 5, "NB2", 2, 2));
+//        System.out.println(insertAddress("2", 5, "NB2", null, null, null, null,2, 2));
     }
 }

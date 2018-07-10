@@ -1,12 +1,11 @@
 package pap.domain;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
-import java.util.Calendar;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
 
 /**
  *Class that defines an item.
@@ -22,10 +21,12 @@ public class Item implements Serializable {
     @Column(name="ItemCount")
     private int itemCount;
     @Column(name="AddedDate")
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date addedDate;
     @Column(name="AddedBy")
     private int addedBy;
     @Column(name="UpdatedDate")
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date updatedDate;
     @Column(name="UpdatedBy")
     private int updatedBy;

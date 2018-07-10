@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
 
 /**
  *Class that specifies the privilege/type of a user.
@@ -18,10 +19,12 @@ public class PersonType implements Serializable {
     @Column(name="PersonType")
     private String personType;
     @Column(name="AddedDate")
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date addedDate;
     @Column(name="AddedBy")
     private int addedBy;
     @Column(name="UpdatedDate")
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date updatedDate;
     @Column(name="UpdatedBy")
     private int updatedBy;

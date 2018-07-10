@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
 
 /**
  *Class forcCredential of a user in the system,
@@ -24,10 +25,12 @@ public class Credential implements Serializable {
     @Column(name="AddedBy")
     private int addedBy;
     @Column(name="AddedDate")
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date addedDate;
     @Column(name="UpdatedBy")
     private int updatedBy;
     @Column(name="UpdatedDate")
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date updatedDate;
     
     /**
