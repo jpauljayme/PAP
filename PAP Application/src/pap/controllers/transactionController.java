@@ -129,9 +129,6 @@ public class transactionController {
         ItemType beddings = getItemType("Bedding");
         int interval = (transactions.getTransactionType().equals("Regular")? 2:1);
         
-        double totalAmount = (transactions.getClothingWeight() * clothes.getItemTypePrice()) +
-                             (transactions.getBeddingsWeight() * beddings.getItemTypePrice());
-        
         try{
             MySQLConnector.openConnection();
             
@@ -143,7 +140,7 @@ public class transactionController {
                 statement.setInt(2, transactions.getAddedBy());
                 statement.setDouble(3, transactions.getClothingWeight());
                 statement.setDouble(4, transactions.getBeddingsWeight());
-                statement.setDouble(5, totalAmount);
+                statement.setDouble(5, transactions.getTotalAmount());
                 statement.setString(6, transactions.getTransactionType());
                 statement.setInt(7, interval);
                 statement.execute();

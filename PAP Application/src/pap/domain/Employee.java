@@ -16,6 +16,9 @@ public class Employee extends Person{
         super(personTypeID, addressID, lastName, firstName, middleName,
                 birthDate, sex, email, contactNumber, addedBy, updatedBy);
     }
+    public Employee(){
+    
+    }
     
     
 }

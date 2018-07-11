@@ -86,9 +86,16 @@ public class addressController {
             statement.executeUpdate();
 
             int id = getLastInsertID(connection);
-
+            
             MySQLConnector.closeConnection();
-            return id;
+            
+            if(id != 0){
+                System.out.print("Address Succesffuly inserted into the person table");
+                return id;
+            }else{
+                System.out.print("Address Succesffuly inserted into the person table");
+                return id;
+            }
         } catch (SQLException e) {
         }
 

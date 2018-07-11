@@ -132,6 +132,11 @@ public class Admin_landing extends javax.swing.JFrame {
         addEmployeeButton.setForeground(new java.awt.Color(255, 255, 255));
         addEmployeeButton.setText("Add Employee");
         addEmployeeButton.setBorderPainted(false);
+        addEmployeeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addEmployeeButtonActionPerformed(evt);
+            }
+        });
         jPanel1.add(addEmployeeButton);
         addEmployeeButton.setBounds(380, 140, 160, 27);
 
@@ -308,6 +313,11 @@ public class Admin_landing extends javax.swing.JFrame {
         this.dispose();
         new Login_page().setVisible(true);
     }//GEN-LAST:event_logoutButtonActionPerformed
+
+    private void addEmployeeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addEmployeeButtonActionPerformed
+        new AddEmployee(credential, person, personType).setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_addEmployeeButtonActionPerformed
 
     /**
      * @param args the command line arguments

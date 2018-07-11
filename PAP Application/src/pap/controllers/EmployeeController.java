@@ -14,6 +14,7 @@ import pap.domain.Person;
 import pap.domain.PersonType;
 import pap.domain.ResultSetMapper;
 import static pap.functionality.dataExist.getRow;
+import static pap.functionality.getLastID.getLastInsertID;
 import pap.util.GlobalConstants;
 import pap.util.Validation;
 
@@ -35,7 +36,7 @@ public class EmployeeController {
      * @param address address related to the employee to be added
      * @return true if successful, false if unsuccessful.
      */
-    public static boolean addEmployee(Employee emp, Address address) {
+    public static int addEmployee(Employee emp, Address address) {
 
         // simple JDBC code to run SQL query and populate resultSet - START
         MySQLConnector.openConnection();
@@ -62,20 +63,21 @@ public class EmployeeController {
 
             System.out.println(statement.toString());
             int ret = statement.executeUpdate();
+            int id = getLastInsertID(connection);
             MySQLConnector.closeConnection();
-
+            System.out.println("Employee reach");
             if (ret != 0) {
-                System.out.print("Succesffuly inserted into the person table");
-                return true;
+                System.out.print("Employee Succesffuly inserted into the person table");
+                return id;
             } else {
-                System.out.print("Unsuccesful in inserting.");
-                return false;
+                System.out.print("Employee Unsuccesful in inserting.");
+                return 0;
             }
 
         } catch (SQLException s) {
 
         }
-        return false;
+        return 0;
     }
 
     /**
@@ -268,9 +270,11 @@ public class EmployeeController {
      * @param sex
      * @param email
      * @param contactNumber
+     * @param addedBy
+     * @return 
      *
      */
-    public static void validateInput(String firstName, String middleName,
+    public static String validateInput(String firstName, String middleName,
             String lastName, String birthDate, char sex, String email,
             String contactNumber, int addedBy) {
         //Validate addedBy ID
@@ -280,7 +284,7 @@ public class EmployeeController {
         
         try {
             if(getRow(connection, "person", "PersonID", addedBy) == false){
-                System.out.println("Added by does not exist.");
+                return("InvalidAddedPerson");
             }
         } catch (SQLException ex) {
             Logger.getLogger(EmployeeController.class.getName()).log(Level.SEVERE, null, ex);
@@ -288,39 +292,18 @@ public class EmployeeController {
         
         //Validate name fields.
         if (Validation.validateName(firstName, middleName, lastName) == true) {
-            System.out.print(GlobalConstants.NAME_SUCCESS);
+            return(GlobalConstants.NAME_ERROR);
+        } else if (Validation.validateDate(birthDate, GlobalConstants.DATE_FORMAT) == false){
+            return(GlobalConstants.DATE_ERROR);
+        } else if (Validation.validateSex(sex) == false) {
+            return(GlobalConstants.SEX_ERROR);
+        } else if (Validation.isValidEmailAddress(email) == false) {
+            return(GlobalConstants.EMAIL_ERROR);
+        } else if (Validation.validateContactNumber(contactNumber) == false) {
+            return(GlobalConstants.CONTACTNUMBER_ERROR);
         } else {
-            System.out.println(GlobalConstants.NAME_ERROR);
+            return("Valid");
         }
-
-        //Validate birthdate
-        if (Validation.validateDate(birthDate, GlobalConstants.DATE_FORMAT) == true) {
-            System.out.println(GlobalConstants.DATE_SUCCESS);
-        } else {
-            System.out.println(GlobalConstants.DATE_ERROR);
-        }
-
-        //Validate sex
-        if (Validation.validateSex(sex) == true) {
-            System.out.println(GlobalConstants.SEX_SUCCESS);
-        } else {
-            System.out.println(GlobalConstants.SEX_ERROR);
-        }
-
-        //Validate email
-        if (Validation.isValidEmailAddress(email) == true) {
-            System.out.println(GlobalConstants.EMAIL_SUCCESS);
-        } else {
-            System.out.println(GlobalConstants.EMAIL_ERROR);
-        }
-
-        //validate contact number
-        if (Validation.validateContactNumber(contactNumber)) {
-            System.out.println(GlobalConstants.CONTACTNUMBER_SUCCESS);
-        } else {
-            System.out.println(GlobalConstants.CONTACTNUMBER_SUCCESS);
-        }
-
     }
 
     /**
