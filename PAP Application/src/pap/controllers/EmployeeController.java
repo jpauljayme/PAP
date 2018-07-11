@@ -11,6 +11,8 @@ import pap.domain.Address;
 import pap.domain.Employee;
 import pap.domain.Person;
 import pap.domain.ResultSetMapper;
+import pap.util.GlobalConstants;
+import pap.util.Validation;
 
 /**
  *
@@ -34,8 +36,6 @@ public class EmployeeController {
         MySQLConnector.openConnection();
         try (Connection connection = MySQLConnector.getConnection()) {
             int addressID = addressController.insertAddress(address);
-            System.out.println(addressID);
-            java.sql.Date sqlBirthDate = java.sql.Date.valueOf(emp.getBirthDate());
 
             String query = "INSERT INTO person(PersonTypeID, AddressID,"
                     + "FirstName, MiddleName, LastName, BirthDate, Sex, "
@@ -184,6 +184,49 @@ public class EmployeeController {
         }
 
         return employeeList;
+    }
+
+    
+
+    public static void validateInput(String firstName, String middleName,
+            String lastName, String birthDate, char sex, String email,
+            String contactNumber) {
+
+        //Validate name fields.
+        if (Validation.validateName(firstName, middleName, lastName) == true) {
+            System.out.print(GlobalConstants.NAME_SUCCESS);
+        } else {
+            System.out.println(GlobalConstants.NAME_ERROR);
+        }
+
+        //Validate birthdate
+        if (Validation.validateJavaDate(birthDate) == true) {
+            System.out.println(GlobalConstants.DATE_SUCCESS);
+        } else {
+            System.out.println(GlobalConstants.DATE_ERROR);
+        }
+
+        //Validate sex
+        if (Validation.validateSex(sex) == true) {
+            System.out.println(GlobalConstants.SEX_SUCCESS);
+        } else {
+            System.out.println(GlobalConstants.SEX_ERROR);
+        }
+
+        //Validate email
+        if (Validation.isValidEmailAddress(email) == true) {
+            System.out.println(GlobalConstants.EMAIL_SUCCESS);
+        } else {
+            System.out.println(GlobalConstants.EMAIL_ERROR);
+        }
+
+        //validate contact number
+        if (Validation.validateContactNumber(contactNumber)) {
+            System.out.println(GlobalConstants.CONTACTNUMBER_SUCCESS);
+        } else {
+            System.out.println(GlobalConstants.CONTACTNUMBER_SUCCESS);
+        }
+
     }
 
     public static void main(String[] args) throws SQLException {
