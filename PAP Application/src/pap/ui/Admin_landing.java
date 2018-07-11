@@ -5,6 +5,18 @@
  */
 package pap.ui;
 
+import java.security.NoSuchAlgorithmException;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import static pap.controllers.EmployeeController.getEmployees;
+import static pap.controllers.EmployeeController.getPersonType;
+import static pap.controllers.addressController.getAddress;
+import static pap.controllers.credentialsController.getCredentials;
+import pap.domain.Address;
+import pap.domain.Credential;
+import pap.domain.Person;
+import pap.domain.PersonType;
+
 /**
  *
  * @author Sarausad
@@ -16,6 +28,39 @@ public class Admin_landing extends javax.swing.JFrame {
      */
     public Admin_landing() {
         initComponents();
+    }
+    
+    public static Credential credential;
+    public static Person person;
+    public static PersonType personType;
+    public static List<Person> employeeList;
+    public Admin_landing(Credential c, Person p, PersonType pt) throws NoSuchAlgorithmException {
+        initComponents();
+        credential = c;
+        person = p;
+        personType = pt;
+        helloTextField.setText("Hello, " + credential.getUsername());
+        
+        employeeList = getEmployees();
+        System.out.println(getEmployees());
+        DefaultTableModel model = (DefaultTableModel) employeeTable1.getModel();
+        model.setRowCount(0);
+        if(employeeList != null){
+            Person[] employees = employeeList.toArray(new Person[employeeList.size()]);
+            for(Person e : employees){
+                Address add = getAddress(e.getAddressID());
+                Credential addedBy = getCredentials(e.getAddedBy());
+                PersonType persont = getPersonType(e.getPersonTypeID());
+                
+                String fullname = e.getFirstName()+" "+e.getMiddleName()+ " "+e.getLastName();
+                String address = add.getHouseNumber()+" "+add.getStreet()+ " "+add.getBarangay()+" "+add.getCity();
+                
+                Object[] row = {e.getPersonID(), fullname, address, e.getEmail(), e.getBirthDate(),
+                                e.getContactNumber(), e.getAddedDate(), addedBy.getUsername(), persont.getPersonType()};
+                
+                model.addRow(row);
+            }
+        }
     }
 
     /**
@@ -31,10 +76,7 @@ public class Admin_landing extends javax.swing.JFrame {
         sortButtonGroup = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         helloTextField = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        employeeTable = new javax.swing.JTable();
         viewInvoicesButton = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
         updateEmployeeButton = new javax.swing.JButton();
         addEmployeeButton = new javax.swing.JButton();
         removeEmployeeButton = new javax.swing.JButton();
@@ -42,19 +84,11 @@ public class Admin_landing extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         jComboBox1 = new javax.swing.JComboBox<>();
         jComboBox2 = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         employeeTable1 = new javax.swing.JTable();
         logoutButton = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jComboBox3 = new javax.swing.JComboBox<>();
-        jComboBox4 = new javax.swing.JComboBox<>();
-        jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -67,55 +101,7 @@ public class Admin_landing extends javax.swing.JFrame {
         helloTextField.setFont(new java.awt.Font("Montserrat", 0, 18)); // NOI18N
         helloTextField.setText("Hello, <username>");
         jPanel1.add(helloTextField);
-        helloTextField.setBounds(10, 60, 180, 23);
-
-        employeeTable.setFont(new java.awt.Font("Meiryo UI", 0, 13)); // NOI18N
-        employeeTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "ID", "Name", "Date Added", "Added By"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        employeeTable.setRowHeight(30);
-        employeeTable.setShowVerticalLines(false);
-        jScrollPane1.setViewportView(employeeTable);
-
-        jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(730, 220, 370, 340);
+        helloTextField.setBounds(10, 60, 180, 19);
 
         viewInvoicesButton.setBackground(new java.awt.Color(23, 111, 153));
         viewInvoicesButton.setFont(new java.awt.Font("Meiryo UI", 0, 14)); // NOI18N
@@ -130,34 +116,44 @@ public class Admin_landing extends javax.swing.JFrame {
         jPanel1.add(viewInvoicesButton);
         viewInvoicesButton.setBounds(550, 170, 160, 27);
 
-        jLabel2.setFont(new java.awt.Font("Meiryo UI", 1, 16)); // NOI18N
-        jLabel2.setText("Customers");
-        jPanel1.add(jLabel2);
-        jLabel2.setBounds(730, 110, 100, 21);
-
         updateEmployeeButton.setBackground(new java.awt.Color(23, 111, 153));
         updateEmployeeButton.setFont(new java.awt.Font("Meiryo UI", 0, 14)); // NOI18N
         updateEmployeeButton.setForeground(new java.awt.Color(255, 255, 255));
         updateEmployeeButton.setText("Update Employee");
         updateEmployeeButton.setBorderPainted(false);
+        updateEmployeeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateEmployeeButtonActionPerformed(evt);
+            }
+        });
         jPanel1.add(updateEmployeeButton);
-        updateEmployeeButton.setBounds(380, 140, 160, 27);
+        updateEmployeeButton.setBounds(380, 170, 160, 27);
 
         addEmployeeButton.setBackground(new java.awt.Color(23, 111, 153));
         addEmployeeButton.setFont(new java.awt.Font("Meiryo UI", 0, 14)); // NOI18N
         addEmployeeButton.setForeground(new java.awt.Color(255, 255, 255));
         addEmployeeButton.setText("Add Employee");
         addEmployeeButton.setBorderPainted(false);
+        addEmployeeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addEmployeeButtonActionPerformed(evt);
+            }
+        });
         jPanel1.add(addEmployeeButton);
-        addEmployeeButton.setBounds(380, 110, 160, 27);
+        addEmployeeButton.setBounds(380, 140, 160, 27);
 
         removeEmployeeButton.setBackground(new java.awt.Color(23, 111, 153));
         removeEmployeeButton.setFont(new java.awt.Font("Meiryo UI", 0, 14)); // NOI18N
         removeEmployeeButton.setForeground(new java.awt.Color(255, 255, 255));
         removeEmployeeButton.setText("Remove Employee");
         removeEmployeeButton.setBorderPainted(false);
+        removeEmployeeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeEmployeeButtonActionPerformed(evt);
+            }
+        });
         jPanel1.add(removeEmployeeButton);
-        removeEmployeeButton.setBounds(380, 170, 160, 27);
+        removeEmployeeButton.setBounds(550, 140, 160, 27);
 
         salesReportButton1.setBackground(new java.awt.Color(23, 111, 153));
         salesReportButton1.setFont(new java.awt.Font("Meiryo UI", 0, 14)); // NOI18N
@@ -170,7 +166,7 @@ public class Admin_landing extends javax.swing.JFrame {
             }
         });
         jPanel1.add(salesReportButton1);
-        salesReportButton1.setBounds(550, 140, 160, 27);
+        salesReportButton1.setBounds(720, 170, 160, 27);
 
         jPanel2.setBackground(new java.awt.Color(3, 91, 133));
         jPanel2.setLayout(null);
@@ -178,7 +174,7 @@ public class Admin_landing extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("idk what to name view");
+        jLabel1.setText("Admin View");
         jPanel2.add(jLabel1);
         jLabel1.setBounds(0, 20, 1120, 14);
 
@@ -188,11 +184,7 @@ public class Admin_landing extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Meiryo UI", 0, 14)); // NOI18N
         jLabel3.setText("Sort by");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(20, 170, 50, 18);
-
-        jTextField1.setFont(new java.awt.Font("Meiryo UI", 0, 12)); // NOI18N
-        jPanel1.add(jTextField1);
-        jTextField1.setBounds(150, 140, 220, 30);
+        jLabel3.setBounds(20, 170, 50, 19);
 
         jComboBox1.setFont(new java.awt.Font("Meiryo UI", 0, 12)); // NOI18N
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID", "Name", "Email", "Date Added", "Type" }));
@@ -256,7 +248,7 @@ public class Admin_landing extends javax.swing.JFrame {
         jScrollPane2.setViewportView(employeeTable1);
 
         jPanel1.add(jScrollPane2);
-        jScrollPane2.setBounds(20, 220, 690, 340);
+        jScrollPane2.setBounds(20, 220, 1080, 340);
 
         logoutButton.setBackground(new java.awt.Color(206, 53, 53));
         logoutButton.setFont(new java.awt.Font("Meiryo UI", 0, 14)); // NOI18N
@@ -265,49 +257,13 @@ public class Admin_landing extends javax.swing.JFrame {
         logoutButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         logoutButton.setBorderPainted(false);
         logoutButton.setFocusable(false);
-        jPanel1.add(logoutButton);
-        logoutButton.setBounds(1000, 90, 90, 30);
-
-        jLabel4.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel4.setFont(new java.awt.Font("Montserrat", 0, 18)); // NOI18N
-        jLabel4.setText("<insert today's date>");
-        jPanel1.add(jLabel4);
-        jLabel4.setBounds(900, 60, 200, 23);
-
-        jLabel5.setFont(new java.awt.Font("Meiryo UI", 0, 14)); // NOI18N
-        jLabel5.setText("Search Employee");
-        jPanel1.add(jLabel5);
-        jLabel5.setBounds(20, 150, 120, 18);
-
-        jLabel6.setFont(new java.awt.Font("Meiryo UI", 0, 14)); // NOI18N
-        jLabel6.setText("Sort by");
-        jPanel1.add(jLabel6);
-        jLabel6.setBounds(730, 170, 50, 18);
-
-        jTextField2.setFont(new java.awt.Font("Meiryo UI", 0, 12)); // NOI18N
-        jPanel1.add(jTextField2);
-        jTextField2.setBounds(860, 140, 220, 30);
-
-        jComboBox3.setFont(new java.awt.Font("Meiryo UI", 0, 12)); // NOI18N
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID", "Name", "Date Added", "Added By", " " }));
-        jComboBox3.addActionListener(new java.awt.event.ActionListener() {
+        logoutButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox3ActionPerformed(evt);
+                logoutButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(jComboBox3);
-        jComboBox3.setBounds(860, 170, 110, 30);
-
-        jComboBox4.setFont(new java.awt.Font("Meiryo UI", 0, 12)); // NOI18N
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ascending", "Descending" }));
-        jComboBox4.setSelectedIndex(1);
-        jPanel1.add(jComboBox4);
-        jComboBox4.setBounds(970, 170, 110, 30);
-
-        jLabel7.setFont(new java.awt.Font("Meiryo UI", 0, 14)); // NOI18N
-        jLabel7.setText("Search Customer");
-        jPanel1.add(jLabel7);
-        jLabel7.setBounds(730, 150, 120, 18);
+        jPanel1.add(logoutButton);
+        logoutButton.setBounds(1000, 90, 90, 30);
 
         jLabel8.setFont(new java.awt.Font("Meiryo UI", 1, 16)); // NOI18N
         jLabel8.setText("Employees");
@@ -334,7 +290,8 @@ public class Admin_landing extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void viewInvoicesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewInvoicesButtonActionPerformed
-        // TODO add your handling code here:
+        new User_landing(credential, person, personType).setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_viewInvoicesButtonActionPerformed
 
     private void salesReportButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salesReportButton1ActionPerformed
@@ -345,9 +302,24 @@ public class Admin_landing extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
-    private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox3ActionPerformed
+    private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
+        this.dispose();
+        new Login_page().setVisible(true);
+    }//GEN-LAST:event_logoutButtonActionPerformed
+
+    private void addEmployeeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addEmployeeButtonActionPerformed
+        new AddEmployee(credential, person, personType).setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_addEmployeeButtonActionPerformed
+
+    private void updateEmployeeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateEmployeeButtonActionPerformed
+        
+    }//GEN-LAST:event_updateEmployeeButtonActionPerformed
+
+    private void removeEmployeeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeEmployeeButtonActionPerformed
+        new RemoveEmployee(credential, person, personType, employeeList).setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_removeEmployeeButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -386,27 +358,16 @@ public class Admin_landing extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addEmployeeButton;
-    private javax.swing.JTable employeeTable;
     private javax.swing.JTable employeeTable1;
     private javax.swing.JLabel helloTextField;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JButton logoutButton;
     private javax.swing.ButtonGroup orientationButtonGroup;
     private javax.swing.JButton removeEmployeeButton;

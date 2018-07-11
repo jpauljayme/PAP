@@ -8,6 +8,23 @@ import java.util.List;
 import static pap.controllers.EmployeeController.getListOfPersonID;
 import static pap.controllers.EmployeeController.getPersonByID;
 
+import java.security.NoSuchAlgorithmException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+import static pap.controllers.EmployeeController.getPersonByID;
+import static pap.controllers.EmployeeController.getPersonType;
+import static pap.controllers.addressController.getAddress;
+import static pap.controllers.credentialsController.getCredentials;
+import static pap.controllers.transactionController.getTransaction;
+import pap.domain.Address;
+import pap.domain.Credential;
+import pap.domain.Person;
+import pap.domain.PersonType;
+import pap.domain.Transactions;
+import static pap.ui.Admin_landing.employeeList;
+
 /**
  *
  * @author Sarausad
@@ -19,6 +36,36 @@ public class User_landing extends javax.swing.JFrame {
      */
     public User_landing() {
         initComponents();
+    }
+    
+    public static Credential credential;
+    public static Person person;
+    public static PersonType personType;
+    public User_landing(Credential c, Person p, PersonType pt) {
+        initComponents();
+        credential = c;
+        person = p;
+        personType = pt;
+        helloTextField.setText("Hello, " + credential.getUsername());
+        
+        List<Transactions> tran = getTransaction();
+        DefaultTableModel model = (DefaultTableModel) inventoryTable.getModel();
+        model.setRowCount(0);
+        if(employeeList != null){
+            Transactions[] tr = tran.toArray(new Transactions[tran.size()]);
+            for(Transactions t : tr){
+                Person per = getPersonByID(t.getPersonID());
+                Address add = getAddress(per.getAddressID());
+                System.out.println("ADDRESS ID" + per.getAddressID());
+                String fullname = per.getFirstName()+" "+per.getMiddleName()+ " "+per.getLastName();
+                String address = add.getFloor()+" "+add.getRoomNumber()+ " "+add.getBuildingName();
+                
+                Object[] row = {t.getTransactionID(), fullname, per.getContactNumber(), address,
+                                t.getAddedDate(), t.getReceivedDate(), "Yes", t.getTransactionType(), t.getTotalAmount()};
+                
+                model.addRow(row);
+            }
+        }
     }
 
     /**
@@ -38,15 +85,13 @@ public class User_landing extends javax.swing.JFrame {
         inventoryTable = new javax.swing.JTable();
         logoutButton = new javax.swing.JButton();
         salesReportButton = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
         addInvoiceButton = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         jComboBox1 = new javax.swing.JComboBox<>();
         jComboBox2 = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
+        jLabel22 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(980, 600));
@@ -141,11 +186,6 @@ public class User_landing extends javax.swing.JFrame {
         jPanel1.add(salesReportButton);
         salesReportButton.setBounds(420, 130, 180, 30);
 
-        jLabel2.setFont(new java.awt.Font("Meiryo UI", 0, 14)); // NOI18N
-        jLabel2.setText("Search Customer");
-        jPanel1.add(jLabel2);
-        jLabel2.setBounds(20, 110, 120, 19);
-
         addInvoiceButton.setBackground(new java.awt.Color(23, 111, 153));
         addInvoiceButton.setFont(new java.awt.Font("Meiryo UI", 0, 14)); // NOI18N
         addInvoiceButton.setForeground(new java.awt.Color(255, 255, 255));
@@ -165,10 +205,6 @@ public class User_landing extends javax.swing.JFrame {
         jPanel1.add(jLabel3);
         jLabel3.setBounds(20, 130, 50, 19);
 
-        jTextField1.setFont(new java.awt.Font("Meiryo UI", 0, 12)); // NOI18N
-        jPanel1.add(jTextField1);
-        jTextField1.setBounds(150, 100, 250, 30);
-
         jComboBox1.setFont(new java.awt.Font("Meiryo UI", 0, 12)); // NOI18N
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID", "Name", "Date Added", "Date Received", "Transaction Type", "Total Amount" }));
         jComboBox1.setSelectedIndex(2);
@@ -184,20 +220,26 @@ public class User_landing extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(3, 91, 133));
         jPanel2.setLayout(null);
 
+        jLabel22.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel22.setText("<");
+        jLabel22.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel22MouseClicked(evt);
+            }
+        });
+        jPanel2.add(jLabel22);
+        jLabel22.setBounds(20, 10, 20, 29);
+
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("idk what to name view");
+        jLabel1.setText("Employee View");
         jPanel2.add(jLabel1);
         jLabel1.setBounds(0, 20, 980, 14);
 
         jPanel1.add(jPanel2);
         jPanel2.setBounds(0, 0, 980, 50);
-
-        jLabel4.setFont(new java.awt.Font("Montserrat", 0, 18)); // NOI18N
-        jLabel4.setText("<insert today's date>");
-        jPanel1.add(jLabel4);
-        jLabel4.setBounds(770, 60, 200, 19);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 980, 580);
@@ -220,6 +262,19 @@ public class User_landing extends javax.swing.JFrame {
         this.dispose();
         new Login_page().setVisible(true);
     }//GEN-LAST:event_logoutButtonActionPerformed
+
+    private void jLabel22MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel22MouseClicked
+        try {
+            if(personType.getPersonTypeID() == 2){
+                new Admin_landing(credential, person, personType).setVisible(true);
+                this.dispose();
+            }else{
+                
+            }    
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(AddEmployee.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jLabel22MouseClicked
 
     /**
      * @param args the command line arguments
@@ -263,13 +318,11 @@ public class User_landing extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JButton logoutButton;
     private javax.swing.ButtonGroup orientationButtonGroup;
     private javax.swing.JButton salesReportButton;

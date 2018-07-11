@@ -6,12 +6,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import pap.dbconnection.MySQLConnector;
 import pap.domain.Address;
 import pap.domain.Employee;
 import pap.domain.Person;
 import pap.domain.PersonType;
 import pap.domain.ResultSetMapper;
+import static pap.functionality.dataExist.getRow;
+import static pap.functionality.getLastID.getLastInsertID;
 import pap.util.GlobalConstants;
 import pap.util.Validation;
 
@@ -33,7 +37,7 @@ public class EmployeeController {
      * @param address address related to the employee to be added
      * @return true if successful, false if unsuccessful.
      */
-    public static boolean addEmployee(Employee emp, Address address) {
+    public static int addEmployee(Employee emp, Address address) {
 
         // simple JDBC code to run SQL query and populate resultSet - START
         MySQLConnector.openConnection();
@@ -59,21 +63,17 @@ public class EmployeeController {
             statement.setInt(11, emp.getUpdatedBy());
 
             System.out.println(statement.toString());
-            int ret = statement.executeUpdate();
+            statement.executeQuery();
+            int id = getLastInsertID(connection);
             MySQLConnector.closeConnection();
+            System.out.println("Employee reach");
 
-            if (ret != 0) {
-                System.out.print("Succesffuly inserted into the person table");
-                return true;
-            } else {
-                System.out.print("Unsuccesful in inserting.");
-                return false;
-            }
+            return id;
 
         } catch (SQLException s) {
 
         }
-        return false;
+        return 0;
     }
 
     /**
@@ -175,9 +175,7 @@ public class EmployeeController {
         MySQLConnector.openConnection();
         try (Connection connection = MySQLConnector.getConnection()) {
 
-            String viewEmployee = "SELECT p.PersonID, p.PersonTypeID, "
-                    + "p.FirstName, p.MiddleName, "
-                    + "p.LastName, p.BirthDate, p.Sex, p.ContactNumber, p.Email "
+            String viewEmployee = "SELECT * " 
                     + "FROM person AS p "
                     + "WHERE p.PersonTypeID = ? ";
 
@@ -268,47 +266,60 @@ public class EmployeeController {
      * @param sex
      * @param email
      * @param contactNumber
+     * @param addedBy
+     * @return 
      *
      */
-    public static void validateInput(String firstName, String middleName,
+    public static String validateInput(String firstName, String middleName,
             String lastName, String birthDate, char sex, String email,
-            String contactNumber) {
-
-        //Validate name fields.
-        if (Validation.validateName(firstName, middleName, lastName) == true) {
-            System.out.print(GlobalConstants.NAME_SUCCESS);
-        } else {
-            System.out.println(GlobalConstants.NAME_ERROR);
+            String contactNumber, int addedBy) {
+        //Validate addedBy ID
+        
+        MySQLConnector.openConnection();
+        Connection connection = MySQLConnector.getConnection();
+        
+        try {
+            if(getRow(connection, "person", "PersonID", addedBy) == false){
+                return("InvalidAddedPerson");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(EmployeeController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        //Validate birthdate
-        if (Validation.validateDate(birthDate, GlobalConstants.DATE_FORMAT) == true) {
-            System.out.println(GlobalConstants.DATE_SUCCESS);
-        } else {
-            System.out.println(GlobalConstants.DATE_ERROR);
+        
+        //Validate name fields.	         //Validate name fields.
+         if (Validation.validateName(firstName, middleName, lastName) == false) {
+            System.out.println(GlobalConstants.NAME_SUCCESS);
+         }else {	   
+            return(GlobalConstants.NAME_ERROR);
+         }
+        //Validate birthdate	
+        if (Validation.validateDate(birthDate, GlobalConstants.DATE_FORMAT) == true) {	
+            System.out.println(GlobalConstants.DATE_SUCCESS);	
+        } else {	
+            return(GlobalConstants.DATE_ERROR);	
+        }	
+	
+        //Validate sex	
+        if (Validation.validateSex(sex) == true) {	
+            System.out.println(GlobalConstants.SEX_SUCCESS);	
+        } else {	
+            return(GlobalConstants.SEX_ERROR);	
+        }	
+	
+        //Validate email	
+        if (Validation.isValidEmailAddress(email) == true) {	
+            System.out.println(GlobalConstants.EMAIL_SUCCESS);	
+        } else {	
+            return(GlobalConstants.EMAIL_ERROR);	
+        }	
+	
+        //validate contact number	
+        if (Validation.validateContactNumber(contactNumber)) {	
+            System.out.println(GlobalConstants.CONTACTNUMBER_SUCCESS);	
+        } else {	
+            return(GlobalConstants.CONTACTNUMBER_SUCCESS);	
         }
-
-        //Validate sex
-        if (Validation.validateSex(sex) == true) {
-            System.out.println(GlobalConstants.SEX_SUCCESS);
-        } else {
-            System.out.println(GlobalConstants.SEX_ERROR);
-        }
-
-        //Validate email
-        if (Validation.isValidEmailAddress(email) == true) {
-            System.out.println(GlobalConstants.EMAIL_SUCCESS);
-        } else {
-            System.out.println(GlobalConstants.EMAIL_ERROR);
-        }
-
-        //validate contact number
-        if (Validation.validateContactNumber(contactNumber)) {
-            System.out.println(GlobalConstants.CONTACTNUMBER_SUCCESS);
-        } else {
-            System.out.println(GlobalConstants.CONTACTNUMBER_SUCCESS);
-        }
-
+        return("Valid");
     }
 
     /**
@@ -401,7 +412,7 @@ public class EmployeeController {
         MySQLConnector.openConnection();
         try (Connection connection = MySQLConnector.getConnection()) {
 
-            String query = "SELECT p.PersonTypeID, p.PersonID, p.FirstName, p.MiddleName, "
+            String query = "SELECT p.PersonTypeID, p.AddressID, p.PersonID, p.FirstName, p.MiddleName, "
                     + "p.LastName, p.BirthDate, p.Sex, p.ContactNumber, "
                     + "p.Email, p.UpdatedBy FROM person p "
                     + "WHERE "

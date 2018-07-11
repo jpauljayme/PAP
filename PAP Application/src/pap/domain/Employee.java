@@ -9,12 +9,15 @@ import java.util.Date;
  */
 public class Employee extends Person{
     
-    public Employee(int personTypeID,
+    public Employee(int personTypeID, int addressID,
             String lastName, String firstName, String middleName, String birthDate,
             char sex, String email, String contactNumber, int addedBy, int updatedBy){
         
-        super(personTypeID, lastName, firstName, middleName,
+        super(personTypeID, addressID, lastName, firstName, middleName,
                 birthDate, sex, email, contactNumber, addedBy, updatedBy);
+    }
+    public Employee(){
+    
     }
     
     

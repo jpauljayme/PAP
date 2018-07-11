@@ -75,12 +75,12 @@ public class Validation {
      * @return true if all name fields are valid else returns false
      */
     public static boolean validateName(String firstName, String middleName, String lastName) {
-        return !firstName.isEmpty() && firstName.length() > GlobalConstants.MAX_LENGTH_FIRSTNAME
-                && Pattern.matches(GlobalConstants.NAME_REGEX, firstName)
-                && !middleName.isEmpty() && middleName.length() > GlobalConstants.MAX_LENGTH_MIDDLENAME
-                && Pattern.matches(GlobalConstants.NAME_REGEX, middleName)
-                && !lastName.isEmpty() && lastName.length() > GlobalConstants.MAX_LENGTH_LASTNAME
-                && Pattern.matches(GlobalConstants.NAME_REGEX, lastName);
+        return (!firstName.isEmpty()) && (firstName.length() > GlobalConstants.MAX_LENGTH_FIRSTNAME)
+                && (Pattern.matches(GlobalConstants.NAME_REGEX, firstName))
+                && (!middleName.isEmpty()) && (middleName.length() > GlobalConstants.MAX_LENGTH_MIDDLENAME)
+                && (Pattern.matches(GlobalConstants.NAME_REGEX, middleName))
+                && (!lastName.isEmpty() && lastName.length() > GlobalConstants.MAX_LENGTH_LASTNAME)
+                && (Pattern.matches(GlobalConstants.NAME_REGEX, lastName));
     }
 
     /**

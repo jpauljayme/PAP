@@ -19,7 +19,7 @@ public class Address implements Serializable {
     @Column(name="Floor")
     private String floor;
     @Column(name="RoomNumber")
-    private String roomNumber;
+    private int roomNumber;
     @Column(name="BuildingName")
     private String buildingName;
     @Column(name="HouseNumber")
@@ -47,7 +47,7 @@ public class Address implements Serializable {
     public Address(){
         this.addressID = 0;
         this.floor = "";
-        this.roomNumber = "";
+        this.roomNumber = 0;
         this.buildingName = "";
         this.addedBy = 0;
         this.updatedBy = 0;
@@ -67,7 +67,7 @@ public class Address implements Serializable {
      * @param city
      */
 
-    public Address(String floor, String roomNumber, String buildingName,
+    public Address(String floor, int roomNumber, String buildingName,
             String houseNumber, String street, String barangay, String city,
             int addedBy, int updatedBy){
         this.floor = floor;
@@ -105,7 +105,7 @@ public class Address implements Serializable {
      * Returns the room number
      * @return the roomNumber
      */
-    public String getRoomNumber() {
+    public int getRoomNumber() {
         return roomNumber;
     }
 
@@ -206,7 +206,7 @@ public class Address implements Serializable {
      * Sets the room number of the Address
      * @param roomNumber the roomNumber to set
      */
-    public void setRoomNumber(String roomNumber) {
+    public void setRoomNumber(int roomNumber) {
         this.roomNumber = roomNumber;
     }
 
