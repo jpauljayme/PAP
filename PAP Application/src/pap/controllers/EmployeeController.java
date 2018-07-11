@@ -355,6 +355,49 @@ public class EmployeeController {
         return new Person();
     }
 
+
+    /**
+     * Returns employee.
+     *
+     * @param empID Username that will be used in the query.
+     * @return person inserted in a List.
+     */
+    public static Person getPersonByID(int empID) {
+        ResultSet resultSet;
+        ResultSetMapper<Person> resultSetMapper = new ResultSetMapper<>();
+
+        // simple JDBC code to run SQL query and populate resultSet - START
+        MySQLConnector.openConnection();
+        try (Connection connection = MySQLConnector.getConnection()) {
+
+            String query = "SELECT p.PersonTypeID, p.PersonID, p.FirstName, p.MiddleName, "
+                    + "p.LastName, p.BirthDate, p.Sex, p.ContactNumber, "
+                    + "p.Email, p.UpdatedBy FROM person p "
+                    + "WHERE "
+                    + "p.PersonID = ?";
+
+            statement = connection.prepareStatement(query);
+            statement.setInt(1, empID);
+            System.out.println(statement.toString());
+            resultSet = statement.executeQuery();
+
+            // simple JDBC code to run SQL query and populate resultSet - END
+            employeeList = resultSetMapper.mapResultSetToObject(resultSet, Person.class);
+
+            // print out the list retrieved from database
+            if (employeeList != null) {
+                System.out.println(employeeList.get(0).getPersonID());
+                return employeeList.get(0);
+
+            } else {
+                System.out.println("getPersonByUsername ResultSet is empty. Please check if database table is empty");
+            }
+        } catch (SQLException s) {
+
+        }
+        return new Person();
+    }
+    
     /**
      * Returns persontype of specified personType ID
      *
