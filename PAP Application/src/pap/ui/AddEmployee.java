@@ -40,17 +40,17 @@ public class AddEmployee extends javax.swing.JFrame {
     public AddEmployee() {
         initComponents();
     }
-    
+
     public static Credential credential;
     public static Person person;
     public static PersonType personType;
+
     public AddEmployee(Credential c, Person p, PersonType pt) {
         initComponents();
         credential = c;
         person = p;
         personType = pt;
-        
-        
+
     }
 
     /**
@@ -76,8 +76,8 @@ public class AddEmployee extends javax.swing.JFrame {
         addContactNumber = new javax.swing.JTextField();
         addBirthday = new javax.swing.JTextField();
         addEmail = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        addEmpBtn = new javax.swing.JButton();
+        cancelBtn = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -146,25 +146,25 @@ public class AddEmployee extends javax.swing.JFrame {
 
         addEmail.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        jButton1.setBackground(new java.awt.Color(132, 145, 37));
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Add Employee");
-        jButton1.setBorderPainted(false);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        addEmpBtn.setBackground(new java.awt.Color(132, 145, 37));
+        addEmpBtn.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        addEmpBtn.setForeground(new java.awt.Color(255, 255, 255));
+        addEmpBtn.setText("Add Employee");
+        addEmpBtn.setBorderPainted(false);
+        addEmpBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                addEmpBtnActionPerformed(evt);
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(206, 53, 53));
-        jButton2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Cancel");
-        jButton2.setBorderPainted(false);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        cancelBtn.setBackground(new java.awt.Color(206, 53, 53));
+        cancelBtn.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        cancelBtn.setForeground(new java.awt.Color(255, 255, 255));
+        cancelBtn.setText("Cancel");
+        cancelBtn.setBorderPainted(false);
+        cancelBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                cancelBtnActionPerformed(evt);
             }
         });
 
@@ -280,9 +280,9 @@ public class AddEmployee extends javax.swing.JFrame {
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(76, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(addEmpBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
+                .addComponent(cancelBtn)
                 .addGap(71, 71, 71))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -431,8 +431,8 @@ public class AddEmployee extends javax.swing.JFrame {
                 .addComponent(jButton4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(cancelBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                    .addComponent(addEmpBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(23, 23, 23))
         );
 
@@ -446,7 +446,7 @@ public class AddEmployee extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 618, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 697, Short.MAX_VALUE)
         );
 
         pack();
@@ -471,14 +471,14 @@ public class AddEmployee extends javax.swing.JFrame {
         addCity.setText("");
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtnActionPerformed
         try {
             new Admin_landing(credential, person, personType).setVisible(true);
             this.dispose();
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(AddEmployee.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_cancelBtnActionPerformed
 
     private void jLabel22MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel22MouseClicked
         try {
@@ -489,152 +489,154 @@ public class AddEmployee extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jLabel22MouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void addEmpBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addEmpBtnActionPerformed
         //flag to validate address, person, and credentials input
         boolean eAddress = false;
         boolean ePerson = false;
         boolean eCredential = false;
-        
+        boolean isAdded;
         Employee per = new Employee();
         Address add = new Address();
         Credential cred = new Credential();
+
+//        per.setPersonTypeID(3);
+//        per.setFirstName(addFirstName.getText());
+//        per.setMiddleName(addMiddleName.getText());
+//        per.setLastName(addLastName.getText());
+//        per.setContactNumber(addContactNumber.getText());
+//        per.setBirthDate(addBirthday.getText());
+//        per.setEmail(addEmail.getText());
+//        per.setSex(addSex.getSelectedItem().toString().charAt(0));
+//        per.setAddedBy(person.getPersonID());
+//        per.setUpdatedBy(person.getPersonID());
+//
+//        add.setHouseNumber(addHouseNumber.getText());
+//        add.setStreet(addStreet.getText());
+//        add.setBarangay(addBarangay.getText());
+//        add.setCity(addCity.getText());
+//        add.setAddedBy(person.getPersonID());
+//        add.setUpdatedBy(person.getPersonID());
+//
+//        cred.setUsername(addUsername.getText());
+//        cred.setUserPassword(addPassword.getText());
+//        cred.setAddedBy(person.getPersonID());
+//        cred.setUpdatedBy(person.getPersonID());
+
         
+
+        //stores personID to be used in credential creation
+        int eID = 0;
+
+        //validate address, marks eAddress true if valid
+        if (eAddress == false) {
+            if (validateEmployeeAddress(addHouseNumber.getText(), addStreet.getText(),
+                    addBarangay.getText(), addCity.getText()) == false) {
+                infoBox("Invalid address fields.", "Invalid address");
+            } else {
+                eAddress = true;
+            }
+        }
+        //validate person, marks ePerson true if valid
+        if (eAddress == true && ePerson == false) {
+            switch (validateInput(addFirstName.getText(), addMiddleName.getText(),
+                    addLastName.getText(), addBirthday.getText(),
+                    addSex.getSelectedItem().toString().charAt(0),
+                    addEmail.getText(), addContactNumber.getText(),
+                    person.getPersonID())) {
+                case GlobalConstants.NAME_ERROR:
+
+                    infoBox(GlobalConstants.NAME_ERROR, "Invalid Name");
+                    break;
+                case GlobalConstants.DATE_ERROR:
+                    infoBox(GlobalConstants.DATE_ERROR, "Invalid Birthday");
+                    break;
+                case GlobalConstants.SEX_ERROR:
+                    infoBox(GlobalConstants.SEX_ERROR, "Invalid Sex");
+                    break;
+                case GlobalConstants.EMAIL_ERROR:
+                    infoBox(GlobalConstants.EMAIL_ERROR, "Invalid Email");
+                    break;
+                case GlobalConstants.CONTACTNUMBER_ERROR:
+                    infoBox(GlobalConstants.CONTACTNUMBER_ERROR, "Invalid Contact Number");
+                    break;
+                case GlobalConstants.VALIDATE_SUCESS:
+                    
+                    //set emploee fields after validation
+                    ePerson = true;
                     per.setPersonTypeID(3);
                     per.setFirstName(addFirstName.getText());
-                    per.setFirstName(addMiddleName.getText());
-                    per.setFirstName(addLastName.getText());
-                    per.setFirstName(addContactNumber.getText());
-                    per.setFirstName(addBirthday.getText());
-                    per.setFirstName(addEmail.getText());
+                    per.setMiddleName(addMiddleName.getText());
+                    per.setLastName(addLastName.getText());
+                    per.setContactNumber(addContactNumber.getText());
+                    per.setBirthDate(addBirthday.getText());
+                    per.setEmail(addEmail.getText());
                     per.setSex(addSex.getSelectedItem().toString().charAt(0));
                     per.setAddedBy(person.getPersonID());
                     per.setUpdatedBy(person.getPersonID());
-                    
+                    //Set address fields after validation
                     add.setHouseNumber(addHouseNumber.getText());
                     add.setStreet(addStreet.getText());
                     add.setBarangay(addBarangay.getText());
                     add.setCity(addCity.getText());
                     add.setAddedBy(person.getPersonID());
                     add.setUpdatedBy(person.getPersonID());
-                    
-                    cred.setUsername(addUsername.getText());
-                    cred.setUserPassword(addPassword.getText());
-                    cred.setAddedBy(person.getPersonID());
-                    cred.setUpdatedBy(person.getPersonID());
-        
-        int addID = insertAddress(add);
-        System.out.println("Address ID" + addID);
-        
-//        //stores personID to be used in credential creation
-//        int eID = 0;
-//        
-//        //validate address, marks eAddress true if valid
-//        if(eAddress == false){
-//            if(validateEmployeeAddress(addHouseNumber.getText(), addStreet.getText(),
-//                                   addBarangay.getText(), addCity.getText()) == false){
-//                infoBox("Username does not exist", "Invalid Username");
-//            }else{
-//                eAddress = true;
-//            }
-//        }
-//        //validate person, marks ePerson true if valid
-//        if(eAddress == true && ePerson == false){
-//            switch(validateInput(addFirstName.getText(), addMiddleName.getText(),
-//                             addLastName.getText(), addBirthday.getText(),
-//                             addSex.getSelectedItem().toString().charAt(0),
-//                             addEmail.getText(), addContactNumber.getText(),
-//                             person.getPersonID())){
-//                case "InvalidAddedPerson":
-//                    infoBox("Username does not exist", "Invalid Username");
-//                    break;
-//                case "Invalid string for name field.":
-//                    System.out.println("test "+addFirstName.getText());
-//                    System.out.println("test "+addMiddleName.getText());
-//                    System.out.println("test "+ addLastName.getText());
-//                    
-//                    infoBox("Invalid string for name field.", "Invalid Name");
-//                    break;
-//                case "Invalid date format.":
-//                    infoBox("Invalid date format.", "Invalid Birthday");
-//                    break;
-//                case "Invalid sex input.":
-//                    infoBox("Invalid sex input.", "Invalid Sex");
-//                    break;
-//                case "Invalid email format.":
-//                    infoBox("Invalid email format.", "Invalid Email");
-//                    break;
-//                case "Invalid contact number format.":
-//                    infoBox("Invalid contact number format.", "Invalid Contact Number");
-//                    break;
-//                case "Valid":
-//                    ePerson = true;
-//                    per.setPersonTypeID(3);
-//                    per.setFirstName(addFirstName.getText());
-//                    per.setFirstName(addMiddleName.getText());
-//                    per.setFirstName(addLastName.getText());
-//                    per.setFirstName(addContactNumber.getText());
-//                    per.setFirstName(addBirthday.getText());
-//                    per.setFirstName(addEmail.getText());
-//                    per.setSex(addSex.getSelectedItem().toString().charAt(0));
-//                    per.setAddedBy(person.getPersonID());
-//                    per.setUpdatedBy(person.getPersonID());
-//                    
-//                    add.setHouseNumber(addHouseNumber.getText());
-//                    add.setStreet(addStreet.getText());
-//                    add.setBarangay(addBarangay.getText());
-//                    add.setCity(addCity.getText());
-//                    add.setAddedBy(person.getPersonID());
-//                    add.setUpdatedBy(person.getPersonID());
-//                    break;
-//                }
-//        }
-//        //validate credential, marks eCredential true if valid
-//        if(eAddress == true && ePerson == true && eCredential == false){
-//            try {
-//                switch(validCredentialInsert(addUsername.getText(),
-//                                             addPassword.getText(),
-//                                             person.getPersonID())){
-//                    case "ContainsWhitespace":
-//                        infoBox("Username Contains Whitespace", "Invalid Username");
-//                        break;
-//                    case "Empty username or password":
-//                        infoBox("Empty username or password", "Invalid Credentials");
-//                        break;
-//                    case "UsernamePasswordOverflow":
-//                        infoBox("Username or Password ", "Username or Password Overflow");
-//                        break;
-//                    case "AddedByDoesNotExist":
-//                        infoBox("Username does not exist", "Invalid Username");
-//                        break;
-//                    case "UsernameTaken":
-//                        infoBox("Username does not exist", "Invalid Username");
-//                        break;
-//                    case "Valid":
-//                        eCredential = true;
-//                        cred.setUsername(addUsername.getText());
-//                        cred.setUserPassword(addPassword.getText());
-//                        cred.setAddedBy(person.getPersonID());
-//                        cred.setUpdatedBy(person.getPersonID());
-//                        break;
-//                    
-//                }
-//            } catch (NoSuchAlgorithmException | SQLException ex) {
-//                Logger.getLogger(AddEmployee.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//        }
-//        if (eAddress == true && ePerson == true && eCredential == true){
-//            if(confirmBox("Confirm Add?") == JOptionPane.YES_OPTION){
-//                try {
-//                    eID = addEmployee(per, add);
-//                    cred.setPersonID(eID);
-//                    insertCredentials(cred);
-//                    infoBox("Employee Added", "Success");
-//                } catch (NoSuchAlgorithmException ex) {
-//                    Logger.getLogger(AddEmployee.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//            }
-//        }
-    }//GEN-LAST:event_jButton1ActionPerformed
+                    break;
+            }
+        }
+        //validate credential, marks eCredential true if valid
+        if (eAddress == true && ePerson == true && eCredential == false) {
+            try {
+                switch (validCredentialInsert(addUsername.getText(),
+                        addPassword.getText(),
+                        person.getPersonID())) {
+                    case "ContainsWhitespace":
+                        infoBox("Username Contains Whitespace", "Invalid Username");
+                        break;
+                    case "Empty username or password":
+                        infoBox("Empty username or password", "Invalid Credentials");
+                        break;
+                    case "UsernamePasswordOverflow":
+                        infoBox("Username or Password ", "Username or Password Overflow");
+                        break;
+                    case "AddedByDoesNotExist":
+                        infoBox("Username does not exist", "Invalid Username");
+                        break;
+                    case "UsernameTaken":
+                        infoBox("Username does not exist", "Invalid Username");
+                        break;
+                    case "Valid":
+                        eCredential = true;
+                        cred.setUsername(addUsername.getText());
+                        cred.setUserPassword(addPassword.getText());
+                        cred.setAddedBy(person.getPersonID());
+                        cred.setUpdatedBy(person.getPersonID());
+                        break;
+
+                }
+            } catch (NoSuchAlgorithmException | SQLException ex) {
+                Logger.getLogger(AddEmployee.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        if (eAddress == true && ePerson == true && eCredential == true) {
+            if (confirmBox("Confirm Add?") == JOptionPane.YES_OPTION) {
+                try {
+                    eID = addEmployee(per, add);
+                    System.out.println("employee id "+ eID);
+                    if(eID !=0){
+                         cred.setPersonID(eID);
+                        insertCredentials(cred);
+                        infoBox("Employee Added", "Success");
+                    }else{
+                        infoBox("Failed to add employee", "Error");
+                    }
+                    new Admin_landing(credential, person, personType).setVisible(true);
+                    this.dispose();
+                } catch (NoSuchAlgorithmException ex) {
+                    Logger.getLogger(AddEmployee.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }//GEN-LAST:event_addEmpBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -677,6 +679,7 @@ public class AddEmployee extends javax.swing.JFrame {
     private javax.swing.JTextField addCity;
     private javax.swing.JTextField addContactNumber;
     private javax.swing.JTextField addEmail;
+    private javax.swing.JButton addEmpBtn;
     private javax.swing.JTextField addFirstName;
     private javax.swing.JTextField addHouseNumber;
     private javax.swing.JTextField addLastName;
@@ -685,8 +688,7 @@ public class AddEmployee extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> addSex;
     private javax.swing.JTextField addStreet;
     private javax.swing.JTextField addUsername;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton cancelBtn;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel10;

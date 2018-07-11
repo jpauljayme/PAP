@@ -29,7 +29,8 @@ public class Admin_landing extends javax.swing.JFrame {
     public Admin_landing() {
         initComponents();
     }
-    
+       private static Person[] employees;
+    private int selected, selectedID;
     public static Credential credential;
     public static Person person;
     public static PersonType personType;
@@ -101,7 +102,7 @@ public class Admin_landing extends javax.swing.JFrame {
         helloTextField.setFont(new java.awt.Font("Montserrat", 0, 18)); // NOI18N
         helloTextField.setText("Hello, <username>");
         jPanel1.add(helloTextField);
-        helloTextField.setBounds(10, 60, 180, 19);
+        helloTextField.setBounds(10, 60, 180, 22);
 
         viewInvoicesButton.setBackground(new java.awt.Color(23, 111, 153));
         viewInvoicesButton.setFont(new java.awt.Font("Meiryo UI", 0, 14)); // NOI18N
@@ -184,7 +185,7 @@ public class Admin_landing extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Meiryo UI", 0, 14)); // NOI18N
         jLabel3.setText("Sort by");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(20, 170, 50, 19);
+        jLabel3.setBounds(20, 170, 50, 17);
 
         orderby.setFont(new java.awt.Font("Meiryo UI", 0, 12)); // NOI18N
         orderby.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID", "Name", "Email", "Date Added", "Type" }));
@@ -243,9 +244,17 @@ public class Admin_landing extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        employeeTable1.setColumnSelectionAllowed(true);
         employeeTable1.setRowHeight(30);
         employeeTable1.setShowVerticalLines(false);
+        employeeTable1.getTableHeader().setReorderingAllowed(false);
+        employeeTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                employeeTable1MouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(employeeTable1);
+        employeeTable1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         jPanel1.add(jScrollPane2);
         jScrollPane2.setBounds(20, 220, 1080, 340);
@@ -268,7 +277,7 @@ public class Admin_landing extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Meiryo UI", 1, 16)); // NOI18N
         jLabel8.setText("Employees");
         jPanel1.add(jLabel8);
-        jLabel8.setBounds(20, 110, 100, 21);
+        jLabel8.setBounds(20, 110, 100, 19);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -316,13 +325,29 @@ public class Admin_landing extends javax.swing.JFrame {
     }//GEN-LAST:event_addEmployeeButtonActionPerformed
 
     private void updateEmployeeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateEmployeeButtonActionPerformed
-        
+        Person p = employeeList.get(selectedID);
+        new UpdateEmployee(credential, person, personType,p ).setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_updateEmployeeButtonActionPerformed
 
     private void removeEmployeeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeEmployeeButtonActionPerformed
         new RemoveEmployee(credential, person, personType, employeeList).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_removeEmployeeButtonActionPerformed
+
+    private void employeeTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_employeeTable1MouseClicked
+        // TODO add your handling code here:
+        
+         selected = employeeTable1.rowAtPoint(evt.getPoint());
+        
+        if(selected > -1){
+            
+            selectedID = (int)  employeeTable1.getValueAt(selected, 0);
+            
+            System.out.print("Selected id - "+selectedID);
+           
+        }
+    }//GEN-LAST:event_employeeTable1MouseClicked
 
     /**
      * @param args the command line arguments

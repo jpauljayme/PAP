@@ -43,7 +43,7 @@ public class EmployeeController {
         MySQLConnector.openConnection();
         try (Connection connection = MySQLConnector.getConnection()) {
             int addressID = addressController.insertAddress(address);
-
+            System.out.println("addrss id "+addressID);
             String query = "INSERT INTO person(PersonTypeID, AddressID,"
                     + "FirstName, MiddleName, LastName, BirthDate, Sex, "
                     + "ContactNumber, Email, AddedBy, UpdatedBy) "
@@ -63,12 +63,16 @@ public class EmployeeController {
             statement.setInt(11, emp.getUpdatedBy());
 
             System.out.println(statement.toString());
-            statement.executeQuery();
+            int ret = statement.executeUpdate();
             int id = getLastInsertID(connection);
             MySQLConnector.closeConnection();
-            System.out.println("Employee reach");
-
-            return id;
+            if(ret != 0){
+                System.out.println("ADDED EMPLOYEE");
+                return id;
+            }else{
+                System.out.println("NOPE EMPLOYEE");
+            }
+            
 
         } catch (SQLException s) {
 

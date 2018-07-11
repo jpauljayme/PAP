@@ -64,69 +64,42 @@ public class addressController {
      * @return true if successful insertion else false
      */
     public static int insertAddress(Address address) {
-        
-        try {
-            MySQLConnector.openConnection();
 
-            try (Connection connection = MySQLConnector.getConnection()) {
+        MySQLConnector.openConnection();
 
-                String query = "INSERT INTO item (Floor, RoomNumber, BuildingName, HouseNumber, Street, Barangay, City, AddedBy, UpdatedBy) VALUES (?,?,?,?,?,?,?,?,?)";
-                PreparedStatement statement = connection.prepareStatement(query);
-                statement.setString(1, address.getFloor());
-                statement.setInt(2, address.getRoomNumber());
-                statement.setString(3, address.getBuildingName());
-                statement.setString(4, address.getHouseNumber());
-                statement.setString(5, address.getStreet());
-                statement.setString(6, address.getBarangay());
-                statement.setString(7, address.getCity());
-                statement.setInt(8, address.getAddedBy());
-                statement.setInt(9, address.getUpdatedBy());
-                statement.execute();
+        try (Connection connection = MySQLConnector.getConnection()) {
+            String query = "INSERT INTO address (Floor, RoomNumber, "
+                    + "BuildingName, HouseNumber, Street, Barangay, "
+                    + "City, AddedBy, UpdatedBy) "
+                    + "VALUES (?,?,?,?,?,?,?,?,?)";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, address.getFloor());
+            statement.setString(2, address.getRoomNumber());
+            statement.setString(3, address.getBuildingName());
+            statement.setString(4, address.getHouseNumber());
+            statement.setString(5, address.getStreet());
+            statement.setString(6, address.getBarangay());
+            statement.setString(7, address.getCity());
+            statement.setInt(8, address.getAddedBy());
+            statement.setInt(9, address.getUpdatedBy());
+            System.out.println(statement.toString());
+            int ret = statement.executeUpdate();
 
-                int id = getLastInsertID(connection);
-
-                MySQLConnector.closeConnection();
+            int id = getLastInsertID(connection);
+            
+            MySQLConnector.closeConnection();
+            System.out.println("Last address ID"+ id);
+            if(ret != 0){
+                System.out.println("Address Succesffuly inserted into the person table");
+                return id;
+            }else{
+                System.out.print("Address Succesffuly inserted into the person table");
                 return id;
             }
         } catch (SQLException e) {
         }
-        return 0;
 
-//        MySQLConnector.openConnection();
-//
-//        try (Connection connection = MySQLConnector.getConnection()) {
-//            String query = "INSERT INTO address (Floor, RoomNumber, "
-//                    + "BuildingName, HouseNumber, Street, Barangay, "
-//                    + "City, AddedBy, UpdatedBy) "
-//                    + "VALUES (?,?,?,?,?,?,?,?,?)";
-//            PreparedStatement statement = connection.prepareStatement(query);
-//            statement.setString(1, address.getFloor());
-//            statement.setString(2, address.getRoomNumber());
-//            statement.setString(3, address.getBuildingName());
-//            statement.setString(4, address.getHouseNumber());
-//            statement.setString(5, address.getStreet());
-//            statement.setString(6, address.getBarangay());
-//            statement.setString(7, address.getCity());
-//            statement.setInt(8, address.getAddedBy());
-//            statement.setInt(9, address.getUpdatedBy());
-//            System.out.println(statement.toString());
-//            statement.execute();
-//
-//            int id = getLastInsertID(connection);
-//            
-//            MySQLConnector.closeConnection();
-//            
-//            if(id != 0){
-//                System.out.print("Address Succesffuly inserted into the person table");
-//                return id;
-//            }else{
-//                System.out.print("Address Succesffuly inserted into the person table");
-//                return id;
-//            }
-//        } catch (SQLException e) {
-//        }
-//
-//        return 0;
+        return 0;
     }
 
     /**
@@ -194,7 +167,7 @@ public class addressController {
                 statement.setString(7, address.getCity());
             } else if (personTypeID == 4) {
                 statement.setString(1, address.getFloor());
-                statement.setInt(2, address.getRoomNumber());
+                statement.setString(2, address.getRoomNumber());
                 statement.setString(3, address.getBuildingName());
                 statement.setString(4, null);
                 statement.setString(5, null);

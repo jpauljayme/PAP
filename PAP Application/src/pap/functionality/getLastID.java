@@ -22,6 +22,7 @@ public class getLastID {
         PreparedStatement statement = connection.prepareStatement(query);
         rs = statement.executeQuery();
         rs.next();
-        return rs.getInt(0);
+        
+        return rs.getInt(1);
     }
 }

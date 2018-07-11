@@ -571,7 +571,7 @@ public class AddInvoice extends javax.swing.JFrame {
         
         String floor = jTextField6.getText();
         String building = (String) jComboBox1.getSelectedItem();
-        int roomNumber = (Integer)jSpinner1.getValue();
+        String roomNumber = jSpinner1.getValue().toString();
         
         Integer clothingCount = Integer.valueOf(jSpinner2.getValue().toString());
         Float clothingWeight = Float.valueOf(jTextField1.getText());        
