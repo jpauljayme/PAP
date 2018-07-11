@@ -78,6 +78,11 @@ public class Validation {
         return ret;
     }
 
+    public static boolean empty(final String s) {
+        // Null-safe, short-circuit evaluation.
+        return s == null || s.trim().isEmpty();
+    }
+
     public static void main(String args[]) {
         validateJavaDate("");
         validateJavaDate("12-29-2016");
