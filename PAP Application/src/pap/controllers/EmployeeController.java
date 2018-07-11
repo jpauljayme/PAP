@@ -11,9 +11,11 @@ import pap.domain.Address;
 import pap.domain.Employee;
 import pap.domain.Person;
 import pap.domain.ResultSetMapper;
+import pap.util.GlobalConstants;
+import pap.util.Validation;
 
 /**
- *
+ *Contains methods to manipulate data from view. Includes CRUD operations.
  * @author John Paul Jayme jpaul.jayme.com
  */
 public class EmployeeController {
@@ -34,8 +36,6 @@ public class EmployeeController {
         MySQLConnector.openConnection();
         try (Connection connection = MySQLConnector.getConnection()) {
             int addressID = addressController.insertAddress(address);
-            System.out.println(addressID);
-            java.sql.Date sqlBirthDate = java.sql.Date.valueOf(emp.getBirthDate());
 
             String query = "INSERT INTO person(PersonTypeID, AddressID,"
                     + "FirstName, MiddleName, LastName, BirthDate, Sex, "
@@ -73,6 +73,13 @@ public class EmployeeController {
         return false;
     }
 
+    /**
+     * Removes employee from person table
+     *
+     * @param empID employee ID to be removed
+     * @param addressID address ID related to the employee to be removed
+     * @return true if successful, false if unsuccessful.
+     */
     public static boolean removeEmployee(int empID, int addressID) {
         System.out.println("employeeID - " + empID + " AddrseID - " + addressID);
         // simple JDBC code to run SQL query and populate resultSet - START
@@ -110,6 +117,12 @@ public class EmployeeController {
         return false;
     }
 
+    /**
+     * Returns employee.
+     *
+     * @param empID employeeID to be retrieved
+     * @return person inserted in a List.
+     */
     public static List<Person> getEmployee(int empID) {
         ResultSet resultSet;
         ResultSetMapper<Person> resultSetMapper = new ResultSetMapper<>();
@@ -119,7 +132,7 @@ public class EmployeeController {
         try (Connection connection = MySQLConnector.getConnection()) {
 
             String viewEmployee = "SELECT p.PersonID, p.AddressID, p.FirstName, p.MiddleName, "
-                    + "p.LastName, p.BirthDate, p.Sex, p.ContactNumber, p.Email "
+                    + "p.LastName, p.BirthDate, p.Sex, p.ContactNumber, p.Email, p.UpdatedBy "
                     + "FROM person AS p "
                     + "WHERE p.PersonID = ? ";
 
@@ -186,17 +199,166 @@ public class EmployeeController {
         return employeeList;
     }
 
+    /**
+     * Updates employee information.
+     *
+     * @param emp employee to be updated
+     *
+     * @return true if successful, false if unsuccessful.
+     */
+    public static boolean updateEmployee(Person emp) {
+        // simple JDBC code to run SQL query and populate resultSet - START
+        MySQLConnector.openConnection();
+        try (Connection connection = MySQLConnector.getConnection()) {
+
+            String query = "UPDATE person SET FirstName = ? , MiddleName = ? , "
+                    + "LastName = ? , BirthDate = ? , Sex = ? , ContactNumber = ? , "
+                    + "Email = ? , UpdatedBy = ? WHERE PersonID = ?";
+
+            statement = connection.prepareStatement(query);
+
+            statement.setString(1, emp.getFirstName());
+            statement.setString(2, emp.getMiddleName());
+            statement.setString(3, emp.getLastName());
+            statement.setObject(4, emp.getBirthDate());
+            statement.setString(5, String.valueOf(emp.getSex()));
+            statement.setString(6, emp.getContactNumber());
+            statement.setString(7, emp.getEmail());
+            statement.setInt(8, emp.getUpdatedBy());
+            statement.setInt(9, emp.getPersonID());
+            System.out.println(statement.toString());
+            int ret = statement.executeUpdate();
+            MySQLConnector.closeConnection();
+            if (ret != 0) {
+                System.out.println("Succesffuly updated employee");
+                return true;
+            } else {
+                System.out.println("Failed updating employee.");
+                return false;
+            }
+
+        } catch (SQLException s) {
+            System.out.print(s);
+        }
+        return false;
+    }
+
+    /**
+     * Validates input from the view.
+     *
+     * @param firstName
+     * @param middleName
+     * @param lastName
+     * @param birthDate
+     * @param sex
+     * @param email
+     * @param contactNumber
+     *
+     */
+    public static void validateInput(String firstName, String middleName,
+            String lastName, String birthDate, char sex, String email,
+            String contactNumber) {
+
+        //Validate name fields.
+        if (Validation.validateName(firstName, middleName, lastName) == true) {
+            System.out.print(GlobalConstants.NAME_SUCCESS);
+        } else {
+            System.out.println(GlobalConstants.NAME_ERROR);
+        }
+
+        //Validate birthdate
+        if (Validation.validateJavaDate(birthDate) == true) {
+            System.out.println(GlobalConstants.DATE_SUCCESS);
+        } else {
+            System.out.println(GlobalConstants.DATE_ERROR);
+        }
+
+        //Validate sex
+        if (Validation.validateSex(sex) == true) {
+            System.out.println(GlobalConstants.SEX_SUCCESS);
+        } else {
+            System.out.println(GlobalConstants.SEX_ERROR);
+        }
+
+        //Validate email
+        if (Validation.isValidEmailAddress(email) == true) {
+            System.out.println(GlobalConstants.EMAIL_SUCCESS);
+        } else {
+            System.out.println(GlobalConstants.EMAIL_ERROR);
+        }
+
+        //validate contact number
+        if (Validation.validateContactNumber(contactNumber)) {
+            System.out.println(GlobalConstants.CONTACTNUMBER_SUCCESS);
+        } else {
+            System.out.println(GlobalConstants.CONTACTNUMBER_SUCCESS);
+        }
+
+    }
+
+    /**
+     * Returns employee.
+     *
+     * @param username Username that will be used in the query.
+     * @return person inserted in a List.
+     */
+    public static List<Person> getPersonByUsername(String username) {
+        ResultSet resultSet;
+        ResultSetMapper<Person> resultSetMapper = new ResultSetMapper<>();
+
+        // simple JDBC code to run SQL query and populate resultSet - START
+        MySQLConnector.openConnection();
+        try (Connection connection = MySQLConnector.getConnection()) {
+
+            String query = "SELECT p.PersonID, p.FirstName, p.MiddleName, "
+                    + "p.LastName, p.BirthDate, p.Sex, p.ContactNumber, "
+                    + "p.Email, p.UpdatedBy FROM person p "
+                    + "INNER JOIN credentials c "
+                    + "WHERE "
+                    + "c.Username = ? "
+                    + "AND "
+                    + "c.PersonID = p.PersonID";
+
+            statement = connection.prepareStatement(query);
+            statement.setString(1, username);
+            System.out.print(statement.toString());
+            resultSet = statement.executeQuery();
+
+            // simple JDBC code to run SQL query and populate resultSet - END
+            employeeList = resultSetMapper.mapResultSetToObject(resultSet, Person.class);
+
+            // print out the list retrieved from database
+            if (employeeList != null) {
+                for (Person p : employeeList) {
+                    System.out.println(p);
+                }
+
+            } else {
+                System.out.println("ResultSet is empty. Please check if database table is empty");
+            }
+        } catch (SQLException s) {
+
+        }
+        return employeeList;
+    }
+
+    /**
+     * Sample main method for checking methods
+     *
+     * @param args
+     * @throws SQLException
+     */
     public static void main(String[] args) throws SQLException {
-        Address a = new Address(null, null, null, "123", "No Street", "Tintay", "Cebu City", 2, 2);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-d");
-        String bdate = "1996-12-30";
+        //Address a = new Address(null, null, null, "123", "No Street", "Tintay", "Cebu City", 2, 2);
+        //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-d");
+        //String bdate = "1996-12-30";
         // LocalDate birthDate = LocalDate.parse(bdate, formatter);
-        Employee e = new Employee(3, "Marvin", "Aaa", "Lim", bdate, 'M',
-                "marbeen@gmail,com", "+639325442218", 2, 2);
+        //Employee e = new Employee(3, "New name", "new mid", "new Lim", bdate, 'M',
+        //"new_marbeen@gmail,com", "+639325442218", 2, 2);
         //addEmployee(e, a);
         //List l = getEmployees();
-        List l = getEmployee(8);
-        if (l.isEmpty() == false) {
+        //List l = getEmployee(7);
+        /*if (l.isEmpty() == false) {
             System.out.println("Successfully retrieved employee");
             Person emp = (Person) l.get(0);
             boolean ret = removeEmployee(emp.getPersonID(), emp.getAddressID());
@@ -205,7 +367,12 @@ public class EmployeeController {
             } else {
                 System.out.println("Failed to remove person");
             }
-        }
-
+        }*/
+        // Person p = (Person) l.get(0);
+        // p.setFirstName("New fn");
+        //p.setMiddleName("yas");
+        // p.setEmail("new_email");
+        //updateEmployee(p);
+        // getPersonByUsername("dante");
     }
 }
