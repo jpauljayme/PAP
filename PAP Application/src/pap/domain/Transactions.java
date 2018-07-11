@@ -18,7 +18,7 @@ public class Transactions implements Serializable {
     @Column(name="TransactionID")
     private int transactionID;
     @Column(name="PersonID")
-    private Person personID;
+    private int personID;
     @Column(name="AddedDate")
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date addedDate;
@@ -40,7 +40,7 @@ public class Transactions implements Serializable {
      */
     public Transactions(){
         this.transactionID = 0;
-        this.personID = null;
+        this.personID = 0;
         this.addedBy = 0;
         this.clothingWeight = 0;
         this.beddingsWeight = 0;
@@ -54,18 +54,21 @@ public class Transactions implements Serializable {
      * @param addedBy
      * @param clothingWeight
      * @param beddingsWeight
-     * @param totalAmount
      * @param transactionType
      */
     
-    public Transactions(Person personID, int addedBy, float clothingWeight,
-                        float beddingsWeight, double totalAmount,
-                        String transactionType){
+    public Transactions(int personID, int addedBy, 
+                        float clothingWeight, float beddingsWeight, String transactionType){
+        double totalPay, clothingPrice, beddingsPrice;
+        clothingPrice = clothingWeight <= 3.00 ? 90.00 : clothingWeight * 30.00 ;
+        beddingsPrice = beddingsWeight <= 3.00 ? 40.00 : clothingWeight * 40.00 ;
+        totalPay = clothingPrice + beddingsPrice;
+                
         this.personID = personID;
         this.addedBy = addedBy;
-        this.clothingWeight = clothingWeight;
-        this.beddingsWeight = beddingsWeight;
-        this.totalAmount = totalAmount;
+        this.clothingWeight = clothingWeight;    
+        this.beddingsWeight = beddingsWeight;       
+        this.totalAmount = totalPay;
         this.transactionType = transactionType;
     }
     
@@ -85,7 +88,7 @@ public class Transactions implements Serializable {
      * Returns the customer's PersonID
      * @return the personID
      */
-    public Person getPersonID() {
+    public int getPersonID() {
         return personID;
     }
 
@@ -163,7 +166,7 @@ public class Transactions implements Serializable {
      * @param personID the personID to set
      */
     public void setPersonID(int personID) {
-        this.personID.setPersonID(personID);
+        this.personID = personID;
     }
 
     /**
@@ -220,5 +223,5 @@ public class Transactions implements Serializable {
      */
     public void setTransactionType(String transactionType) {
         this.transactionType = transactionType;
-    }
+    }    
 }

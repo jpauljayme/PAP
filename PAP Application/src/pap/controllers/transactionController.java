@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import static pap.controllers.itemTypeController.getItemType;
+import static pap.controllers.EmployeeController.getPersonByID;
 import pap.dbconnection.MySQLConnector;
 import pap.domain.ItemType;
 import pap.domain.Person;
@@ -100,23 +101,20 @@ public class transactionController {
         
         ItemType clothes = getItemType("Clothes");
         ItemType beddings = getItemType("Bedding");
-        int interval = (transactions.getTransactionType().equals("Regular")? 2:1);
-        
-        double totalAmount = (transactions.getClothingWeight() * clothes.getItemTypePrice()) +
-                             (transactions.getBeddingsWeight() * beddings.getItemTypePrice());
+        int interval = (transactions.getTransactionType().equals("Regular")? 2:1);        
         
         try{
             MySQLConnector.openConnection();
-            
+                        
             try(Connection connection = MySQLConnector.getConnection()){
                 
                 String query = "INSERT INTO transactions (PersonID, AddedBy, ClothingWeight, BeddingsWeight, TotalAmount, TransactionType, ReceivedDate) VALUES (?,?,?,?,?,?, (DATE_ADD(CURRENT_TIMESTAMP , INTERVAL ? DAY)))";
                 PreparedStatement statement = connection.prepareStatement(query);
-                statement.setInt(1, transactions.getPersonID().getPersonID());
+                statement.setInt(1, transactions.getPersonID());
                 statement.setInt(2, transactions.getAddedBy());
                 statement.setDouble(3, transactions.getClothingWeight());
                 statement.setDouble(4, transactions.getBeddingsWeight());
-                statement.setDouble(5, totalAmount);
+                statement.setDouble(5, transactions.getTotalAmount());
                 statement.setString(6, transactions.getTransactionType());
                 statement.setInt(7, interval);
                 statement.execute();
@@ -158,5 +156,14 @@ public class transactionController {
 
 //        System.out.println(getTransaction("FullName", "DESC").get(0).getTransactionID());
 //        System.out.println(validTransactionInput(3, "Regular", 2, 0, 0));
+          Transactions trans1 = new Transactions(4, 2, 4, 0, "Rushed");
+          Transactions trans2 = new Transactions(7, 2, 4, 3, "Rushed");
+          Transactions trans3 = new Transactions(7, 2, 8, 5, "Regular");
+
+          insertTransaction(trans1);
+          insertTransaction(trans2);
+          insertTransaction(trans3);
+          
+          System.out.println(getTransaction().get(0).getTransactionID());
     }
 }

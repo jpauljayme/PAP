@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 package pap.ui;
+import java.util.List;
+import static pap.controllers.EmployeeController.getListOfPersonID;
+import static pap.controllers.EmployeeController.getPersonByID;
 
 /**
  *
@@ -220,7 +223,7 @@ public class User_landing extends javax.swing.JFrame {
 
     /**
      * @param args the command line arguments
-     */
+     */    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

@@ -65,7 +65,7 @@ public class Login_page extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("MMM Laundry");
         jPanel2.add(jLabel1);
-        jLabel1.setBounds(0, 30, 450, 25);
+        jLabel1.setBounds(0, 30, 450, 30);
 
         jLabel2.setFont(new java.awt.Font("Montserrat", 0, 18)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -117,13 +117,13 @@ public class Login_page extends javax.swing.JFrame {
         jLabel3.setLabelFor(usernameField);
         jLabel3.setText("Username");
         jPanel2.add(jLabel3);
-        jLabel3.setBounds(100, 120, 80, 19);
+        jLabel3.setBounds(100, 120, 80, 22);
 
         jLabel4.setFont(new java.awt.Font("Meiryo", 0, 14)); // NOI18N
         jLabel4.setLabelFor(passwordField);
         jLabel4.setText("Password");
         jPanel2.add(jLabel4);
-        jLabel4.setBounds(100, 150, 80, 19);
+        jLabel4.setBounds(100, 150, 80, 22);
 
         jPanel1.add(jPanel2);
         jPanel2.setBounds(50, 50, 450, 310);
