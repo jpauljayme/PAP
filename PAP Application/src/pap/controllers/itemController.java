@@ -24,7 +24,7 @@ import static pap.functionality.getLastID.getLastInsertID;
  */
 public class itemController {
     public static Item getItem(int itemID){
-        Item temp = new Item();
+        Item temp = null;
         
         try{
             ResultSetMapper<Item> resultSetMapper = new ResultSetMapper<>();

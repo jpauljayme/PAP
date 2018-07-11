@@ -60,7 +60,7 @@ public class User_landing extends javax.swing.JFrame {
         helloTextField.setForeground(new java.awt.Color(255, 255, 255));
         helloTextField.setText("Hello, <username>");
         jPanel1.add(helloTextField);
-        helloTextField.setBounds(20, 60, 200, 23);
+        helloTextField.setBounds(20, 60, 200, 19);
 
         inventoryTable.setFont(new java.awt.Font("Meiryo UI", 0, 13)); // NOI18N
         inventoryTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -118,6 +118,11 @@ public class User_landing extends javax.swing.JFrame {
         logoutButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         logoutButton.setBorderPainted(false);
         logoutButton.setFocusable(false);
+        logoutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutButtonActionPerformed(evt);
+            }
+        });
         jPanel1.add(logoutButton);
         logoutButton.setBounds(870, 90, 90, 30);
 
@@ -127,6 +132,11 @@ public class User_landing extends javax.swing.JFrame {
         salesReportButton.setText("Sales Report");
         salesReportButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         salesReportButton.setBorderPainted(false);
+        salesReportButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salesReportButtonActionPerformed(evt);
+            }
+        });
         jPanel1.add(salesReportButton);
         salesReportButton.setBounds(300, 520, 180, 30);
         jPanel1.add(jSeparator1);
@@ -136,7 +146,7 @@ public class User_landing extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Search Customer");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(20, 110, 120, 18);
+        jLabel2.setBounds(20, 110, 120, 19);
 
         addInvoiceButton.setBackground(new java.awt.Color(23, 111, 153));
         addInvoiceButton.setFont(new java.awt.Font("Meiryo UI", 0, 14)); // NOI18N
@@ -144,6 +154,11 @@ public class User_landing extends javax.swing.JFrame {
         addInvoiceButton.setText("Add Invoice");
         addInvoiceButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         addInvoiceButton.setBorderPainted(false);
+        addInvoiceButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addInvoiceButtonActionPerformed(evt);
+            }
+        });
         jPanel1.add(addInvoiceButton);
         addInvoiceButton.setBounds(490, 520, 180, 30);
 
@@ -151,7 +166,7 @@ public class User_landing extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Sort by");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(20, 130, 50, 18);
+        jLabel3.setBounds(20, 130, 50, 19);
 
         jTextField1.setFont(new java.awt.Font("Meiryo UI", 0, 12)); // NOI18N
         jPanel1.add(jTextField1);
@@ -186,7 +201,7 @@ public class User_landing extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("<insert today's date>");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(770, 60, 200, 23);
+        jLabel4.setBounds(770, 60, 200, 19);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 980, 580);
@@ -194,6 +209,21 @@ public class User_landing extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void salesReportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salesReportButtonActionPerformed
+        this.dispose();
+        new DisplayRevenue().setVisible(true);
+    }//GEN-LAST:event_salesReportButtonActionPerformed
+
+    private void addInvoiceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addInvoiceButtonActionPerformed
+        this.dispose();
+        new AddInvoice().setVisible(true);
+    }//GEN-LAST:event_addInvoiceButtonActionPerformed
+
+    private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
+        this.dispose();
+        new Login_page().setVisible(true);
+    }//GEN-LAST:event_logoutButtonActionPerformed
 
     /**
      * @param args the command line arguments

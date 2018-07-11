@@ -123,9 +123,10 @@ public class credentialsController {
         MySQLConnector.openConnection();
         Connection connection = MySQLConnector.getConnection();
         //Check if string is empty before calling this
- 
-        if(getRow(connection, "person", "PersonID", addedBy) == false){
-            return("AddedByDoesNotExist");
+        if(username.contains(" ")){
+            return ("ContainsWhitespace");
+        }else if(getRow(connection, "person", "PersonID", addedBy) == false){
+            return ("AddedByDoesNotExist");
         }else if(username.length() > 20){
             return ("UsernameOverflow");
         }else if(getRow(connection, "credentials", "Username", username) == true){
@@ -136,7 +137,7 @@ public class credentialsController {
     }
     
     public static void main(String[] args) throws SQLException, NoSuchAlgorithmException{
-//        System.out.println(checkCredentials("dante", "password"));
+        System.out.println(checkCredentials("dante", "password"));
 //        updateCredentials("dante1","dante2", "password", 2);
 //        deleteCredentials(3);
 //        System.out.println(validCredentialInsert("da", "password", 2));

@@ -5,6 +5,15 @@
  */
 package ui;
 
+import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import static pap.controllers.EmployeeController.getPersonByUsername;
+import static pap.controllers.EmployeeController.getPersonType;
+import static pap.controllers.credentialsController.checkCredentials;
+import pap.domain.Credential;
+import pap.domain.Person;
+
 /**
  *
  * @author Sarausad
@@ -56,7 +65,7 @@ public class Login_page extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("MMM Laundry");
         jPanel2.add(jLabel1);
-        jLabel1.setBounds(0, 30, 450, 30);
+        jLabel1.setBounds(0, 30, 450, 25);
 
         jLabel2.setFont(new java.awt.Font("Montserrat", 0, 18)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -83,6 +92,11 @@ public class Login_page extends javax.swing.JFrame {
         loginButton.setText("Login");
         loginButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         loginButton.setBorderPainted(false);
+        loginButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginButtonActionPerformed(evt);
+            }
+        });
         jPanel2.add(loginButton);
         loginButton.setBounds(170, 220, 120, 30);
 
@@ -93,6 +107,11 @@ public class Login_page extends javax.swing.JFrame {
         exitButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         exitButton.setBorderPainted(false);
         exitButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        exitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitButtonActionPerformed(evt);
+            }
+        });
         jPanel2.add(exitButton);
         exitButton.setBounds(190, 250, 80, 30);
 
@@ -100,13 +119,13 @@ public class Login_page extends javax.swing.JFrame {
         jLabel3.setLabelFor(usernameField);
         jLabel3.setText("Username");
         jPanel2.add(jLabel3);
-        jLabel3.setBounds(100, 120, 80, 22);
+        jLabel3.setBounds(100, 120, 80, 19);
 
         jLabel4.setFont(new java.awt.Font("Meiryo", 0, 14)); // NOI18N
         jLabel4.setLabelFor(passwordField);
         jLabel4.setText("Password");
         jPanel2.add(jLabel4);
-        jLabel4.setBounds(100, 150, 80, 22);
+        jLabel4.setBounds(100, 150, 80, 19);
 
         jPanel1.add(jPanel2);
         jPanel2.setBounds(50, 50, 450, 310);
@@ -121,6 +140,45 @@ public class Login_page extends javax.swing.JFrame {
     private void usernameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_usernameFieldActionPerformed
+
+    private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_exitButtonActionPerformed
+
+    private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
+        Credential credential = new Credential();
+        credential.setUsername(usernameField.getText());
+        credential.setUserPassword(passwordField.getText());
+        
+        if(credential.getUsername().isEmpty() || credential.getUserPassword().isEmpty()){
+            System.out.println("Complete all field");
+        }else{
+            try {
+                String s = checkCredentials(credential.getUsername(), credential.getUserPassword());
+                
+                switch(s){
+                    case "InvalidUsername":
+                        System.out.println("InvalidUsername");
+                        break;
+                    case "InvalidPassword":
+                        System.out.println("InvalidPassword");
+                        break;
+                    case "Valid":
+                        new User_landing().setVisible(true);
+                        Person p = getPersonByUsername(credential.getUsername());
+                        this.dispose();
+                        if(getPersonType(p.getPersonTypeID()).getPersonType().equals("Admin")){
+                            new Admin_landing().setVisible(true);
+                        }else{
+                            new User_landing().setVisible(true);
+                        }
+                        break;
+                }
+            } catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(Login_page.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_loginButtonActionPerformed
 
     /**
      * @param args the command line arguments

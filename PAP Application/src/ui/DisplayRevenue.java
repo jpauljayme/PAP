@@ -253,6 +253,11 @@ public class DisplayRevenue extends javax.swing.JFrame {
         jLabel17.setText("<");
         jLabel17.setToolTipText("Go back");
         jLabel17.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel17.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel17MouseClicked(evt);
+            }
+        });
         jPanel3.add(jLabel17);
         jLabel17.setBounds(10, 10, 20, 20);
 
@@ -295,12 +300,9 @@ public class DisplayRevenue extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel13)
-                                        .addGap(19, 19, 19))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel14)
-                                        .addGap(19, 19, 19))))
+                                    .addComponent(jLabel13)
+                                    .addComponent(jLabel14))
+                                .addGap(19, 19, 19))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel11)
@@ -421,6 +423,13 @@ public class DisplayRevenue extends javax.swing.JFrame {
         jLabel14.setText(jComboBox1.getItemAt(selected));
         jLabel9.setText(jComboBox1.getItemAt(selected));
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jLabel17MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MouseClicked
+        this.dispose();
+        //temporary
+        new User_landing().setVisible(true);
+        //get personType and redirect accordingly
+    }//GEN-LAST:event_jLabel17MouseClicked
 
     /**
      * @param args the command line arguments

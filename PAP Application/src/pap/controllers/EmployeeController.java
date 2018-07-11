@@ -10,6 +10,7 @@ import pap.dbconnection.MySQLConnector;
 import pap.domain.Address;
 import pap.domain.Employee;
 import pap.domain.Person;
+import pap.domain.PersonType;
 import pap.domain.ResultSetMapper;
 import pap.util.GlobalConstants;
 import pap.util.Validation;
@@ -22,6 +23,7 @@ public class EmployeeController {
 
     private static PreparedStatement statement;
     private static List<Person> employeeList;
+    private static List<PersonType> personType;
 
     /**
      * Creates an employee and adds it to the person table.
@@ -302,7 +304,7 @@ public class EmployeeController {
      * @param username Username that will be used in the query.
      * @return person inserted in a List.
      */
-    public static List<Person> getPersonByUsername(String username) {
+    public static Person getPersonByUsername(String username) {
         ResultSet resultSet;
         ResultSetMapper<Person> resultSetMapper = new ResultSetMapper<>();
 
@@ -329,9 +331,7 @@ public class EmployeeController {
 
             // print out the list retrieved from database
             if (employeeList != null) {
-                for (Person p : employeeList) {
-                    System.out.println(p);
-                }
+                return employeeList.get(0);
 
             } else {
                 System.out.println("ResultSet is empty. Please check if database table is empty");
@@ -339,8 +339,40 @@ public class EmployeeController {
         } catch (SQLException s) {
 
         }
-        return employeeList;
+        return new Person();
     }
+    
+    public static PersonType getPersonType(int personTypeID) {
+        ResultSet resultSet;
+        ResultSetMapper<PersonType> resultSetMapper = new ResultSetMapper<>();
+
+        // simple JDBC code to run SQL query and populate resultSet - START
+        MySQLConnector.openConnection();
+        try (Connection connection = MySQLConnector.getConnection()) {
+
+            String query = "SELECT * FROM persontype WHERE PersonTypeID=?";
+
+            statement = connection.prepareStatement(query);
+            statement.setInt(1, personTypeID);
+            System.out.print(statement.toString());
+            resultSet = statement.executeQuery();
+
+            // simple JDBC code to run SQL query and populate resultSet - END
+            personType = resultSetMapper.mapResultSetToObject(resultSet, PersonType.class);
+
+            // print out the list retrieved from database
+            if (personType != null) {
+                return personType.get(0);
+
+            } else {
+                System.out.println("ResultSet is empty. Please check if database table is empty");
+            }
+        } catch (SQLException s) {
+
+        }
+        return new PersonType();
+    }
+
 
     /**
      * Sample main method for checking methods
@@ -374,5 +406,6 @@ public class EmployeeController {
         // p.setEmail("new_email");
         //updateEmployee(p);
         // getPersonByUsername("dante");
+//        System.out.println(getPersonByUsername("blaasdasd").getFirstName());
     }
 }
