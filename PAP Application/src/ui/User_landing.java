@@ -35,7 +35,6 @@ public class User_landing extends javax.swing.JFrame {
         inventoryTable = new javax.swing.JTable();
         logoutButton = new javax.swing.JButton();
         salesReportButton = new javax.swing.JButton();
-        jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
         addInvoiceButton = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
@@ -48,16 +47,15 @@ public class User_landing extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(980, 600));
-        setPreferredSize(new java.awt.Dimension(980, 600));
         setResizable(false);
         getContentPane().setLayout(null);
 
-        jPanel1.setBackground(new java.awt.Color(23, 111, 153));
+        jPanel1.setBackground(new java.awt.Color(245, 245, 245));
+        jPanel1.setForeground(new java.awt.Color(245, 245, 245));
         jPanel1.setPreferredSize(new java.awt.Dimension(980, 580));
         jPanel1.setLayout(null);
 
         helloTextField.setFont(new java.awt.Font("Montserrat", 0, 18)); // NOI18N
-        helloTextField.setForeground(new java.awt.Color(255, 255, 255));
         helloTextField.setText("Hello, <username>");
         jPanel1.add(helloTextField);
         helloTextField.setBounds(20, 60, 200, 23);
@@ -109,7 +107,7 @@ public class User_landing extends javax.swing.JFrame {
         jScrollPane1.setViewportView(inventoryTable);
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(20, 170, 940, 300);
+        jScrollPane1.setBounds(20, 170, 940, 390);
 
         logoutButton.setBackground(new java.awt.Color(206, 53, 53));
         logoutButton.setFont(new java.awt.Font("Meiryo UI", 0, 14)); // NOI18N
@@ -128,12 +126,9 @@ public class User_landing extends javax.swing.JFrame {
         salesReportButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         salesReportButton.setBorderPainted(false);
         jPanel1.add(salesReportButton);
-        salesReportButton.setBounds(300, 520, 180, 30);
-        jPanel1.add(jSeparator1);
-        jSeparator1.setBounds(20, 490, 940, 10);
+        salesReportButton.setBounds(420, 130, 180, 30);
 
         jLabel2.setFont(new java.awt.Font("Meiryo UI", 0, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Search Customer");
         jPanel1.add(jLabel2);
         jLabel2.setBounds(20, 110, 120, 18);
@@ -145,10 +140,9 @@ public class User_landing extends javax.swing.JFrame {
         addInvoiceButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         addInvoiceButton.setBorderPainted(false);
         jPanel1.add(addInvoiceButton);
-        addInvoiceButton.setBounds(490, 520, 180, 30);
+        addInvoiceButton.setBounds(420, 100, 180, 30);
 
         jLabel3.setFont(new java.awt.Font("Meiryo UI", 0, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Sort by");
         jPanel1.add(jLabel3);
         jLabel3.setBounds(20, 130, 50, 18);
@@ -183,7 +177,6 @@ public class User_landing extends javax.swing.JFrame {
         jPanel2.setBounds(0, 0, 980, 50);
 
         jLabel4.setFont(new java.awt.Font("Montserrat", 0, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("<insert today's date>");
         jPanel1.add(jLabel4);
         jLabel4.setBounds(770, 60, 200, 23);
@@ -243,7 +236,6 @@ public class User_landing extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JButton logoutButton;
     private javax.swing.ButtonGroup orientationButtonGroup;
