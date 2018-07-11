@@ -84,14 +84,11 @@ public class Admin_landing extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         jComboBox1 = new javax.swing.JComboBox<>();
         jComboBox2 = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         employeeTable1 = new javax.swing.JTable();
         logoutButton = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -124,6 +121,11 @@ public class Admin_landing extends javax.swing.JFrame {
         updateEmployeeButton.setForeground(new java.awt.Color(255, 255, 255));
         updateEmployeeButton.setText("Update Employee");
         updateEmployeeButton.setBorderPainted(false);
+        updateEmployeeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateEmployeeButtonActionPerformed(evt);
+            }
+        });
         jPanel1.add(updateEmployeeButton);
         updateEmployeeButton.setBounds(380, 170, 160, 27);
 
@@ -145,6 +147,11 @@ public class Admin_landing extends javax.swing.JFrame {
         removeEmployeeButton.setForeground(new java.awt.Color(255, 255, 255));
         removeEmployeeButton.setText("Remove Employee");
         removeEmployeeButton.setBorderPainted(false);
+        removeEmployeeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeEmployeeButtonActionPerformed(evt);
+            }
+        });
         jPanel1.add(removeEmployeeButton);
         removeEmployeeButton.setBounds(550, 140, 160, 27);
 
@@ -167,7 +174,7 @@ public class Admin_landing extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("idk what to name view");
+        jLabel1.setText("Admin View");
         jPanel2.add(jLabel1);
         jLabel1.setBounds(0, 20, 1120, 14);
 
@@ -178,10 +185,6 @@ public class Admin_landing extends javax.swing.JFrame {
         jLabel3.setText("Sort by");
         jPanel1.add(jLabel3);
         jLabel3.setBounds(20, 170, 50, 19);
-
-        jTextField1.setFont(new java.awt.Font("Meiryo UI", 0, 12)); // NOI18N
-        jPanel1.add(jTextField1);
-        jTextField1.setBounds(150, 140, 220, 30);
 
         jComboBox1.setFont(new java.awt.Font("Meiryo UI", 0, 12)); // NOI18N
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID", "Name", "Email", "Date Added", "Type" }));
@@ -262,17 +265,6 @@ public class Admin_landing extends javax.swing.JFrame {
         jPanel1.add(logoutButton);
         logoutButton.setBounds(1000, 90, 90, 30);
 
-        jLabel4.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel4.setFont(new java.awt.Font("Montserrat", 0, 18)); // NOI18N
-        jLabel4.setText("<insert today's date>");
-        jPanel1.add(jLabel4);
-        jLabel4.setBounds(900, 60, 200, 19);
-
-        jLabel5.setFont(new java.awt.Font("Meiryo UI", 0, 14)); // NOI18N
-        jLabel5.setText("Search Employee");
-        jPanel1.add(jLabel5);
-        jLabel5.setBounds(20, 150, 120, 19);
-
         jLabel8.setFont(new java.awt.Font("Meiryo UI", 1, 16)); // NOI18N
         jLabel8.setText("Employees");
         jPanel1.add(jLabel8);
@@ -319,6 +311,15 @@ public class Admin_landing extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_addEmployeeButtonActionPerformed
 
+    private void updateEmployeeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateEmployeeButtonActionPerformed
+        
+    }//GEN-LAST:event_updateEmployeeButtonActionPerformed
+
+    private void removeEmployeeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeEmployeeButtonActionPerformed
+        new RemoveEmployee(credential, person, personType).setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_removeEmployeeButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -362,13 +363,10 @@ public class Admin_landing extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JButton logoutButton;
     private javax.swing.ButtonGroup orientationButtonGroup;
     private javax.swing.JButton removeEmployeeButton;

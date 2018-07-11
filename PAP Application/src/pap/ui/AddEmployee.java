@@ -498,49 +498,7 @@ public class AddEmployee extends javax.swing.JFrame {
         Employee per = new Employee();
         Address add = new Address();
         Credential cred = new Credential();
-        //stores personID to be used in credential creation
-        int eID = 0;
         
-        //validate address, marks eAddress true if valid
-        if(eAddress == false){
-            if(validateEmployeeAddress(addHouseNumber.getText(), addStreet.getText(),
-                                   addBarangay.getText(), addCity.getText()) == false){
-                infoBox("Username does not exist", "Invalid Username");
-            }else{
-                eAddress = true;
-            }
-        }
-        //validate person, marks ePerson true if valid
-        if(eAddress == true && ePerson == false){
-            switch(validateInput(addFirstName.getText(), addMiddleName.getText(),
-                             addLastName.getText(), addBirthday.getText(),
-                             addSex.getSelectedItem().toString().charAt(0),
-                             addEmail.getText(), addContactNumber.getText(),
-                             person.getPersonID())){
-                case "InvalidAddedPerson":
-                    infoBox("Username does not exist", "Invalid Username");
-                    break;
-                case "Invalid string for name field.":
-                    System.out.println("test "+addFirstName.getText());
-                    System.out.println("test "+addMiddleName.getText());
-                    System.out.println("test "+ addLastName.getText());
-                    
-                    infoBox("Invalid string for name field.", "Invalid Name");
-                    break;
-                case "Invalid date format.":
-                    infoBox("Invalid date format.", "Invalid Birthday");
-                    break;
-                case "Invalid sex input.":
-                    infoBox("Invalid sex input.", "Invalid Sex");
-                    break;
-                case "Invalid email format.":
-                    infoBox("Invalid email format.", "Invalid Email");
-                    break;
-                case "Invalid contact number format.":
-                    infoBox("Invalid contact number format.", "Invalid Contact Number");
-                    break;
-                case "Valid":
-                    ePerson = true;
                     per.setPersonTypeID(3);
                     per.setFirstName(addFirstName.getText());
                     per.setFirstName(addMiddleName.getText());
@@ -558,55 +516,124 @@ public class AddEmployee extends javax.swing.JFrame {
                     add.setCity(addCity.getText());
                     add.setAddedBy(person.getPersonID());
                     add.setUpdatedBy(person.getPersonID());
-                    break;
-                }
-        }
-        //validate credential, marks eCredential true if valid
-        if(eAddress == true && ePerson == true && eCredential == false){
-            try {
-                switch(validCredentialInsert(addUsername.getText(),
-                                             addPassword.getText(),
-                                             person.getPersonID())){
-                    case "ContainsWhitespace":
-                        infoBox("Username Contains Whitespace", "Invalid Username");
-                        break;
-                    case "Empty username or password":
-                        infoBox("Empty username or password", "Invalid Credentials");
-                        break;
-                    case "UsernamePasswordOverflow":
-                        infoBox("Username or Password ", "Username or Password Overflow");
-                        break;
-                    case "AddedByDoesNotExist":
-                        infoBox("Username does not exist", "Invalid Username");
-                        break;
-                    case "UsernameTaken":
-                        infoBox("Username does not exist", "Invalid Username");
-                        break;
-                    case "Valid":
-                        eCredential = true;
-                        cred.setUsername(addUsername.getText());
-                        cred.setUserPassword(addPassword.getText());
-                        cred.setAddedBy(person.getPersonID());
-                        cred.setUpdatedBy(person.getPersonID());
-                        break;
                     
-                }
-            } catch (NoSuchAlgorithmException | SQLException ex) {
-                Logger.getLogger(AddEmployee.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        if (eAddress == true && ePerson == true && eCredential == true){
-            if(confirmBox("Confirm Add?") == JOptionPane.YES_OPTION){
-                try {
-                    eID = addEmployee(per, add);
-                    cred.setPersonID(eID);
-                    insertCredentials(cred);
-                    infoBox("Employee Added", "Success");
-                } catch (NoSuchAlgorithmException ex) {
-                    Logger.getLogger(AddEmployee.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }
+                    cred.setUsername(addUsername.getText());
+                    cred.setUserPassword(addPassword.getText());
+                    cred.setAddedBy(person.getPersonID());
+                    cred.setUpdatedBy(person.getPersonID());
+        
+        int addID = insertAddress(add);
+        System.out.println("Address ID" + addID);
+        
+//        //stores personID to be used in credential creation
+//        int eID = 0;
+//        
+//        //validate address, marks eAddress true if valid
+//        if(eAddress == false){
+//            if(validateEmployeeAddress(addHouseNumber.getText(), addStreet.getText(),
+//                                   addBarangay.getText(), addCity.getText()) == false){
+//                infoBox("Username does not exist", "Invalid Username");
+//            }else{
+//                eAddress = true;
+//            }
+//        }
+//        //validate person, marks ePerson true if valid
+//        if(eAddress == true && ePerson == false){
+//            switch(validateInput(addFirstName.getText(), addMiddleName.getText(),
+//                             addLastName.getText(), addBirthday.getText(),
+//                             addSex.getSelectedItem().toString().charAt(0),
+//                             addEmail.getText(), addContactNumber.getText(),
+//                             person.getPersonID())){
+//                case "InvalidAddedPerson":
+//                    infoBox("Username does not exist", "Invalid Username");
+//                    break;
+//                case "Invalid string for name field.":
+//                    System.out.println("test "+addFirstName.getText());
+//                    System.out.println("test "+addMiddleName.getText());
+//                    System.out.println("test "+ addLastName.getText());
+//                    
+//                    infoBox("Invalid string for name field.", "Invalid Name");
+//                    break;
+//                case "Invalid date format.":
+//                    infoBox("Invalid date format.", "Invalid Birthday");
+//                    break;
+//                case "Invalid sex input.":
+//                    infoBox("Invalid sex input.", "Invalid Sex");
+//                    break;
+//                case "Invalid email format.":
+//                    infoBox("Invalid email format.", "Invalid Email");
+//                    break;
+//                case "Invalid contact number format.":
+//                    infoBox("Invalid contact number format.", "Invalid Contact Number");
+//                    break;
+//                case "Valid":
+//                    ePerson = true;
+//                    per.setPersonTypeID(3);
+//                    per.setFirstName(addFirstName.getText());
+//                    per.setFirstName(addMiddleName.getText());
+//                    per.setFirstName(addLastName.getText());
+//                    per.setFirstName(addContactNumber.getText());
+//                    per.setFirstName(addBirthday.getText());
+//                    per.setFirstName(addEmail.getText());
+//                    per.setSex(addSex.getSelectedItem().toString().charAt(0));
+//                    per.setAddedBy(person.getPersonID());
+//                    per.setUpdatedBy(person.getPersonID());
+//                    
+//                    add.setHouseNumber(addHouseNumber.getText());
+//                    add.setStreet(addStreet.getText());
+//                    add.setBarangay(addBarangay.getText());
+//                    add.setCity(addCity.getText());
+//                    add.setAddedBy(person.getPersonID());
+//                    add.setUpdatedBy(person.getPersonID());
+//                    break;
+//                }
+//        }
+//        //validate credential, marks eCredential true if valid
+//        if(eAddress == true && ePerson == true && eCredential == false){
+//            try {
+//                switch(validCredentialInsert(addUsername.getText(),
+//                                             addPassword.getText(),
+//                                             person.getPersonID())){
+//                    case "ContainsWhitespace":
+//                        infoBox("Username Contains Whitespace", "Invalid Username");
+//                        break;
+//                    case "Empty username or password":
+//                        infoBox("Empty username or password", "Invalid Credentials");
+//                        break;
+//                    case "UsernamePasswordOverflow":
+//                        infoBox("Username or Password ", "Username or Password Overflow");
+//                        break;
+//                    case "AddedByDoesNotExist":
+//                        infoBox("Username does not exist", "Invalid Username");
+//                        break;
+//                    case "UsernameTaken":
+//                        infoBox("Username does not exist", "Invalid Username");
+//                        break;
+//                    case "Valid":
+//                        eCredential = true;
+//                        cred.setUsername(addUsername.getText());
+//                        cred.setUserPassword(addPassword.getText());
+//                        cred.setAddedBy(person.getPersonID());
+//                        cred.setUpdatedBy(person.getPersonID());
+//                        break;
+//                    
+//                }
+//            } catch (NoSuchAlgorithmException | SQLException ex) {
+//                Logger.getLogger(AddEmployee.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }
+//        if (eAddress == true && ePerson == true && eCredential == true){
+//            if(confirmBox("Confirm Add?") == JOptionPane.YES_OPTION){
+//                try {
+//                    eID = addEmployee(per, add);
+//                    cred.setPersonID(eID);
+//                    insertCredentials(cred);
+//                    infoBox("Employee Added", "Success");
+//                } catch (NoSuchAlgorithmException ex) {
+//                    Logger.getLogger(AddEmployee.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//            }
+//        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

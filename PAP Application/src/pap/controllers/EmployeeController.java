@@ -62,17 +62,12 @@ public class EmployeeController {
             statement.setInt(11, emp.getUpdatedBy());
 
             System.out.println(statement.toString());
-            int ret = statement.executeUpdate();
+            statement.executeQuery();
             int id = getLastInsertID(connection);
             MySQLConnector.closeConnection();
             System.out.println("Employee reach");
-            if (ret != 0) {
-                System.out.print("Employee Succesffuly inserted into the person table");
-                return id;
-            } else {
-                System.out.print("Employee Unsuccesful in inserting.");
-                return 0;
-            }
+
+            return id;
 
         } catch (SQLException s) {
 
@@ -290,20 +285,40 @@ public class EmployeeController {
             Logger.getLogger(EmployeeController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        //Validate name fields.
-        if (Validation.validateName(firstName, middleName, lastName) == true) {
+        //Validate name fields.	         //Validate name fields.
+         if (Validation.validateName(firstName, middleName, lastName) == false) {
+            System.out.println(GlobalConstants.NAME_SUCCESS);
+         }else {	   
             return(GlobalConstants.NAME_ERROR);
-        } else if (Validation.validateDate(birthDate, GlobalConstants.DATE_FORMAT) == false){
-            return(GlobalConstants.DATE_ERROR);
-        } else if (Validation.validateSex(sex) == false) {
-            return(GlobalConstants.SEX_ERROR);
-        } else if (Validation.isValidEmailAddress(email) == false) {
-            return(GlobalConstants.EMAIL_ERROR);
-        } else if (Validation.validateContactNumber(contactNumber) == false) {
-            return(GlobalConstants.CONTACTNUMBER_ERROR);
-        } else {
-            return("Valid");
+         }
+        //Validate birthdate	
+        if (Validation.validateDate(birthDate, GlobalConstants.DATE_FORMAT) == true) {	
+            System.out.println(GlobalConstants.DATE_SUCCESS);	
+        } else {	
+            return(GlobalConstants.DATE_ERROR);	
+        }	
+	
+        //Validate sex	
+        if (Validation.validateSex(sex) == true) {	
+            System.out.println(GlobalConstants.SEX_SUCCESS);	
+        } else {	
+            return(GlobalConstants.SEX_ERROR);	
+        }	
+	
+        //Validate email	
+        if (Validation.isValidEmailAddress(email) == true) {	
+            System.out.println(GlobalConstants.EMAIL_SUCCESS);	
+        } else {	
+            return(GlobalConstants.EMAIL_ERROR);	
+        }	
+	
+        //validate contact number	
+        if (Validation.validateContactNumber(contactNumber)) {	
+            System.out.println(GlobalConstants.CONTACTNUMBER_SUCCESS);	
+        } else {	
+            return(GlobalConstants.CONTACTNUMBER_SUCCESS);	
         }
+        return("Valid");
     }
 
     /**

@@ -5,6 +5,10 @@
  */
 package pap.ui;
 
+import pap.domain.Credential;
+import pap.domain.Person;
+import pap.domain.PersonType;
+
 /**
  *
  * @author Sarausad
@@ -16,6 +20,16 @@ public class RemoveEmployee extends javax.swing.JFrame {
      */
     public RemoveEmployee() {
         initComponents();
+    }
+    
+    public static Credential credential;
+    public static Person person;
+    public static PersonType personType;
+    public RemoveEmployee(Credential c, Person p, PersonType pt) {
+        initComponents();
+        credential = c;
+        person = p;
+        personType = pt;
     }
 
     /**

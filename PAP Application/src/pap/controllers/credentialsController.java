@@ -116,14 +116,7 @@ public class credentialsController {
                 int id = getLastInsertID(connection);
                 
                 MySQLConnector.closeConnection();
-                System.out.println("Credential reach");
-                if(id != 0){
-                System.out.print("Credential Succesffuly inserted into the person table");
                 return id;
-            }else{
-                System.out.print("Credential Succesffuly inserted into the person table");
-                return id;
-            }
             }
         }catch (SQLException e){
         }
