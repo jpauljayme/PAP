@@ -13,6 +13,8 @@ import static pap.controllers.EmployeeController.getPersonType;
 import static pap.controllers.credentialsController.checkCredentials;
 import pap.domain.Credential;
 import pap.domain.Person;
+import pap.domain.PersonType;
+import static pap.util.Warning.infoBox;
 
 /**
  *
@@ -156,16 +158,17 @@ public class Login_page extends javax.swing.JFrame {
                 
                 switch(s){
                     case "InvalidUsername":
-                        System.out.println("InvalidUsername");
+                        infoBox("Username does not exist", "Invalid Username");
                         break;
                     case "InvalidPassword":
-                        System.out.println("InvalidPassword");
+                        infoBox("Password does not match", "Invalid Password");
                         break;
                     case "Valid":
                         Person p = getPersonByUsername(credential.getUsername());
+                        PersonType pt = getPersonType(p.getPersonTypeID());
                         this.dispose();
-                        if(getPersonType(p.getPersonTypeID()).getPersonType().equals("Admin")){
-                            new Admin_landing().setVisible(true);
+                        if(pt.getPersonType().equals("Admin")){
+                            new Admin_landing(credential, p, pt).setVisible(true);
                         }else{
                             new User_landing().setVisible(true);
                         }

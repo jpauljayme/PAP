@@ -68,7 +68,7 @@ public class Person implements Serializable {
      * @param updatedBy
      *
      */
-    public Person(int personTypeID,
+    public Person(int personTypeID, int addressID,
             String lastName, String firstName, String middleName, String birthDate,
             char sex, String email, String contactNumber, int addedBy, int updatedBy) {
         this.personTypeID = personTypeID;

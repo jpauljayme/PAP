@@ -177,9 +177,7 @@ public class EmployeeController {
         MySQLConnector.openConnection();
         try (Connection connection = MySQLConnector.getConnection()) {
 
-            String viewEmployee = "SELECT p.PersonID, p.PersonTypeID, "
-                    + "p.FirstName, p.MiddleName, "
-                    + "p.LastName, p.BirthDate, p.Sex, p.ContactNumber, p.Email "
+            String viewEmployee = "SELECT * " 
                     + "FROM person AS p "
                     + "WHERE p.PersonTypeID = ? ";
 

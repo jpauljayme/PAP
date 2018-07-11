@@ -35,6 +35,7 @@ public class credentialsController {
      * @return "Valid" or "Invalid" string
      * @throws java.security.NoSuchAlgorithmException
      */    
+    
     public static String checkCredentials(String username, String password) throws NoSuchAlgorithmException{
         try {
             ResultSetMapper<Credential> resultSetMapper = new ResultSetMapper<>();
@@ -62,6 +63,30 @@ public class credentialsController {
         } catch (SQLException e) {
         }
         return ("InvalidUsername");
+    }
+    
+    public static Credential getCredentials(int personID) throws NoSuchAlgorithmException{
+        try {
+            ResultSetMapper<Credential> resultSetMapper = new ResultSetMapper<>();
+            ResultSet resultSet;
+            MySQLConnector.openConnection();
+            
+            try (Connection connection = MySQLConnector.getConnection()) {
+                PreparedStatement statement = connection.prepareStatement("SELECT * FROM credentials WHERE PersonID=?");
+                statement.setInt(1, personID);
+                
+                resultSet = statement.executeQuery();
+                List<Credential> c = resultSetMapper.mapResultSetToObject(resultSet, Credential.class);
+                
+                MySQLConnector.closeConnection();
+                
+                if (c != null) {
+                    return c.get(0);
+                }
+            }
+        } catch (SQLException e) {
+        }
+        return new Credential();
     }
 
 
