@@ -84,8 +84,7 @@ public class User_landing extends javax.swing.JFrame {
         salesReportButton = new javax.swing.JButton();
         addInvoiceButton = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        orderby = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jLabel22 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -202,17 +201,15 @@ public class User_landing extends javax.swing.JFrame {
         jPanel1.add(jLabel3);
         jLabel3.setBounds(20, 130, 50, 19);
 
-        jComboBox1.setFont(new java.awt.Font("Meiryo UI", 0, 12)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID", "Name", "Date Added", "Date Received", "Transaction Type", "Total Amount" }));
-        jComboBox1.setSelectedIndex(2);
-        jPanel1.add(jComboBox1);
-        jComboBox1.setBounds(150, 130, 140, 30);
-
-        jComboBox2.setFont(new java.awt.Font("Meiryo UI", 0, 12)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ascending", "Descending" }));
-        jComboBox2.setSelectedIndex(1);
-        jPanel1.add(jComboBox2);
-        jComboBox2.setBounds(290, 130, 110, 30);
+        orderby.setFont(new java.awt.Font("Meiryo UI", 0, 12)); // NOI18N
+        orderby.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID", "Name", "Date Added", "Date Received", "Transaction Type", "Total Amount" }));
+        orderby.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                orderbyActionPerformed(evt);
+            }
+        });
+        jPanel1.add(orderby);
+        orderby.setBounds(150, 130, 140, 30);
 
         jPanel2.setBackground(new java.awt.Color(3, 91, 133));
         jPanel2.setLayout(null);
@@ -273,6 +270,54 @@ public class User_landing extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jLabel22MouseClicked
 
+    private void orderbyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderbyActionPerformed
+        String orderBy = orderby.getSelectedItem().toString();
+//        String sortBy = sortby.getSelectedItem().toString();
+//        sortBy = (orderBy.equals("Descending")? "DESC" : "ASC");
+        //ID, Name, Date Added, Date Received, Transaction Type, Total Amount
+        System.out.println("Enter press1");
+        switch(orderBy){
+            case "ID":
+                orderBy = "TransactionID";
+                break;
+            case "Name":
+                orderBy = "FullName";
+                break;
+            case "Date Added":
+                orderBy = "AddedDate";
+                break;
+            case "Date Received":
+                orderBy = "ReceivedDate";
+                break;
+            case "Transaction Type":
+                orderBy = "TransactionType";
+                break;
+            case "Total Amount":
+                orderBy = "TotalAmount";
+                break;
+        }
+//        System.out.println("sortedby " + sortBy);
+        System.out.println("orderby " + orderBy);
+        List<Transactions> tList = getTransaction(orderBy);
+        System.out.println("sortedlist" + tList);
+        DefaultTableModel model = (DefaultTableModel) inventoryTable.getModel();
+        model.setRowCount(0);
+        if(employeeList != null){
+            Transactions[] tr = tList.toArray(new Transactions[tList.size()]);
+            for(Transactions t : tr){
+                Person per = getPersonByID(t.getPersonID());
+                Address add = getAddress(per.getAddressID());
+                String fullname = per.getFirstName()+" "+per.getMiddleName()+ " "+per.getLastName();
+                String address = add.getFloor()+" "+add.getRoomNumber()+ " "+add.getBuildingName();
+                
+                Object[] row = {t.getTransactionID(), fullname, per.getContactNumber(), address,
+                                t.getAddedDate(), t.getReceivedDate(), "Yes", t.getTransactionType(), t.getTotalAmount()};
+                
+                model.addRow(row);
+            }
+        }
+    }//GEN-LAST:event_orderbyActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -312,8 +357,6 @@ public class User_landing extends javax.swing.JFrame {
     private javax.swing.JButton addInvoiceButton;
     private javax.swing.JLabel helloTextField;
     private javax.swing.JTable inventoryTable;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
@@ -321,6 +364,7 @@ public class User_landing extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton logoutButton;
+    private javax.swing.JComboBox<String> orderby;
     private javax.swing.ButtonGroup orientationButtonGroup;
     private javax.swing.JButton salesReportButton;
     private javax.swing.ButtonGroup sortButtonGroup;

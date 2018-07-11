@@ -89,25 +89,21 @@ public class transactionController {
     /**
      * Retrieves a list of transactions
      *
-     * @param sortBy
      * @param orderBy
      * @return list of transactions
      */    
-    public static List<Transactions> getTransaction(String sortBy, String orderBy){
+    public static List<Transactions> getTransaction(String orderBy){
         List<Transactions> result = new ArrayList<>();
-        
         try{
             ResultSetMapper<Transactions> resultSetMapper = new ResultSetMapper<>();
             ResultSet resultSet;
             MySQLConnector.openConnection();
-            
             try(Connection connection = MySQLConnector.getConnection()){
-                
-                String query = "SELECT CONCAT(person.FirstName, person.MiddleName, person.LastName) AS FullName, transactions.* FROM transactions INNER JOIN person ON transactions.PersonID = person.PersonID ORDER BY %s %s";
-                query = String.format(query, sortBy, orderBy);
+                String query = "SELECT CONCAT(person.FirstName, person.MiddleName, person.LastName) AS FullName, transactions.* FROM transactions INNER JOIN person ON transactions.PersonID = person.PersonID ORDER BY %s";
+                query = String.format(query, orderBy);
+                System.out.println(query);
                 PreparedStatement statement = connection.prepareStatement(query);
                 resultSet = statement.executeQuery();
-                
                 result = resultSetMapper.mapResultSetToObject(resultSet, Transactions.class);
                 
             }
@@ -193,7 +189,7 @@ public class transactionController {
 //        System.out.println(insertTransaction(2, 2, 4.4, 0, "Regular"));
 //        System.out.println(getTransaction("FullName", "ASC"));
 
-//        System.out.println(getTransaction("FullName", "DESC").get(0).getTransactionID());
+//        System.out.println("transaction" + getTransaction("FullName", "DESC"));
 //        System.out.println(validTransactionInput(3, "Regular", 2, 0, 0));
     }
 }

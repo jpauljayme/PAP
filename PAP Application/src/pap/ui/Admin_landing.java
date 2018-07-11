@@ -84,8 +84,8 @@ public class Admin_landing extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        orderby = new javax.swing.JComboBox<>();
+        sortby = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         employeeTable1 = new javax.swing.JTable();
         logoutButton = new javax.swing.JButton();
@@ -186,21 +186,21 @@ public class Admin_landing extends javax.swing.JFrame {
         jPanel1.add(jLabel3);
         jLabel3.setBounds(20, 170, 50, 19);
 
-        jComboBox1.setFont(new java.awt.Font("Meiryo UI", 0, 12)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID", "Name", "Email", "Date Added", "Type" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        orderby.setFont(new java.awt.Font("Meiryo UI", 0, 12)); // NOI18N
+        orderby.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID", "Name", "Email", "Date Added", "Type" }));
+        orderby.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                orderbyActionPerformed(evt);
             }
         });
-        jPanel1.add(jComboBox1);
-        jComboBox1.setBounds(150, 170, 110, 30);
+        jPanel1.add(orderby);
+        orderby.setBounds(150, 170, 110, 30);
 
-        jComboBox2.setFont(new java.awt.Font("Meiryo UI", 0, 12)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ascending", "Descending" }));
-        jComboBox2.setSelectedIndex(1);
-        jPanel1.add(jComboBox2);
-        jComboBox2.setBounds(260, 170, 110, 30);
+        sortby.setFont(new java.awt.Font("Meiryo UI", 0, 12)); // NOI18N
+        sortby.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ascending", "Descending" }));
+        sortby.setSelectedIndex(1);
+        jPanel1.add(sortby);
+        sortby.setBounds(260, 170, 110, 30);
 
         employeeTable1.setFont(new java.awt.Font("Meiryo UI", 0, 13)); // NOI18N
         employeeTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -298,9 +298,12 @@ public class Admin_landing extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_salesReportButton1ActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    private void orderbyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderbyActionPerformed
+        String orderBy = orderby.getSelectedItem().toString();
+        String sortBy = sortby.getSelectedItem().toString();
+        
+        
+    }//GEN-LAST:event_orderbyActionPerformed
 
     private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
         this.dispose();
@@ -360,8 +363,6 @@ public class Admin_landing extends javax.swing.JFrame {
     private javax.swing.JButton addEmployeeButton;
     private javax.swing.JTable employeeTable1;
     private javax.swing.JLabel helloTextField;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel8;
@@ -369,10 +370,12 @@ public class Admin_landing extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton logoutButton;
+    private javax.swing.JComboBox<String> orderby;
     private javax.swing.ButtonGroup orientationButtonGroup;
     private javax.swing.JButton removeEmployeeButton;
     private javax.swing.JButton salesReportButton1;
     private javax.swing.ButtonGroup sortButtonGroup;
+    private javax.swing.JComboBox<String> sortby;
     private javax.swing.JButton updateEmployeeButton;
     private javax.swing.JButton viewInvoicesButton;
     // End of variables declaration//GEN-END:variables
