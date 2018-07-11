@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.regex.Pattern;
 
 /**
- *
+ *Global constants that will be used in different views and classes.
  * @author John Paul Jayme jpaul.jayme.com
  */
 public class GlobalConstants {
