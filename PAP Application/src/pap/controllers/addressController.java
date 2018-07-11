@@ -20,67 +20,68 @@ import static pap.functionality.getLastID.getLastInsertID;
  * @author Allena Denise
  */
 public class addressController {
-    
-    public static Address getAddress(int addressID){
+
+    public static Address getAddress(int addressID) {
         Address temp = new Address();
-        try{
+        try {
             ResultSetMapper<Address> resultSetMapper = new ResultSetMapper<>();
             ResultSet resultSet;
             MySQLConnector.openConnection();
-            
-            try(Connection connection = MySQLConnector.getConnection()){
-                
+
+            try (Connection connection = MySQLConnector.getConnection()) {
+
                 String query = "SELECT * FROM address WHERE AddressID=?";
                 PreparedStatement statement = connection.prepareStatement(query);
                 statement.setInt(1, addressID);
                 resultSet = statement.executeQuery();
                 List<Address> a = resultSetMapper.mapResultSetToObject(resultSet, Address.class);
-                
-                if(a != null){
+
+                if (a != null) {
                     System.out.println("test6");
                     return a.get(0);
                 }
             }
-        }catch(SQLException e){
+        } catch (SQLException e) {
         }
         return temp;
     }
-    
-    public static int insertAddress(String floor, int roomNumber, String buildingName, String houseNumber, String street, String barangay, String city, int addedBy, int updatedBy) throws SQLException{
-        try{
-            
-            MySQLConnector.openConnection();
 
-            try(Connection connection = MySQLConnector.getConnection()) {
-                
-                String query = "INSERT INTO address (Floor, RoomNumber, BuildingName, HouseNumber, Street, Barangay, City, AddedBy, UpdatedBy) VALUES (?,?,?,?,?,?,?,?,?)";
-                PreparedStatement statement = connection.prepareStatement(query);
-                statement.setString(1, floor);
-                statement.setInt(2, roomNumber);
-                statement.setString(3, buildingName);
-                statement.setString(4, houseNumber);
-                statement.setString(5, street);
-                statement.setString(6, barangay);
-                statement.setString(7, city);
-                statement.setInt(8, addedBy);
-                statement.setInt(9, updatedBy);
-                statement.execute();
-                
-                int id = getLastInsertID(connection);
-                
-                MySQLConnector.closeConnection();
-                return id;
-            }
+    public static int insertAddress(Address address) {
+
+        MySQLConnector.openConnection();
+
+        try (Connection connection = MySQLConnector.getConnection()) {
+            String query = "INSERT INTO address (Floor, RoomNumber, "
+                    + "BuildingName, HouseNumber, Street, Barangay, "
+                    + "City, AddedBy, UpdatedBy) "
+                    + "VALUES (?,?,?,?,?,?,?,?,?)";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, address.getFloor());
+            statement.setString(2, address.getRoomNumber());
+            statement.setString(3, address.getBuildingName());
+            statement.setString(4, address.getHouseNumber());
+            statement.setString(5, address.getStreet());
+            statement.setString(6, address.getBarangay());
+            statement.setString(7, address.getCity());
+            statement.setInt(8, address.getAddedBy());
+            statement.setInt(9, address.getUpdatedBy());
+            System.out.println(statement.toString());
+            statement.executeUpdate();
+
+            int id = getLastInsertID(connection);
+
+            MySQLConnector.closeConnection();
+            return id;
         }catch (SQLException e){
         }
+
         return 0;
     }
-    
+
 //    public static String validAddress(){
 //    
 //    }
-    
-    public static void main(String[] args) throws SQLException{
+    public static void main(String[] args) throws SQLException {
 //        System.out.println("AddressID: " + getAddress(4).getAddressID());
 //        System.out.println("Floor: " + getAddress(4).getFloor());
 //        System.out.println("RoomNumber: " + getAddress(4).getRoomNumber());
@@ -89,7 +90,7 @@ public class addressController {
 //        System.out.println("UpdatedBy: " + getAddress(4).getUpdatedBy());
 //        System.out.println("AddedDate: " + getAddress(4).getAddedDate());
 //        System.out.println("UpdatedDate: " + getAddress(4).getUpdatedDate());
-        
+
 //        System.out.println(insertAddress("2", 5, "NB2", null, null, null, null,2, 2));
     }
 }
