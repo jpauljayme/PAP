@@ -136,7 +136,7 @@ public class transactionController {
                 
                 String query = "INSERT INTO transactions (PersonID, AddedBy, ClothingWeight, BeddingsWeight, TotalAmount, TransactionType, ReceivedDate) VALUES (?,?,?,?,?,?, (DATE_ADD(CURRENT_TIMESTAMP , INTERVAL ? DAY)))";
                 PreparedStatement statement = connection.prepareStatement(query);
-                statement.setInt(1, transactions.getPersonID().getPersonID());
+                statement.setInt(1, transactions.getPersonID());
                 statement.setInt(2, transactions.getAddedBy());
                 statement.setDouble(3, transactions.getClothingWeight());
                 statement.setDouble(4, transactions.getBeddingsWeight());

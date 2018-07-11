@@ -381,7 +381,7 @@ public class EmployeeController {
         MySQLConnector.openConnection();
         try (Connection connection = MySQLConnector.getConnection()) {
 
-            String query = "SELECT p.PersonTypeID, p.PersonID, p.FirstName, p.MiddleName, "
+            String query = "SELECT p.PersonTypeID, p.AddressID, p.PersonID, p.FirstName, p.MiddleName, "
                     + "p.LastName, p.BirthDate, p.Sex, p.ContactNumber, "
                     + "p.Email, p.UpdatedBy FROM person p "
                     + "WHERE "

@@ -290,7 +290,8 @@ public class Admin_landing extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void viewInvoicesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewInvoicesButtonActionPerformed
-        // TODO add your handling code here:
+        new User_landing(credential, person, personType).setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_viewInvoicesButtonActionPerformed
 
     private void salesReportButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salesReportButton1ActionPerformed
