@@ -316,7 +316,7 @@ public class Admin_landing extends javax.swing.JFrame {
     }//GEN-LAST:event_updateEmployeeButtonActionPerformed
 
     private void removeEmployeeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeEmployeeButtonActionPerformed
-        new RemoveEmployee(credential, person, personType).setVisible(true);
+        new RemoveEmployee(credential, person, personType, employeeList).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_removeEmployeeButtonActionPerformed
 
