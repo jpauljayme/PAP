@@ -312,7 +312,7 @@ public class EmployeeController {
         MySQLConnector.openConnection();
         try (Connection connection = MySQLConnector.getConnection()) {
 
-            String query = "SELECT p.PersonID, p.FirstName, p.MiddleName, "
+            String query = "SELECT p.PersonTypeID, p.PersonID, p.FirstName, p.MiddleName, "
                     + "p.LastName, p.BirthDate, p.Sex, p.ContactNumber, "
                     + "p.Email, p.UpdatedBy FROM person p "
                     + "INNER JOIN credentials c "
@@ -323,7 +323,7 @@ public class EmployeeController {
 
             statement = connection.prepareStatement(query);
             statement.setString(1, username);
-            System.out.print(statement.toString());
+//            System.out.println(statement.toString());
             resultSet = statement.executeQuery();
 
             // simple JDBC code to run SQL query and populate resultSet - END
@@ -331,10 +331,11 @@ public class EmployeeController {
 
             // print out the list retrieved from database
             if (employeeList != null) {
+//                System.out.println(employeeList.get(0).getPersonID());
                 return employeeList.get(0);
 
             } else {
-                System.out.println("ResultSet is empty. Please check if database table is empty");
+                System.out.println("getPersonByUsername ResultSet is empty. Please check if database table is empty");
             }
         } catch (SQLException s) {
 
@@ -354,7 +355,7 @@ public class EmployeeController {
 
             statement = connection.prepareStatement(query);
             statement.setInt(1, personTypeID);
-            System.out.print(statement.toString());
+            System.out.println(statement.toString());
             resultSet = statement.executeQuery();
 
             // simple JDBC code to run SQL query and populate resultSet - END
@@ -365,7 +366,7 @@ public class EmployeeController {
                 return personType.get(0);
 
             } else {
-                System.out.println("ResultSet is empty. Please check if database table is empty");
+                System.out.println("getPersonType ResultSet is empty. Please check if database table is empty");
             }
         } catch (SQLException s) {
 
@@ -406,6 +407,7 @@ public class EmployeeController {
         // p.setEmail("new_email");
         //updateEmployee(p);
         // getPersonByUsername("dante");
-//        System.out.println(getPersonByUsername("blaasdasd").getFirstName());
+//        System.out.println("blam: "+getPersonByUsername("dante").getPersonID());
+//        System.out.println("blam: "+getPersonType(3).getPersonType());
     }
 }

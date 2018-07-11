@@ -90,7 +90,6 @@ public class Login_page extends javax.swing.JFrame {
         loginButton.setFont(new java.awt.Font("Meiryo", 0, 14)); // NOI18N
         loginButton.setForeground(new java.awt.Color(255, 255, 255));
         loginButton.setText("Login");
-        loginButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         loginButton.setBorderPainted(false);
         loginButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -104,7 +103,6 @@ public class Login_page extends javax.swing.JFrame {
         exitButton.setFont(new java.awt.Font("Meiryo", 0, 14)); // NOI18N
         exitButton.setForeground(new java.awt.Color(255, 255, 255));
         exitButton.setText("Cancel");
-        exitButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         exitButton.setBorderPainted(false);
         exitButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         exitButton.addActionListener(new java.awt.event.ActionListener() {
@@ -164,7 +162,6 @@ public class Login_page extends javax.swing.JFrame {
                         System.out.println("InvalidPassword");
                         break;
                     case "Valid":
-                        new User_landing().setVisible(true);
                         Person p = getPersonByUsername(credential.getUsername());
                         this.dispose();
                         if(getPersonType(p.getPersonTypeID()).getPersonType().equals("Admin")){
