@@ -16,48 +16,57 @@ import static pap.functionality.dataExist.getRow;
 import static pap.functionality.getLastID.getLastInsertID;
 
 /**
+ * itemList class methods and CRUD operations
  *
  * @author Allena Denise
  */
 public class itemListController {
-    
-    public static int insertItemList(ItemList itemList){
-        try{
+
+    public static int insertItemList(ItemList itemList) {
+        try {
             MySQLConnector.openConnection();
-            
-            try(Connection connection = MySQLConnector.getConnection()){
-                
+
+            try (Connection connection = MySQLConnector.getConnection()) {
+
                 String query = "INSERT INTO itemList (TransactionID, ItemID) VALUES (?,?)";
                 PreparedStatement statement = connection.prepareStatement(query);
                 statement.setInt(1, itemList.getTransactionID());
                 statement.setInt(2, itemList.getItemID());
                 statement.executeQuery();
-                
+
                 int id = getLastInsertID(connection);
-                
+
                 MySQLConnector.closeConnection();
                 return id;
             }
-        }catch(SQLException e){
+        } catch (SQLException e) {
         }
         return 0;
     }
-    
-    public static String validItemListInput(int transactionID, int itemID) throws SQLException{
-        
+
+    /**
+     * Validate itemList input.
+     *
+     * @param transactionID
+     * @param itemID
+     * @return Error string else "Valid"
+     * @throws java.sql.SQLException
+     */
+    public static String validItemListInput(int transactionID, int itemID) throws SQLException {
+
         MySQLConnector.openConnection();
         Connection connection = MySQLConnector.getConnection();
-        
-        if(getRow(connection, "transactions", "TransactionID", transactionID) == false){
+
+        if (getRow(connection, "transactions", "TransactionID", transactionID) == false) {
             return ("TransactionIDDoesNotExist");
-        }else if(getRow(connection, "item", "ItemID", itemID) == false){
+        } else if (getRow(connection, "item", "ItemID", itemID) == false) {
             return ("ItemIDDoesNotExist");
-        }else{
+        } else {
             return ("Valid");
         }
     }
-    
-    public static void main(String[] args) throws SQLException{
+
+    public static void main(String[] args) throws SQLException {
 //        System.out.println(insertItemList(1, 40, 2, 2));
 
 //        System.out.println("ItemID: " + getItem(1).getItemID());
@@ -67,7 +76,6 @@ public class itemListController {
 //        System.out.println("AddedBy: " + getItem(1).getAddedBy());
 //        System.out.println("UpdatedDate: " + getItem(1).getUpdatedDate());
 //        System.out.println("UpdatedBy: " + getItem(1).getUpdatedBy());
-
 //        System.out.println(validItemListInput(1, 1));
     }
 }

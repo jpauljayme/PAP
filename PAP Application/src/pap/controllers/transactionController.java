@@ -19,13 +19,20 @@ import pap.domain.ResultSetMapper;
 import pap.domain.Transactions;
 import static pap.functionality.dataExist.getRow;
 import static pap.functionality.getLastID.getLastInsertID;
+import pap.util.GlobalConstants;
+import pap.util.Validation;
 
 /**
- *
+ *CRUD Operations for transaction. Contains various methods for validation etc.
  * @author Allena Denise
  */
 public class transactionController {
-    
+
+    /**
+     * Retrieves transaction from transaction table.
+     * 
+     * @return list of transactions
+     */    
     public static List<Transactions> getTransaction(){
         List<Transactions> result = new ArrayList<>();
         
@@ -47,7 +54,13 @@ public class transactionController {
         }
         return result;
     } 
-    
+
+    /**
+     * Retrieves transaction row from transaction table.
+     *
+     * 
+     * @return Transaction object
+     */    
     public static Transactions getTransaction(int transactionID){
         Transactions temp = new Transactions();
         
@@ -73,6 +86,13 @@ public class transactionController {
         return temp;
     }
     
+    /**
+     * Retrieves a list of transactions
+     *
+     * @param sortBy
+     * @param orderBy
+     * @return list of transactions
+     */    
     public static List<Transactions> getTransaction(String sortBy, String orderBy){
         List<Transactions> result = new ArrayList<>();
         
@@ -95,7 +115,14 @@ public class transactionController {
         }
         return result;
     }
-    
+
+    /**
+     * Inserts transaction object to transaction table
+     *
+     * @param transactions
+     * 
+     * @return id of newly inserted transaction
+     */    
     public static int insertTransaction(Transactions transactions){
         
         ItemType clothes = getItemType("Clothes");
@@ -130,13 +157,26 @@ public class transactionController {
         }
         return 0;
     }
-    
-    public static String validTransactionInput(int personID, String transactionType ,int addedBy, double clothingWeight, double beddingsWeight) throws SQLException{
+
+    /**
+     * Validation for transaction input
+     *
+     * @param personID
+     * @param transactionType
+     * @param addedBy
+     * @param clothingWeight
+     * @param beddingsWeight
+     * 
+     * @return String of error, else a Valid string
+     */    
+    public static String validTransactionInput(int personID, String transactionType
+            ,int addedBy, double clothingWeight, double beddingsWeight) throws SQLException{
         
         MySQLConnector.openConnection();
         Connection connection = MySQLConnector.getConnection();
-        
-        if(getRow(connection, "person", "PersonID", personID) == false){
+        if(Validation.validateString(transactionType, GlobalConstants.MAX_LENGTH_TRANSACTIONTYPE)){
+            return ("Invalid transaction type length.");
+        }else if(getRow(connection, "person", "PersonID", personID) == false){
             return ("PersonIDDoesNotExist");
         }else if(getRow(connection, "transactions", "TransactionType", transactionType) == false){
             return ("TransactionTypeDoesNotExist");

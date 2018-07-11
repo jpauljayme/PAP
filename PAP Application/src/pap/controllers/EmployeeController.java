@@ -5,12 +5,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import pap.dbconnection.MySQLConnector;
 import pap.domain.Address;
 import pap.domain.Employee;
 import pap.domain.Person;
 import pap.domain.PersonType;
 import pap.domain.ResultSetMapper;
+import static pap.functionality.dataExist.getRow;
 import pap.util.GlobalConstants;
 import pap.util.Validation;
 
@@ -271,8 +274,20 @@ public class EmployeeController {
      */
     public static void validateInput(String firstName, String middleName,
             String lastName, String birthDate, char sex, String email,
-            String contactNumber) {
-
+            String contactNumber, int addedBy) {
+        //Validate addedBy ID
+        
+        MySQLConnector.openConnection();
+        Connection connection = MySQLConnector.getConnection();
+        
+        try {
+            if(getRow(connection, "person", "PersonID", addedBy) == false){
+                System.out.println("Added by does not exist.");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(EmployeeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         //Validate name fields.
         if (Validation.validateName(firstName, middleName, lastName) == true) {
             System.out.print(GlobalConstants.NAME_SUCCESS);

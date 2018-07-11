@@ -18,13 +18,23 @@ import pap.domain.ResultSetMapper;
 import static pap.functionality.dataExist.getRow;
 import static pap.functionality.getLastID.getLastInsertID;
 import pap.hash.MD5;
+import pap.util.GlobalConstants;
+import pap.util.Validation;
 
 /**
- *
+ *CRUD operations for credentials class. Includes validation.
  * @author Allena Denise
  */
 public class credentialsController {
-    
+
+    /**
+     * Checks credential info
+     *
+     * @param username
+     * @param password
+     * @return "Valid" or "Invalid" string
+     * @throws java.security.NoSuchAlgorithmException
+     */    
     public static String checkCredentials(String username, String password) throws NoSuchAlgorithmException{
         try {
             ResultSetMapper<Credential> resultSetMapper = new ResultSetMapper<>();
@@ -53,7 +63,16 @@ public class credentialsController {
         }
         return ("InvalidUsername");
     }
-    
+
+
+    /**
+     * Insert credentials to credentials table
+     *
+     * @param credential
+     * @param credential
+     *
+     * @return credential ID
+     */       
     public static int insertCredentials(Credential credential) throws NoSuchAlgorithmException{
         try{
             MySQLConnector.openConnection();
@@ -78,7 +97,16 @@ public class credentialsController {
         }
         return 0;
     }
-    
+
+
+    /**
+     * Update credentials information
+     *
+     * @param oldUsername
+     * @param credential
+     * @throws java.security.NoSuchAlgorithmException
+     * 
+     */       
     public static void updateCredentials(String oldUsername, Credential credential) throws NoSuchAlgorithmException{
         try{
             MySQLConnector.openConnection();
@@ -99,7 +127,15 @@ public class credentialsController {
         }catch (SQLException e){
         }
     }
-    
+ 
+
+    /**
+     * Deletes credential info from credentials table
+     *
+     * @param credentialsID
+     * 
+     * 
+     */       
     public static void deleteCredentials(int credentialsID){
         try{
             MySQLConnector.openConnection();
@@ -117,18 +153,36 @@ public class credentialsController {
         }catch (SQLException e){
         }
     }
-    
-    public static String validCredentialInsert(String username, String password, int addedBy) throws NoSuchAlgorithmException, SQLException{
+
+    /**
+     * Validates credential info before insertion
+     *
+     * @param username
+     * @param password
+     * @param addedBy
+     *
+     * @return credential ID
+     * @throws java.security.NoSuchAlgorithmException
+     * @throws java.sql.SQLException
+     */      
+    public static String validCredentialInsert(String username,
+            String password, int addedBy) throws NoSuchAlgorithmException, SQLException{
         
         MySQLConnector.openConnection();
         Connection connection = MySQLConnector.getConnection();
         //Check if string is empty before calling this
+        
+        
         if(username.contains(" ")){
             return ("ContainsWhitespace");
+        }else if(Validation.empty(username) && Validation.empty(password)){
+            return ("Empty username or password");
+        }
+        else if(Validation.validateString(username, GlobalConstants.MAX_LENGTH_USERNAME)
+                && Validation.validateString(password, GlobalConstants.MAX_LENGTH_PASSWORD)){
+            return ("UsernamePasswordOverflow");
         }else if(getRow(connection, "person", "PersonID", addedBy) == false){
             return ("AddedByDoesNotExist");
-        }else if(username.length() > 20){
-            return ("UsernameOverflow");
         }else if(getRow(connection, "credentials", "Username", username) == true){
             return ("UsernameTaken");
         }else{
