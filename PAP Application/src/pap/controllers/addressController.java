@@ -77,7 +77,36 @@ public class addressController {
 
         return 0;
     }
+    public static boolean removeAddress(int addressID) {
 
+        MySQLConnector.openConnection();
+
+        try (Connection connection = MySQLConnector.getConnection()) {
+            int ret;
+            String query = "DELETE FROM address WHERE AddressID =?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, addressID);
+            System.out.println(statement.toString());
+            ret = statement.executeUpdate();
+            System.out.print("at removeaddress ret -"+ret);
+            MySQLConnector.closeConnection();
+            if(ret !=0){
+                
+                System.out.println("Successfully removed address");
+                return true;
+            }else{
+                System.out.println("Failed to remove address");
+                return false;
+            }
+            
+
+            
+            
+        }catch (SQLException e){
+        }
+
+        return false;
+    }
 //    public static String validAddress(){
 //    
 //    }
