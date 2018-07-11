@@ -8,8 +8,11 @@ package pap.controllers;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import static pap.controllers.itemController.getItem;
+import static pap.controllers.transactionController.getTransaction;
 import pap.dbconnection.MySQLConnector;
 import pap.domain.ItemList;
+import static pap.functionality.dataExist.getRow;
 import static pap.functionality.getLastID.getLastInsertID;
 
 /**
@@ -40,6 +43,20 @@ public class itemListController {
         return 0;
     }
     
+    public static String validItemListInput(int transactionID, int itemID) throws SQLException{
+        
+        MySQLConnector.openConnection();
+        Connection connection = MySQLConnector.getConnection();
+        
+        if(getRow(connection, "transactions", "TransactionID", transactionID) == false){
+            return ("TransactionIDDoesNotExist");
+        }else if(getRow(connection, "item", "ItemID", itemID) == false){
+            return ("ItemIDDoesNotExist");
+        }else{
+            return ("Valid");
+        }
+    }
+    
     public static void main(String[] args) throws SQLException{
 //        System.out.println(insertItemList(1, 40, 2, 2));
 
@@ -50,5 +67,7 @@ public class itemListController {
 //        System.out.println("AddedBy: " + getItem(1).getAddedBy());
 //        System.out.println("UpdatedDate: " + getItem(1).getUpdatedDate());
 //        System.out.println("UpdatedBy: " + getItem(1).getUpdatedBy());
+
+//        System.out.println(validItemListInput(1, 1));
     }
 }

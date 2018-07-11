@@ -18,7 +18,7 @@ public class Transactions implements Serializable {
     @Column(name="TransactionID")
     private int transactionID;
     @Column(name="PersonID")
-    private int personID;
+    private Person personID;
     @Column(name="AddedDate")
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date addedDate;
@@ -40,7 +40,7 @@ public class Transactions implements Serializable {
      */
     public Transactions(){
         this.transactionID = 0;
-        this.personID = 0;
+        this.personID = null;
         this.addedBy = 0;
         this.clothingWeight = 0;
         this.beddingsWeight = 0;
@@ -58,7 +58,7 @@ public class Transactions implements Serializable {
      * @param transactionType
      */
     
-    public Transactions(int personID, int addedBy, float clothingWeight,
+    public Transactions(Person personID, int addedBy, float clothingWeight,
                         float beddingsWeight, double totalAmount,
                         String transactionType){
         this.personID = personID;
@@ -85,7 +85,7 @@ public class Transactions implements Serializable {
      * Returns the customer's PersonID
      * @return the personID
      */
-    public int getPersonID() {
+    public Person getPersonID() {
         return personID;
     }
 
@@ -163,7 +163,7 @@ public class Transactions implements Serializable {
      * @param personID the personID to set
      */
     public void setPersonID(int personID) {
-        this.personID = personID;
+        this.personID.setPersonID(personID);
     }
 
     /**

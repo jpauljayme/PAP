@@ -10,9 +10,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import static pap.controllers.itemTypeController.getItemType;
 import pap.dbconnection.MySQLConnector;
 import pap.domain.Item;
+import pap.domain.Person;
 import pap.domain.ResultSetMapper;
+import static pap.functionality.dataExist.getRow;
 import static pap.functionality.getLastID.getLastInsertID;
 
 /**
@@ -69,6 +72,24 @@ public class itemController {
         return 0;
     }
     
+    public static String validItemInsert(int itemTypeID, int itemCount, int addedBy) throws SQLException{
+        
+        MySQLConnector.openConnection();
+        Connection connection = MySQLConnector.getConnection();
+
+        if(getRow(connection, "person", "PersonID", addedBy) == false){
+            return ("AddedByDoesNotExist");
+        }else if(getRow(connection, "itemType", "itemTypeID", itemTypeID) == false){
+            return ("ItemTypeDoesNotExist");
+        }else if(itemCount <= 0){
+            return ("NoItemCount");
+        }else if(itemCount > 2147483647){
+            return ("ItemCountOverflow");
+        }else{
+            return ("Valid");
+        }
+    }
+    
     public static void main(String[] args) throws SQLException{
 //        System.out.println(insertItem(1, 40, 2, 2));
 
@@ -79,5 +100,6 @@ public class itemController {
 //        System.out.println("AddedBy: " + getItem(1).getAddedBy());
 //        System.out.println("UpdatedDate: " + getItem(1).getUpdatedDate());
 //        System.out.println("UpdatedBy: " + getItem(1).getUpdatedBy());
+//        System.out.println(validItemInsert(1, 1, 2));
     }
 }

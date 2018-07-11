@@ -37,6 +37,7 @@ public class Credential implements Serializable {
      *Default constructor.
      */
     public Credential(){
+        this.credentialsID = 0;
         this.personID = 0;
         this.username = null;
         this.userPassword = null;

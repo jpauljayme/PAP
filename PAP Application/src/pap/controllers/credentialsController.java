@@ -13,7 +13,9 @@ import java.sql.SQLException;
 import java.util.List;
 import pap.dbconnection.MySQLConnector;
 import pap.domain.Credential;
+import pap.domain.Person;
 import pap.domain.ResultSetMapper;
+import static pap.functionality.dataExist.getRow;
 import static pap.functionality.getLastID.getLastInsertID;
 import pap.hash.MD5;
 
@@ -116,45 +118,28 @@ public class credentialsController {
         }
     }
     
-    public static String validCredentialInsert(String username, String password) throws NoSuchAlgorithmException{
+    public static String validCredentialInsert(String username, String password, int addedBy) throws NoSuchAlgorithmException, SQLException{
         
-        if(username.equals("")){
-            return ("UsernameEmpty");
-        }
-        if(password.equals("")){
-            return ("PasswordEmpty");
-        }
-        if(username.length() > 20){
+        MySQLConnector.openConnection();
+        Connection connection = MySQLConnector.getConnection();
+        //Check if string is empty before calling this
+ 
+        if(getRow(connection, "person", "PersonID", addedBy) == false){
+            return("AddedByDoesNotExist");
+        }else if(username.length() > 20){
             return ("UsernameOverflow");
-        }       
-        try {
-            ResultSetMapper<Credential> resultSetMapper = new ResultSetMapper<>();
-            ResultSet resultSet;
-            MySQLConnector.openConnection();
-            
-            try (Connection connection = MySQLConnector.getConnection()) {
-                PreparedStatement statement = connection.prepareStatement("SELECT * FROM credentials WHERE Username=?");
-                statement.setString(1, username);
-                
-                resultSet = statement.executeQuery();
-                List<Credential> c = resultSetMapper.mapResultSetToObject(resultSet, Credential.class);
-                
-                MySQLConnector.closeConnection();
-                
-                if (c != null) {
-                    return ("UsernameTaken");
-                }
-            }
-        } catch (SQLException e) {
-        }
-        return ("Valid");
+        }else if(getRow(connection, "credentials", "Username", username) == true){
+            return ("UsernameTaken");
+        }else{
+            return ("Valid");
+        } 
     }
     
     public static void main(String[] args) throws SQLException, NoSuchAlgorithmException{
 //        System.out.println(checkCredentials("dante", "password"));
 //        updateCredentials("dante1","dante2", "password", 2);
 //        deleteCredentials(3);
-//        System.out.println(validCredentialInsert("dant2", "password"));
+//        System.out.println(validCredentialInsert("da", "password", 2));
 //        System.out.println(insertCredentials(2, "username", "password", 2, 2));
     }
 }

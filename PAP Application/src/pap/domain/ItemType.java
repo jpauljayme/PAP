@@ -35,6 +35,7 @@ public class ItemType implements Serializable {
      *Default constructor.
      */
     public ItemType(){
+        this.itemTypeID = 0;
         this.itemTypeName = null;
         this.itemTypePrice = 0;
         this.addedBy = 0;
