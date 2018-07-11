@@ -54,18 +54,20 @@ public class Transactions implements Serializable {
      * @param addedBy
      * @param clothingWeight
      * @param beddingsWeight
-     * @param totalAmount
      * @param transactionType
      */
     
-    public Transactions(int personID, int addedBy, float clothingWeight,
-                        float beddingsWeight, double totalAmount,
-                        String transactionType){
+    public Transactions(int personID, int addedBy, 
+                        float clothingWeight, float beddingsWeight, String transactionType){
+        double totalPay, clothingPrice, beddingsPrice;
+        clothingPrice = clothingWeight <= 3.00 ? 90.00 : clothingWeight * 30.00 ;
+        beddingsPrice = beddingsWeight <= 3.00 ? 40.00 : clothingWeight * 40.00 ;
+        totalPay = clothingPrice + beddingsPrice;
         this.personID = personID;
         this.addedBy = addedBy;
-        this.clothingWeight = clothingWeight;
-        this.beddingsWeight = beddingsWeight;
-        this.totalAmount = totalAmount;
+        this.clothingWeight = clothingWeight;    
+        this.beddingsWeight = beddingsWeight;       
+        this.totalAmount = totalPay;
         this.transactionType = transactionType;
     }
     
@@ -220,5 +222,5 @@ public class Transactions implements Serializable {
      */
     public void setTransactionType(String transactionType) {
         this.transactionType = transactionType;
-    }
+    }    
 }

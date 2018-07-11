@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -366,6 +367,36 @@ public class EmployeeController {
         return new Person();
     }
 
+    public static List getListOfPersonID(){        
+        ResultSet resultSet;
+        ResultSetMapper<Person> resultSetMapper = new ResultSetMapper<>();
+        
+        // simple JDBC code to run SQL query and populate resultSet - START
+        MySQLConnector.openConnection();
+        
+        try (Connection connection = MySQLConnector.getConnection()) {
+
+            String query = "SELECT p.PersonID FROM person p";
+
+            statement = connection.prepareStatement(query);
+            System.out.println(statement.toString());
+            resultSet = statement.executeQuery();
+
+            // simple JDBC code to run SQL query and populate resultSet - END
+            employeeList = resultSetMapper.mapResultSetToObject(resultSet, Person.class);
+
+            // print out the list retrieved from database
+            if (employeeList != null) {
+                return employeeList;
+
+            } else {
+                System.out.println("getPersonByUsername ResultSet is empty. Please check if database table is empty");
+            }
+        } catch (SQLException s) {
+
+        }
+        return null;
+    }
 
     /**
      * Returns employee.

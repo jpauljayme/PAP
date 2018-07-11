@@ -83,6 +83,20 @@ public class Person implements Serializable {
         this.updatedBy = updatedBy;
 
     }
+    
+    public Person(int personTypeID,
+            String lastName, String firstName, String middleName, 
+            String contactNumber, int addedBy, int updatedBy, int addressID) {
+        this.personTypeID = personTypeID;
+        this.lastName = lastName;
+        this.middleName = middleName;
+        this.firstName = firstName;
+        this.contactNumber = contactNumber;
+        this.addedBy = addedBy;
+        this.updatedBy = updatedBy;
+        this.addressID = addressID;
+
+    }
 
     /**
      * Default constructor.

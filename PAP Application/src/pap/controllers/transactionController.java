@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import static pap.controllers.itemTypeController.getItemType;
+import static pap.controllers.EmployeeController.getPersonByID;
 import pap.dbconnection.MySQLConnector;
 import pap.domain.ItemType;
 import pap.domain.Person;
@@ -127,7 +128,7 @@ public class transactionController {
         
         try{
             MySQLConnector.openConnection();
-            
+                        
             try(Connection connection = MySQLConnector.getConnection()){
                 
                 String query = "INSERT INTO transactions (PersonID, AddedBy, ClothingWeight, BeddingsWeight, TotalAmount, TransactionType, ReceivedDate) VALUES (?,?,?,?,?,?, (DATE_ADD(CURRENT_TIMESTAMP , INTERVAL ? DAY)))";
@@ -191,5 +192,14 @@ public class transactionController {
 
 //        System.out.println("transaction" + getTransaction("FullName", "DESC"));
 //        System.out.println(validTransactionInput(3, "Regular", 2, 0, 0));
+          Transactions trans1 = new Transactions(4, 2, 4, 0, "Rushed");
+          Transactions trans2 = new Transactions(7, 2, 4, 3, "Rushed");
+          Transactions trans3 = new Transactions(7, 2, 8, 5, "Regular");
+
+          insertTransaction(trans1);
+          insertTransaction(trans2);
+          insertTransaction(trans3);
+          
+          System.out.println(getTransaction().get(0).getTransactionID());
     }
 }
