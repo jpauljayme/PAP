@@ -208,11 +208,11 @@ public class EmployeeController {
      *
      * @return true if successful, false if unsuccessful.
      */
-    public static boolean updateEmployee(Person emp) {
+    public static boolean updateEmployee(Person emp, Address address) {
         // simple JDBC code to run SQL query and populate resultSet - START
         MySQLConnector.openConnection();
         try (Connection connection = MySQLConnector.getConnection()) {
-
+            boolean retAddress;
             String query = "UPDATE person SET FirstName = ? , MiddleName = ? , "
                     + "LastName = ? , BirthDate = ? , Sex = ? , ContactNumber = ? , "
                     + "Email = ? , UpdatedBy = ? WHERE PersonID = ?";
@@ -228,12 +228,23 @@ public class EmployeeController {
             statement.setString(7, emp.getEmail());
             statement.setInt(8, emp.getUpdatedBy());
             statement.setInt(9, emp.getPersonID());
+            
+            
             System.out.println(statement.toString());
             int ret = statement.executeUpdate();
             MySQLConnector.closeConnection();
             if (ret != 0) {
-                System.out.println("Succesffuly updated employee");
-                return true;
+                retAddress = addressController.updateAddress(address);
+                if(retAddress == true){
+                    System.out.println("Succesffuly updated employee and"
+                            + " corresponding address");
+                    return true;
+                }else{
+                    System.out.println("Failed to update employee and"
+                            + " corresponding address");
+                    return false;
+                }
+                
             } else {
                 System.out.println("Failed updating employee.");
                 return false;

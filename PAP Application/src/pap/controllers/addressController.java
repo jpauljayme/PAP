@@ -107,6 +107,46 @@ public class addressController {
 
         return false;
     }
+    
+    public static boolean updateAddress(Address address){
+        MySQLConnector.openConnection();
+
+        try (Connection connection = MySQLConnector.getConnection()) {
+       
+            int ret;
+            String query = "UPDATE address SET Floor = ? , RoomNumber = ?, "
+                    + "BuildingName = ? , HouseNumber = ? , Street = ? , "
+                    + "Barangay = ? , City = ? , UpdatedBy = ? "
+                    + "WHERE AddressID = ? ";
+            
+            
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, address.getFloor());
+            statement.setString(2, address.getRoomNumber());
+            statement.setString(3, address.getBuildingName());
+            statement.setString(4, address.getHouseNumber());
+            statement.setString(5, address.getStreet());
+            statement.setString(6, address.getBarangay());
+            statement.setString(7, address.getCity());
+            statement.setInt(8, address.getUpdatedBy());
+            statement.setInt(9, address.getAddressID());
+            
+            System.out.println(statement.toString());
+            ret = statement.executeUpdate();
+            MySQLConnector.closeConnection();
+            
+            if(ret !=0){
+                System.out.println("Successfully updated address!");
+                return true;
+            }else{
+                System.out.println("Failed to update address!");
+                return false;
+            }
+        }catch (SQLException e){
+            System.out.println(e);
+        }
+        return false;
+    }
 //    public static String validAddress(){
 //    
 //    }
