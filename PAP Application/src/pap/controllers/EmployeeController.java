@@ -16,7 +16,8 @@ import pap.util.GlobalConstants;
 import pap.util.Validation;
 
 /**
- *Contains methods to manipulate data from view. Includes CRUD operations.
+ * Contains methods to manipulate data from view. Includes CRUD operations.
+ *
  * @author John Paul Jayme jpaul.jayme.com
  */
 public class EmployeeController {
@@ -133,7 +134,8 @@ public class EmployeeController {
         MySQLConnector.openConnection();
         try (Connection connection = MySQLConnector.getConnection()) {
 
-            String viewEmployee = "SELECT p.PersonID, p.AddressID, p.FirstName, p.MiddleName, "
+            String viewEmployee = "SELECT p.PersonID, p.PersonTypeID, "
+                    + "p.AddressID, p.FirstName, p.MiddleName, "
                     + "p.LastName, p.BirthDate, p.Sex, p.ContactNumber, p.Email, p.UpdatedBy "
                     + "FROM person AS p "
                     + "WHERE p.PersonID = ? ";
@@ -173,7 +175,8 @@ public class EmployeeController {
         MySQLConnector.openConnection();
         try (Connection connection = MySQLConnector.getConnection()) {
 
-            String viewEmployee = "SELECT p.PersonID, p.FirstName, p.MiddleName, "
+            String viewEmployee = "SELECT p.PersonID, p.PersonTypeID, "
+                    + "p.FirstName, p.MiddleName, "
                     + "p.LastName, p.BirthDate, p.Sex, p.ContactNumber, p.Email "
                     + "FROM person AS p "
                     + "WHERE p.PersonTypeID = ? ";
@@ -205,7 +208,7 @@ public class EmployeeController {
      * Updates employee information.
      *
      * @param emp employee to be updated
-     *
+     * @param address address associated with employee
      * @return true if successful, false if unsuccessful.
      */
     public static boolean updateEmployee(Person emp, Address address) {
@@ -228,23 +231,22 @@ public class EmployeeController {
             statement.setString(7, emp.getEmail());
             statement.setInt(8, emp.getUpdatedBy());
             statement.setInt(9, emp.getPersonID());
-            
-            
+
             System.out.println(statement.toString());
             int ret = statement.executeUpdate();
             MySQLConnector.closeConnection();
             if (ret != 0) {
-                retAddress = addressController.updateAddress(address);
-                if(retAddress == true){
+                retAddress = addressController.updateAddress(address, emp.getPersonTypeID());
+                if (retAddress == true) {
                     System.out.println("Succesffuly updated employee and"
                             + " corresponding address");
                     return true;
-                }else{
+                } else {
                     System.out.println("Failed to update employee and"
                             + " corresponding address");
                     return false;
                 }
-                
+
             } else {
                 System.out.println("Failed updating employee.");
                 return false;
@@ -280,7 +282,7 @@ public class EmployeeController {
         }
 
         //Validate birthdate
-        if (Validation.validateJavaDate(birthDate) == true) {
+        if (Validation.validateDate(birthDate, GlobalConstants.DATE_FORMAT) == true) {
             System.out.println(GlobalConstants.DATE_SUCCESS);
         } else {
             System.out.println(GlobalConstants.DATE_ERROR);
@@ -353,7 +355,7 @@ public class EmployeeController {
         }
         return new Person();
     }
-    
+
     public static PersonType getPersonType(int personTypeID) {
         ResultSet resultSet;
         ResultSetMapper<PersonType> resultSetMapper = new ResultSetMapper<>();
@@ -385,7 +387,6 @@ public class EmployeeController {
         return new PersonType();
     }
 
-
     /**
      * Sample main method for checking methods
      *
@@ -412,11 +413,19 @@ public class EmployeeController {
                 System.out.println("Failed to remove person");
             }
         }*/
-        // Person p = (Person) l.get(0);
-        // p.setFirstName("New fn");
-        //p.setMiddleName("yas");
-        // p.setEmail("new_email");
-        //updateEmployee(p);
+//        List l = getEmployee(7);
+//        Person p = (Person) l.get(0);
+//        p.setFirstName("UPDATED FN");
+//        p.setMiddleName("UPDATED MN");
+//        p.setLastName("YASS KWEEN");
+//        p.setEmail("UPDATED@gmail.com");
+//        p.setContactNumber("09325442218");
+//        Address a = addressController.getAddress(p.getAddressID());
+//        a.setBarangay("UPDATED");
+//        a.setCity("shiity");
+//        a.setHouseNumber("69");
+//        a.setStreet("Hoee STREET");
+//        System.out.println(updateEmployee(p, a));
         // getPersonByUsername("dante");
 //        System.out.println("blam: "+getPersonByUsername("dante").getPersonID());
 //        System.out.println("blam: "+getPersonType(3).getPersonType());

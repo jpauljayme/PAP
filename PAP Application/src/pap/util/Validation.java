@@ -1,47 +1,35 @@
 package pap.util;
 
-import java.text.ParseException;
-import java.util.Date;
 import java.util.regex.Pattern;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
+import org.joda.time.format.*;
 
 /**
- *Contains methods for validation of data.
+ * Contains methods for validation of data.
+ *
  * @author John Paul Jayme jpaul.jayme.com
  */
 public class Validation {
 
     /**
-     * Validates dates. 
+     * Validates dates.
      *
      * @param strDate date to be checked
+     * @param format allowed date format
      * @return true if valid date else returns false
-     */    
-    public static boolean validateJavaDate(String strDate) {
-        /* Check if date is 'null' */
-        if (strDate.trim().equals("")) {
-            System.out.println(GlobalConstants.DATE_ERROR);
-            return false;
-        } /* Date is not 'null' */ else {
-            /*
-	     * Set preferred date format,
-	     * For example MM-dd-yyyy, MM.dd.yyyy,dd.MM.yyyy etc.*/
-            //SimpleDateFormat sdfrmt = new SimpleDateFormat("MM-dd-yyyy");
-            GlobalConstants.DATE_FORMAT.setLenient(false);
-            /* Create Date object
-	     * parse the string into date 
-             */
-            try {
-                Date javaDate = GlobalConstants.DATE_FORMAT.parse(strDate);
-                System.out.println(strDate + GlobalConstants.DATE_SUCCESS);
-            } /* Date format is invalid */ catch (ParseException e) {
-                System.out.println(strDate + GlobalConstants.DATE_ERROR);
-                return false;
-            }
-            /* Return true if date format is valid */
-            return true;
+     */
+    public static boolean validateDate(String strDate, String format) {
+        org.joda.time.DateTime date = null;
+        boolean ret;
+        try {
+            DateTimeFormatter fmt = DateTimeFormat.forPattern(format);
+            date = fmt.parseDateTime(strDate);
+            ret = true;
+        } catch (Exception e) {
+            ret = false;
         }
+        return ret;
     }
 
     /**
@@ -49,12 +37,16 @@ public class Validation {
      *
      * @param email email to be checked.
      * @return true if valid email else returns false
-     */      
+     */
     public static boolean isValidEmailAddress(String email) {
-        boolean result = true;
+        boolean result;
+        if(email.length() > GlobalConstants.MAX_LENGTH_EMAIL){
+           return false; 
+        }
         try {
             InternetAddress emailAddr = new InternetAddress(email);
             emailAddr.validate();
+            result = true;
         } catch (AddressException ex) {
             result = false;
         }
@@ -66,13 +58,14 @@ public class Validation {
      *
      * @param phoneNo contact number to be checked
      * @return true if valid contact number else returns false
-     */      
+     */
     public static boolean validateContactNumber(String phoneNo) {
         //validate phone numbers of format "1234567890"
-        return phoneNo.matches(GlobalConstants.CONTACTNUMBER_REGEX); //return false if nothing matches the input
+        return !(phoneNo.trim().length() > GlobalConstants.MAX_LENGTH_CONTACTNUMBER)
+                && phoneNo.matches(GlobalConstants.CONTACTNUMBER_REGEX); //return false if nothing matches the input
 
     }
-    
+
     /**
      * Validates name fields.
      *
@@ -80,11 +73,14 @@ public class Validation {
      * @param middleName represents middle name
      * @param lastName represents last name
      * @return true if all name fields are valid else returns false
-     */  
+     */
     public static boolean validateName(String firstName, String middleName, String lastName) {
-        return !firstName.isEmpty() && Pattern.matches(GlobalConstants.NAME_REGEX, firstName)
-                && !middleName.isEmpty() && Pattern.matches(GlobalConstants.NAME_REGEX, middleName)
-                && !lastName.isEmpty() && Pattern.matches(GlobalConstants.NAME_REGEX, lastName);
+        return !firstName.isEmpty() && firstName.length() > GlobalConstants.MAX_LENGTH_FIRSTNAME
+                && Pattern.matches(GlobalConstants.NAME_REGEX, firstName)
+                && !middleName.isEmpty() && middleName.length() > GlobalConstants.MAX_LENGTH_MIDDLENAME
+                && Pattern.matches(GlobalConstants.NAME_REGEX, middleName)
+                && !lastName.isEmpty() && lastName.length() > GlobalConstants.MAX_LENGTH_LASTNAME
+                && Pattern.matches(GlobalConstants.NAME_REGEX, lastName);
     }
 
     /**
@@ -92,7 +88,7 @@ public class Validation {
      *
      * @param sex sex to be checked
      * @return true if valid sex else returns false
-     */      
+     */
     public static boolean validateSex(char sex) {
         boolean ret;
         switch (sex) {
@@ -107,18 +103,33 @@ public class Validation {
         }
         return ret;
     }
+
     /**
-     * Validates strings
+     * Checks if string is empty
      *
      * @param s string to be checked
      * @return true if string is empty else false
-     */  
+     */
     public static boolean empty(final String s) {
         // Null-safe, short-circuit evaluation.
         return s == null || s.trim().isEmpty();
     }
-
+    
+    /**
+     * Checks if string is in the max length bounds
+     *
+     * @param s string to be checked
+     * @param maxLength maximum length of target string
+     * @return true if string exceeds maximum length else false
+     */
+    public static boolean validateString(final String s, int maxLength){
+        return s.length() > maxLength;
+    }
     
     public static void main(String args[]) {
+        //validateDate("10-02-201-");
+        //System.out.print(validateDate("10-02-2012 ", GlobalConstants.DATE_FORMAT2));
+        System.out.print(validateContactNumber("0932544218"));
     }
+
 }

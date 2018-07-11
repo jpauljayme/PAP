@@ -14,13 +14,23 @@ import pap.dbconnection.MySQLConnector;
 import pap.domain.Address;
 import pap.domain.ResultSetMapper;
 import static pap.functionality.getLastID.getLastInsertID;
+import pap.util.GlobalConstants;
+import pap.util.Validation;
 
 /**
+ * CRUD Operations for address and validation
  *
- * @author Allena Denise
+ * @author Allena Denise, John Paul Jayme
  */
 public class addressController {
 
+    /**
+     * Returns address information
+     *
+     * @param addressID
+     *
+     * @return address information
+     */
     public static Address getAddress(int addressID) {
         Address temp = new Address();
         try {
@@ -46,6 +56,13 @@ public class addressController {
         return temp;
     }
 
+    /**
+     * Insert address information to table
+     *
+     * @param address
+     *
+     * @return true if successful insertion else false
+     */
     public static int insertAddress(Address address) {
 
         MySQLConnector.openConnection();
@@ -72,11 +89,19 @@ public class addressController {
 
             MySQLConnector.closeConnection();
             return id;
-        }catch (SQLException e){
+        } catch (SQLException e) {
         }
 
         return 0;
     }
+
+    /**
+     * removes address info related to a person
+     *
+     * @param addressID
+     *
+     * @return true if successful removal else false
+     */
     public static boolean removeAddress(int addressID) {
 
         MySQLConnector.openConnection();
@@ -88,68 +113,120 @@ public class addressController {
             statement.setInt(1, addressID);
             System.out.println(statement.toString());
             ret = statement.executeUpdate();
-            System.out.print("at removeaddress ret -"+ret);
+            System.out.print("at removeaddress ret -" + ret);
             MySQLConnector.closeConnection();
-            if(ret !=0){
-                
+            if (ret != 0) {
+
                 System.out.println("Successfully removed address");
                 return true;
-            }else{
+            } else {
                 System.out.println("Failed to remove address");
                 return false;
             }
-            
 
-            
-            
-        }catch (SQLException e){
+        } catch (SQLException e) {
         }
 
         return false;
     }
-    
-    public static boolean updateAddress(Address address){
+
+    /**
+     * Updates address information
+     *
+     * @param address
+     * @param personTypeID
+     *
+     * @return true if successful update else false
+     */
+    public static boolean updateAddress(Address address, int personTypeID) {
         MySQLConnector.openConnection();
 
         try (Connection connection = MySQLConnector.getConnection()) {
-       
+
             int ret;
             String query = "UPDATE address SET Floor = ? , RoomNumber = ?, "
                     + "BuildingName = ? , HouseNumber = ? , Street = ? , "
                     + "Barangay = ? , City = ? , UpdatedBy = ? "
                     + "WHERE AddressID = ? ";
-            
-            
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setString(1, address.getFloor());
-            statement.setString(2, address.getRoomNumber());
-            statement.setString(3, address.getBuildingName());
-            statement.setString(4, address.getHouseNumber());
-            statement.setString(5, address.getStreet());
-            statement.setString(6, address.getBarangay());
-            statement.setString(7, address.getCity());
+            System.out.println(personTypeID);
+            if (personTypeID == 3) {
+                statement.setString(1, null);
+                statement.setString(2, null);
+                statement.setString(3, null);
+                statement.setString(4, address.getHouseNumber());
+                statement.setString(5, address.getStreet());
+                statement.setString(6, address.getBarangay());
+                statement.setString(7, address.getCity());
+            } else if (personTypeID == 4) {
+                statement.setString(1, address.getFloor());
+                statement.setString(2, address.getRoomNumber());
+                statement.setString(3, address.getBuildingName());
+                statement.setString(4, null);
+                statement.setString(5, null);
+                statement.setString(6, null);
+                statement.setString(7, null);
+            }
+
             statement.setInt(8, address.getUpdatedBy());
             statement.setInt(9, address.getAddressID());
-            
+
             System.out.println(statement.toString());
             ret = statement.executeUpdate();
             MySQLConnector.closeConnection();
-            
-            if(ret !=0){
+
+            if (ret != 0) {
                 System.out.println("Successfully updated address!");
                 return true;
-            }else{
+            } else {
                 System.out.println("Failed to update address!");
                 return false;
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println(e);
         }
         return false;
     }
-//    public static String validAddress(){
-//    
-//    }
+
+    /**
+     * Validates address input of employee
+     *
+     * @param houseNumber
+     * @param street
+     * @param barangay
+     * @param city
+     * @return true if valid address else false
+     */
+    public static boolean validateEmployeeAddress(String houseNumber, String street, String barangay,
+            String city) {
+
+        return !Validation.empty(houseNumber) && !Validation.validateString(houseNumber,
+                GlobalConstants.MAX_LENGTH_HOUSENUMBER)
+                && !Validation.empty(street) && !Validation.validateString(street,
+                GlobalConstants.MAX_LENGTH_STREET)
+                && !Validation.empty(city) && !Validation.validateString(city,
+                GlobalConstants.MAX_LENGTH_CITY);
+
+    }
+
+    /**
+     * Validates address input of customer
+     *
+     * @param floor
+     * @param roomNumber
+     * @param buildingName
+     *
+     * @return true if valid address else false
+     */
+    public static boolean validateCustomerAddress(String floor, String roomNumber,
+            String buildingName) {
+        return !Validation.empty(floor) && !Validation.validateString(floor,
+                GlobalConstants.MAX_LENGTH_FLOOR) && !Validation.empty(roomNumber)
+                && !Validation.validateString(roomNumber, GlobalConstants.MAX_LENGTH_ROOMNUMBER)
+                && !Validation.empty(buildingName) && !Validation.validateString(buildingName,
+                GlobalConstants.MAX_LENGTH_BUILDINGNAME);
+    }
+
     public static void main(String[] args) throws SQLException {
 //        System.out.println("AddressID: " + getAddress(4).getAddressID());
 //        System.out.println("Floor: " + getAddress(4).getFloor());
