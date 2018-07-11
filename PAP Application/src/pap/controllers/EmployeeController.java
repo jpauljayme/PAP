@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import pap.dbconnection.MySQLConnector;
 import pap.domain.Address;
@@ -356,6 +355,12 @@ public class EmployeeController {
         return new Person();
     }
 
+    /**
+     * Returns persontype of specified personType ID
+     *
+     * @param personTypeID
+     * @return PersonType
+     */
     public static PersonType getPersonType(int personTypeID) {
         ResultSet resultSet;
         ResultSetMapper<PersonType> resultSetMapper = new ResultSetMapper<>();
@@ -388,6 +393,44 @@ public class EmployeeController {
     }
 
     /**
+     * Checks if to be inserted person object exists in the database.
+     *
+     * @param person
+     * @return true if person already exists else false
+     */
+    public static boolean ifPersonExists(Person person) {
+        ResultSet resultSet;
+        MySQLConnector.openConnection();
+        try (Connection connection = MySQLConnector.getConnection()) {
+            String query = "SELECT FirstName, MiddleName, LastName, BirthDate, "
+                    + "Sex FROM person "
+                    + "WHERE FirstName = ? AND MiddleName = ? AND LastName = ? "
+                    + "AND BirthDate = ? AND Sex = ?";
+
+            statement = connection.prepareStatement(query);
+            statement.setString(1, person.getFirstName());
+            statement.setString(2, person.getMiddleName());
+            statement.setString(3, person.getLastName());
+            statement.setString(4, person.getBirthDate());
+            statement.setString(5, String.valueOf(person.getSex()));
+            System.out.println(statement.toString());
+            resultSet = statement.executeQuery();
+            boolean ret = resultSet.next();
+            MySQLConnector.closeConnection();
+            if (ret == true) {
+                System.out.println("Employee already exists in the database!!");
+                return false;
+            } else {
+                System.out.println("Employee does not exist in the database!!");
+                return true;
+            }
+        } catch (SQLException s) {
+            System.out.println(s);
+        }
+        return false;
+    }
+
+    /**
      * Sample main method for checking methods
      *
      * @param args
@@ -395,11 +438,11 @@ public class EmployeeController {
      */
     public static void main(String[] args) throws SQLException {
         //Address a = new Address(null, null, null, "123", "No Street", "Tintay", "Cebu City", 2, 2);
-        //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-d");
-        //String bdate = "1996-12-30";
+
+        // String bdate = "1996-12-30";
         // LocalDate birthDate = LocalDate.parse(bdate, formatter);
-        //Employee e = new Employee(3, "New name", "new mid", "new Lim", bdate, 'M',
-        //"new_marbeen@gmail,com", "+639325442218", 2, 2);
+        // Employee e = new Employee(3, "New name", "new mid", "new Lim", bdate, 'M',
+        // "new_marbeen@gmail,com", "+639325442218", 2, 2);
         //addEmployee(e, a);
         //List l = getEmployees();
         //List l = getEmployee(7);
@@ -413,8 +456,8 @@ public class EmployeeController {
                 System.out.println("Failed to remove person");
             }
         }*/
-//        List l = getEmployee(7);
-//        Person p = (Person) l.get(0);
+        //  List l = getEmployee(7);
+        //Person p = (Person) l.get(0);
 //        p.setFirstName("UPDATED FN");
 //        p.setMiddleName("UPDATED MN");
 //        p.setLastName("YASS KWEEN");
@@ -429,5 +472,6 @@ public class EmployeeController {
         // getPersonByUsername("dante");
 //        System.out.println("blam: "+getPersonByUsername("dante").getPersonID());
 //        System.out.println("blam: "+getPersonType(3).getPersonType());
+        //System.out.println(ifEmployeeExists(e));
     }
 }
